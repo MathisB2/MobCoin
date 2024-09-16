@@ -50,5 +50,9 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
+    // retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // gson converter
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     androidTestImplementation(libs.androidx.espresso.core)
 }

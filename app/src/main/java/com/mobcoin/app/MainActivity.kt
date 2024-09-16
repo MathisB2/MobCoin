@@ -7,7 +7,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.mobcoin.app.api.managers.CoinApiManager
+import com.mobcoin.app.api.modele.Coin
 import com.mobcoin.app.databinding.ActivityMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,5 +36,21 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        testApi()
+    }
+
+    fun testApi(){
+        CoinApiManager.getService().coinList("usd").enqueue(object : Callback<List<Coin>> {
+            override fun onResponse(call: Call<List<Coin>>, response: Response<List<Coin>>) {
+                println(response.body())
+                if (response.isSuccessful && response.body()!=null){
+                    println(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<List<Coin>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
     }
 }
