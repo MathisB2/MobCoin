@@ -22,4 +22,10 @@
         android:name="com.mobcoin.app.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.mobcoin.app.ui.notifications.NotificationsFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>
