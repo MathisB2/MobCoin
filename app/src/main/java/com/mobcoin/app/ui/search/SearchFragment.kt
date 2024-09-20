@@ -1,4 +1,4 @@
-package com.mobcoin.app.ui.favorites
+package com.mobcoin.app.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.mobcoin.app.databinding.FragmentFavoritesBinding
+import com.mobcoin.app.databinding.FragmentSearchBinding
+import com.mobcoin.app.ui.search.SearchViewModel
 
-class FavoritesFragment : Fragment(){
+class SearchFragment : Fragment(){
 
-    private var _binding: FragmentFavoritesBinding? = null
+    private var _binding: FragmentSearchBinding? = null
 
     private val binding get() = _binding!!
 
@@ -20,17 +21,16 @@ class FavoritesFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val favoritesViewModel =
-            ViewModelProvider(this).get(FavoritesViewModel::class.java)
+        val searchViewModel =
+            ViewModelProvider(this).get(SearchViewModel::class.java)
 
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textFavorites
-        favoritesViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textSearch
+        searchViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
     }
-
 }

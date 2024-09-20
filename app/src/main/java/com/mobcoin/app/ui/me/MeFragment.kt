@@ -1,4 +1,4 @@
-package com.mobcoin.app.ui.favorites
+package com.mobcoin.app.ui.me
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.mobcoin.app.databinding.FragmentFavoritesBinding
+import com.mobcoin.app.databinding.FragmentMeBinding
 
-class FavoritesFragment : Fragment(){
+class MeFragment : Fragment(){
 
-    private var _binding: FragmentFavoritesBinding? = null
+    private var _binding: FragmentMeBinding? = null
 
     private val binding get() = _binding!!
 
@@ -20,14 +20,14 @@ class FavoritesFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val favoritesViewModel =
-            ViewModelProvider(this).get(FavoritesViewModel::class.java)
+        val meViewModel =
+            ViewModelProvider(this).get(MeViewModel::class.java)
 
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textFavorites
-        favoritesViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textMe
+        meViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
