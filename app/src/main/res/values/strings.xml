@@ -3,4 +3,11 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="loginView_email_input">Email*</string>
+    <string name="loginView_password_input">Password*</string>
+    <string name="loginView_login_button">Login</string>
+    <string name="loginView_topBar_title">Login</string>
+    <string name="loginView_loginWithGoogle_button">Login with Google</string>
+    <string name="loginView_registerButton_helper">Don\'t have an account ?</string>
+    <string name="loginView_registerButton">Register</string>
 </resources>
