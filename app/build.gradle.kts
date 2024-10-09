@@ -66,4 +66,8 @@ dependencies {
     // gson converter
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //icon
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 }
