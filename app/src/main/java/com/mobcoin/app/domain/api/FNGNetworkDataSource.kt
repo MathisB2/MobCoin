@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
-object FAGNetworkDataSource {
+object FNGNetworkDataSource {
     private const val BASE_URL = "https://api.alternative.me/"
 
 
@@ -24,10 +24,10 @@ object FAGNetworkDataSource {
     private val retrofit =
         Retrofit.Builder()
             .client(okHttp)
-            .baseUrl(FAGNetworkDataSource.BASE_URL)
+            .baseUrl(FNGNetworkDataSource.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
 
-    val apiService = retrofit.create(FAGService::class.java)
+    val apiService = retrofit.create(FNGService::class.java)
 }
