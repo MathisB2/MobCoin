@@ -9,6 +9,7 @@ import com.mobcoin.app.domain.GeckoRepository
 import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.FNG
+import com.mobcoin.app.model.GlobalMarketData
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -16,26 +17,27 @@ import timber.log.Timber
 
 class HomeViewModel : ViewModel() {
 
-    private var _fng : MutableLiveData<FNG?> = MutableLiveData()
-    val fng : LiveData<FNG?> = _fng
-
     private var _coins : MutableLiveData<List<Coin>?> = MutableLiveData()
     val coins : LiveData<List<Coin>?> = _coins
 
-    fun fetchFNG() {
-        viewModelScope.launch {
-            FNGRepository.getFNG()
-                .catch {
-                    Timber.e(it)
-                }
-                .collect {
-                    val data = it.body()?.data
+    fun getFNG(): LiveData<FNG?>{
+        val livedata = MutableLiveData<FNG?>()
 
-                    if(!data.isNullOrEmpty()){
-                        _fng.postValue(it.body()?.data?.first())
-                    }
+        viewModelScope.launch {
+            val data = FNGRepository.getFNG()
+            data.catch { e ->
+                Timber.e(e)
+            }.collect { response ->
+                if (response.isSuccessful) {
+                    livedata.postValue(response.body()?.data?.first())
+                } else {
+                    livedata.postValue(null)
                 }
+            }
+
         }
+
+        return livedata
     }
 
     fun fetchCoins() {
@@ -50,4 +52,23 @@ class HomeViewModel : ViewModel() {
         }
     }
 
+    fun getGlobalMarketData(): LiveData<GlobalMarketData?>{
+        val livedata = MutableLiveData<GlobalMarketData?>()
+
+        viewModelScope.launch {
+            val data = GeckoRepository.getGlobalMarketData()
+            data.catch { e ->
+                Timber.e(e)
+            }.collect { response ->
+                if (response.isSuccessful) {
+                    livedata.postValue(response.body()?.data)
+                } else {
+                    livedata.postValue(null)
+                }
+            }
+
+        }
+
+        return livedata
+    }
 }

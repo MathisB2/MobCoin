@@ -11,7 +11,7 @@ import kotlin.math.abs
 
 class CoinUtils {
     companion object{
-        private fun roundDoubleToTwoDecimals(value: Double?): String {
+        fun roundDoubleToTwoDecimals(value: Double?): String {
             if(value == null) return "0"
             val decimalFormat = DecimalFormat("0.00")
             return decimalFormat.format(abs(value))
@@ -25,14 +25,25 @@ class CoinUtils {
                 }
                 value > 0 -> {
                     textView.setTextColor(ContextCompat.getColor(textView.context,R.color.colorSuccess))
-                    "▴${roundDoubleToTwoDecimals(value)}%"
+                    "▴ ${roundDoubleToTwoDecimals(value)}%"
                 }
                 else -> {
                     textView.setTextColor(ContextCompat.getColor(textView.context,R.color.md_theme_error))
-                    "▾${roundDoubleToTwoDecimals(value)}%"
+                    "▾ ${roundDoubleToTwoDecimals(value)}%"
                 }
             }
             textView.text = formattedValue
+        }
+
+        fun formatLargeNumber(number: Double?): String {
+            return when {
+                number == null -> "0"
+                number >= 1_000_000_000_000 -> "${roundDoubleToTwoDecimals(number / 1_000_000_000_000)} T"
+                number >= 1_000_000_000 -> "${roundDoubleToTwoDecimals(number / 1_000_000_000)} B"
+                number >= 1_000_000 -> "${roundDoubleToTwoDecimals(number / 1_000_000)} M"
+                number >= 1_000 -> "${roundDoubleToTwoDecimals(number / 1_000)} K"
+                else -> number.toString()
+            }
         }
     }
 }
