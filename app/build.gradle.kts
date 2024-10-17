@@ -70,4 +70,11 @@ dependencies {
     // gson converter
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    implementation("com.patrykandpatrick.vico:compose:1.15.0")
+    implementation("com.patrykandpatrick.vico:compose-m2:1.15.0")
+    implementation("com.patrykandpatrick.vico:compose-m3:1.15.0")
+    implementation("com.patrykandpatrick.vico:core:1.15.0")
+    implementation("com.patrykandpatrick.vico:views:1.15.0")
 }

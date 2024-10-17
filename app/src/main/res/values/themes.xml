@@ -50,5 +50,7 @@
         <item name="colorOnSuccess">@color/colorOnSuccess</item>
         <item name="colorSuccessContainer">@color/colorSuccessContainer</item>
         <item name="colorOnSuccessContainer">@color/colorOnSuccessContainer</item>
+
+        <item name="android:fontFamily">@font/inter</item>
     </style>
 </resources>
