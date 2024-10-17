@@ -18,4 +18,5 @@
     <string name="registerView_name_input">Name*</string>
     <string name="registerView_password_input">Password confirm*</string>
     <string name="register">Register</string>
+    <string name="registerView_label_avatar">Avatar</string>
 </resources>
