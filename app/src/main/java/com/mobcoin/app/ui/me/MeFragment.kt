@@ -26,10 +26,14 @@ class MeFragment : Fragment(){
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textMe
-        meViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
+
+
+        val chart1 = binding.chartView
+        chart1.entryProducer = meViewModel.chart1EntryModelProducer
+        meViewModel.updateChart1()
+
+
         return root
     }
 
