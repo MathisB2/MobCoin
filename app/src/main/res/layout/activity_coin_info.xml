@@ -86,7 +86,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/coin_evolution" />
 
             <TableLayout
-                android:layout_width="0dp"
+                android:id="@+id/evolution_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
@@ -154,7 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@color/md_theme_onSurfaceVariant"></FrameLayout>
+                    android:background="@color/md_theme_onSurfaceVariant"/>
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -220,6 +221,74 @@
 
             </TableLayout>
 
+            <FrameLayout
+                android:id="@+id/info_coin_separator"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/md_theme_inverseOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/evolution_container" />
+
+            <TableLayout
+                android:id="@+id/info_coin_container"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_coin_separator"
+                android:layout_height="match_parent">
+
+                <TableRow android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/market_cap_rank_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Market Cap Rank: " />
+
+                        <TextView
+                            android:id="@+id/market_cap_rank_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#1"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/market_cap_rank_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total supply :" />
+
+                        <TextView
+                            android:id="@+id/total_supply_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="210000"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+
+                </TableRow>
+
+            </TableLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
