@@ -57,7 +57,8 @@
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Avatar" />
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/registerView_label_avatar" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,7 +69,9 @@
                         android:id="@+id/imageButton"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
-                        app:srcCompat="@drawable/add" />
+                        android:background="@drawable/circle"
+                        app:srcCompat="@drawable/add"
+                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -76,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
