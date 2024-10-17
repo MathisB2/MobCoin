@@ -222,7 +222,7 @@
             </TableLayout>
 
             <FrameLayout
-                android:id="@+id/info_coin_separator"
+                android:id="@+id/info_coin_separator_start"
                 android:layout_width="0dp"
                 android:layout_height="2dp"
                 android:layout_marginStart="32dp"
@@ -239,7 +239,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintRight_toLeftOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info_coin_separator"
+                app:layout_constraintTop_toBottomOf="@id/info_coin_separator_start"
                 android:layout_height="match_parent">
 
                 <TableRow android:gravity="center_horizontal">
@@ -255,7 +255,7 @@
                             android:id="@+id/market_cap_rank_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Market Cap Rank: " />
+                            android:text="Market Cap Rank : " />
 
                         <TextView
                             android:id="@+id/market_cap_rank_value"
@@ -273,7 +273,7 @@
                         android:paddingLeft="8dp">
 
                         <TextView
-                            android:id="@+id/market_cap_rank_title"
+                            android:id="@+id/total_supply_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Total supply :" />
@@ -285,10 +285,66 @@
                             android:text="210000"
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
-
                 </TableRow>
+                <TableRow android:gravity="center_horizontal"
+                    android:layout_marginTop="16dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/market_cap_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Market Cap :" />
+
+                        <TextView
+                            android:id="@+id/market_cap_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$1,381,651,251,183"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/ath_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ATH :" />
+
+                        <TextView
+                            android:id="@+id/ath_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7532 $"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+                </TableRow>
             </TableLayout>
+
+            <FrameLayout
+                android:id="@+id/info_coin_separator_end"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/md_theme_inverseOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_coin_container" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
