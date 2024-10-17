@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="8dp"
+    android:paddingBottom="8dp"
+    tools:context=".CoinInfo">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/coin_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/coin_name"
+                style="titre"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                android:text="BTC"
+                android:textAlignment="gravity"
+                android:textSize="34sp"
+                app:layout_constraintBottom_toBottomOf="@+id/coin_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/coin_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/coin_price"
+                style="titre"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                android:gravity="center_vertical"
+                android:text="50,560.05$"
+                android:textAlignment="gravity"
+                android:textSize="34sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coin_icon" />
+
+            <TextView
+                android:id="@+id/coin_evolution"
+                style="titre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:text="▴ 1.16%"
+                android:textAlignment="gravity"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/coin_price"
+                app:layout_constraintStart_toEndOf="@+id/coin_price"
+                app:layout_constraintTop_toTopOf="@+id/coin_price" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/curve_container"
+                android:name="com.mobcoin.app.ui.me.MeFragment"
+                android:layout_width="0dp"
+                android:layout_height="240dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coin_evolution" />
+
+            <TableLayout
+                android:id="@+id/evolution_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_corners"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/curve_container">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/title_evolution_1h"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="1h"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="27dp" />
+
+                    <TextView
+                        android:id="@+id/title_evolution_24h"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="24h"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="91dp" />
+
+                    <TextView
+                        android:id="@+id/title_evolution_7d"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="7d"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="171dp" />
+
+                    <TextView
+                        android:id="@+id/title_evolution_30d"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="30d"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="244dp" />
+
+                    <TextView
+                        android:id="@+id/title_evolution_1y"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="1y"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="330dp" />
+
+                </TableRow>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/md_theme_onSurfaceVariant"/>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/evolution_1h"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:text="1h"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="27dp" />
+
+                    <TextView
+                        android:id="@+id/evolution_24h"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:text="24h"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="91dp" />
+
+                    <TextView
+                        android:id="@+id/evolution_7d"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:text="7d"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="171dp" />
+
+                    <TextView
+                        android:id="@+id/evolution_30d"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:text="30d"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="244dp" />
+
+                    <TextView
+                        android:id="@+id/evolution_1y"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:text="efg"
+                        android:textAlignment="center"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="330dp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <FrameLayout
+                android:id="@+id/info_coin_separator_start"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/md_theme_inverseOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/evolution_container" />
+
+            <TableLayout
+                android:id="@+id/info_coin_container"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_coin_separator_start"
+                android:layout_height="match_parent">
+
+                <TableRow android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/market_cap_rank_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Market Cap Rank : " />
+
+                        <TextView
+                            android:id="@+id/market_cap_rank_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#1"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/total_supply_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total supply :" />
+
+                        <TextView
+                            android:id="@+id/total_supply_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="210000"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+                </TableRow>
+                <TableRow android:gravity="center_horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/market_cap_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Market Cap :" />
+
+                        <TextView
+                            android:id="@+id/market_cap_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$1,381,651,251,183"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/ath_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ATH :" />
+
+                        <TextView
+                            android:id="@+id/ath_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7532 $"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+
+            <FrameLayout
+                android:id="@+id/info_coin_separator_end"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/md_theme_inverseOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_coin_container" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
