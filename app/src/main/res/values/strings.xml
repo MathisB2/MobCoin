@@ -14,4 +14,8 @@
     <string name="loginView_loginWithGoogle_button">Login with Google</string>
     <string name="loginView_registerButton_helper">Don\'t have an account ?</string>
     <string name="loginView_registerButton">Register</string>
+    <string name="registerView_topBar_title">Register</string>
+    <string name="registerView_name_input">Name*</string>
+    <string name="registerView_password_input">Password confirm*</string>
+    <string name="register">Register</string>
 </resources>
