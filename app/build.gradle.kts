@@ -13,10 +13,14 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "API_KEY", "\"toto>\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig=true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
