@@ -1,10 +1,9 @@
 package com.mobcoin.app.domain.database.dao
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Query
-import com.mobcoin.app.domain.database.model.User
+import androidx.room.Dao
+import com.mobcoin.app.domain.database.model.CoinData
 
-interface CoinDao {
+@Dao
+interface CoinDao: GenericDao<CoinData> {
 
 }

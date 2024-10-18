@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mobcoin.app.databinding.ActivityMainBinding
+import com.mobcoin.app.domain.database.DBDataSource
+import com.mobcoin.app.domain.database.MobCoinDataBase
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
+
     }
 
 }

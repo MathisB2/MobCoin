@@ -1,6 +1,7 @@
 package com.mobcoin.app.domain.database.model
 
 import android.graphics.Bitmap
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -12,6 +13,5 @@ data class CoinData(
 
     val code: String,
     val name: String,
-
-    val icon: Bitmap,
+    val icon: String,
 )

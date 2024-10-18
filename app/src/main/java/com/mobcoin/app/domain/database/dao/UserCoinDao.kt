@@ -1,4 +1,8 @@
 package com.mobcoin.app.domain.database.dao
 
-interface UserCoinDao {
+import androidx.room.Dao
+import com.mobcoin.app.domain.database.model.UserCoin
+
+@Dao
+interface UserCoinDao: GenericDao<UserCoin> {
 }
