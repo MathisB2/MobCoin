@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.FragmentMeBinding
+import com.mobcoin.app.ui.others.LoggedOutFragment
 
 class MeFragment : Fragment(){
 
@@ -20,18 +20,21 @@ class MeFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentMeBinding.inflate(inflater, container, false)
+
+        val root: View = binding.root
         val meViewModel =
             ViewModelProvider(this).get(MeViewModel::class.java)
 
-        _binding = FragmentMeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
 
+        var logged: Boolean = false
 
-
-        val chart1 = binding.chartView
-        chart1.entryProducer = meViewModel.chart1EntryModelProducer
-        meViewModel.updateChart1()
+        if(logged){
+//            childFragmentManager.beginTransaction().replace(fragmentId, LoggedOutFragment()).commit()
+        }else{
+            childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoggedOutFragment()).commit()
+        }
 
 
         return root
