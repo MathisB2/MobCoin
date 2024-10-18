@@ -19,4 +19,6 @@
     <string name="registerView_password_input">Password confirm*</string>
     <string name="register">Register</string>
     <string name="registerView_label_avatar">Avatar</string>
+    <string name="meFragment_login_register_button">Login/Register</string>
+    <string name="meFragment_guestMessage">You are using the app as guest</string>
 </resources>
