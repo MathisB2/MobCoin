@@ -6,16 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.me.MeFragment">
 
-
-    <com.patrykandpatrick.vico.views.chart.ChartView
-        android:id="@+id/chart_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:chart="line"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/me_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:showBottomAxis="true"
-        app:showStartAxis="true"
-        app:axisStyle="@color/colorSuccess"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
