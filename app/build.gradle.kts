@@ -71,6 +71,12 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // icon
+    implementation ("com.squareup.picasso:picasso:2.8")
+
+    // FNG progress bar
+    implementation("app.futured.donut:donut:2.2.4")
+
 
     implementation("com.patrykandpatrick.vico:compose:1.15.0")
     implementation("com.patrykandpatrick.vico:compose-m2:1.15.0")
