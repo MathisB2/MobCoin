@@ -1,5 +1,6 @@
 package com.mobcoin.app.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
@@ -49,7 +50,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        findViewById<EditText>(R.id.loginView_email_input)
+
+
+        findViewById<MaterialButton>(R.id.loginView_register_button).setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
