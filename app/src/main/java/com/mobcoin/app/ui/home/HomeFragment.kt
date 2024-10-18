@@ -1,6 +1,7 @@
 package com.mobcoin.app.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
+import com.mobcoin.app.CoinInfoActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.databinding.FragmentHomeBinding
@@ -45,8 +48,14 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         // coins list
-        val recyclerView = binding.recyclerViewCoinList
-        val adapter = CoinItemAdapter(requireContext(), homeViewModel.coins.value ?:  emptyList())
+        val recyclerView: RecyclerView = binding.recyclerViewCoinList
+//        val adapter = CoinItemAdapter(requireContext(), homeViewModel.coins.value ?:  emptyList())
+        val adapter = CoinItemAdapter(requireContext(), homeViewModel.coins.value ?: emptyList()) { coin ->
+            val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
+                putExtra("COIN_ID", coin.name.lowercase())
+            }
+            startActivity(intent)
+        }
 
         homeViewModel.coins.observe(viewLifecycleOwner){
             adapter.setDataset(it ?: emptyList())
@@ -54,6 +63,8 @@ class HomeFragment : Fragment() {
 
         recyclerView.adapter = adapter
         homeViewModel.fetchCoins()
+
+
 
         // FNG donut
         val fngDonut: DonutProgressView = binding.fngDonut
