@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:layout_marginHorizontal="8dp">
+    android:paddingHorizontal="4dp"
+    android:paddingVertical="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,9 +27,12 @@
 
         <TextView
             android:id="@+id/coinSymbole"
+            style="@style/LabelMediumTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="TextView"
+            android:textColor="@color/md_theme_onBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/coinIcon"
@@ -36,22 +41,26 @@
 
     <TextView
         android:id="@+id/coinPrice"
+        style="@style/BodyMediumTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="72dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="textEnd"
+        android:textColor="@color/md_theme_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintEnd_toStartOf="@+id/coinChanges"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.482" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
     <TextView
         android:id="@+id/coinChanges"
-        android:layout_width="wrap_content"
+        style="@style/BodySmallTextStyle"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/coinPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/coinPrice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

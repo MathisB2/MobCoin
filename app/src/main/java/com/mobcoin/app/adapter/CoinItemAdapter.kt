@@ -37,7 +37,7 @@ class CoinItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, coinId: Int) {
         val item = dataset[coinId]
         holder.coinSymbole.text = item.symbol.uppercase()
-        holder.coinPrice.text = item.currentPrice.toString()
+        holder.coinPrice.text = "$" + item.currentPrice.toString()
         CoinUtils.setPercentageText(item.percentagePriceChange24h,holder.coinChanges)
 
         Picasso.get().load(item.image).into(holder.coinIcon)
