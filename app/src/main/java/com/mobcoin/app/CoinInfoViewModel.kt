@@ -38,12 +38,14 @@ class CoinInfoViewModel : ViewModel() {
                     val value = priceEntry[0].toFloat()
                     val date = priceEntry[1].toFloat()
 
-                    val entry = entryOf(date, value)
-                    //entries.add(entry)
+                    val entry = entryOf(value, date)
+
+                    Log.d("TAAAG", entry.toString())
+                    entries.add(entry)
                 }
             }
 
-            coinChart1EntryModelProducer.setEntries(List(4) { entryOf(it, Random.nextFloat() * 16f) })
+            coinChart1EntryModelProducer.setEntries(entries)
         } else {
             Timber.e("No coin price data available to update the chart.")
         }

@@ -22,9 +22,9 @@ class CoinInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_coin_info)
 
         binding = ActivityCoinInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val coinInfoViewModel =
             ViewModelProvider(this).get(CoinInfoViewModel::class.java)
@@ -35,10 +35,10 @@ class CoinInfoActivity : AppCompatActivity() {
             return
         }
 
-        val coinChart =  binding.coinChart
-        coinChart.entryProducer = ChartEntryModelProducer(List(4) { entryOf(it, Random.nextFloat() * 16f) })
-        coinChart.setModel(ChartEntryModelProducer(List(4) { entryOf(it, Random.nextFloat() * 16f) }).getModel())
-        //coinInfoViewModel.fetchCoinPrices(coinId,"usd","1")
+        val chart1 = binding.coinChart
 
+
+        chart1.entryProducer = coinInfoViewModel.coinChart1EntryModelProducer
+        coinInfoViewModel.fetchCoinPrices(coinId,"usd","1")
     }
 }
