@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TitleTextStyle">
+    <style name="TitleBaseTextStyle">
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
-    <style name="BodyTextStyle">
+    <style name="BodyBaseTextStyle">
         <item name="android:fontFamily">@font/inter</item>
     </style>
+
+
+    <style name="DisplayTextStyle" parent="TitleBaseTextStyle">
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="DisplayLargeTextStyle" parent="DisplayTextStyle">
+        <item name="android:textSize">64sp</item>
+    </style>
+    <style name="DisplayMediumTextStyle" parent="DisplayTextStyle">
+        <item name="android:textSize">45sp</item>
+    </style>
+    <style name="DisplaySmallTextStyle" parent="DisplayTextStyle">
+        <item name="android:textSize">36sp</item>
+    </style>
+
+
+    <style name="HeadlineTextStyle" parent="TitleBaseTextStyle">
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="HeadlineLargeTextStyle" parent="HeadlineTextStyle">
+        <item name="android:textSize">32sp</item>
+    </style>
+    <style name="HeadlineMediumTextStyle" parent="HeadlineTextStyle">
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="HeadlineSmallTextStyle" parent="HeadlineTextStyle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="BodyTextStyle" parent="BodyBaseTextStyle">
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="BodyLargeTextStyle" parent="BodyTextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="BodyMediumTextStyle" parent="BodyTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="BodySmallTextStyle" parent="BodyTextStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+    <style name="LabelTextStyle" parent="BodyBaseTextStyle">
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="LabelLargeTextStyle" parent="LabelTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="LabelMediumTextStyle" parent="LabelTextStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="LabelSmallTextStyle" parent="LabelTextStyle">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+
+    <style name="TitleTextStyle" parent="BodyBaseTextStyle">
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="TitleLargeTextStyle" parent="TitleTextStyle">
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="TitleMediumTextStyle" parent="TitleTextStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="TitleSmallTextStyle" parent="TitleTextStyle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
 </resources>
