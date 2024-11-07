@@ -1,61 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="257dp"
-        android:layout_height="187dp"
-        android:background="@drawable/rounded_corners"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:background="#00FFFFFF"
-            android:rotation="180"
-            app:layout_constraintBottom_toBottomOf="@+id/coin_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/coin_icon"
-            app:srcCompat="@drawable/ic_back_24dp" />
+        android:layout_width="200dp"
+        android:layout_height="130dp"
+        android:layout_rowSpan="1"
+        android:layout_rowWeight="1"
+        android:layout_columnSpan="1"
+        android:layout_columnWeight="1"
+        android:background="@drawable/rounded_corners">
 
         <TextView
-            android:id="@+id/coin_name"
+            android:id="@+id/favorite_item_coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical|fill_vertical"
             android:text="TextView"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/coin_icon"
-            app:layout_constraintStart_toEndOf="@+id/coin_icon"
-            app:layout_constraintTop_toTopOf="@+id/coin_icon" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/favorite_item_coin_icon"
+            app:layout_constraintStart_toEndOf="@+id/favorite_item_coin_icon"
+            app:layout_constraintTop_toTopOf="@+id/favorite_item_coin_icon" />
 
         <TextView
-            android:id="@+id/coin_evolution"
+            android:id="@+id/favorite_item_coin_evolution"
             style="titre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="▴ 1.16%"
             android:textAlignment="gravity"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/coin_name"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-            app:layout_constraintStart_toEndOf="@+id/coin_name"
-            app:layout_constraintTop_toTopOf="@+id/coin_name" />
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/favorite_item_coin_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/favorite_item_coin_name"
+            app:layout_constraintTop_toTopOf="@+id/favorite_item_coin_name" />
 
         <ImageView
-            android:id="@+id/coin_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:id="@+id/favorite_item_coin_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +51,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <com.patrykandpatrick.vico.views.chart.ChartView
+            android:id="@+id/chart_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -73,6 +62,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.111"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coin_name" />
+            app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

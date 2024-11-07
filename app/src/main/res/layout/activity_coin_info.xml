@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/coin_icon"
+                android:id="@+id/favorite_item_coin_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/coin_name"
+                android:id="@+id/favorite_item_coin_name"
                 style="titre"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -41,9 +41,9 @@
                 android:text="BTC"
                 android:textAlignment="gravity"
                 android:textSize="34sp"
-                app:layout_constraintBottom_toBottomOf="@+id/coin_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/favorite_item_coin_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/coin_icon"
+                app:layout_constraintStart_toEndOf="@+id/favorite_item_coin_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -59,10 +59,10 @@
                 android:textAlignment="gravity"
                 android:textSize="34sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_icon" />
+                app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_icon" />
 
             <TextView
-                android:id="@+id/coin_evolution"
+                android:id="@+id/favorite_item_coin_evolution"
                 style="titre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_evolution" />
+                app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_evolution" />
 
             <TableLayout
                 android:id="@+id/evolution_container"
