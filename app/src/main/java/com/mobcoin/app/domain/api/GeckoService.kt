@@ -1,11 +1,13 @@
 package com.mobcoin.app.domain.api
 
 import com.mobcoin.app.model.Coin
+import com.mobcoin.app.model.CoinPrice
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import com.mobcoin.app.model.search.SearchContainer
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
@@ -27,4 +29,13 @@ interface GeckoService {
         @Header("x-cg-demo-api-key") apiKey: String,
         @Query("query") query: String
     ): Response<SearchContainer>
+
+    @GET("coins/{id}/market_chart")
+    suspend fun getCoinPrices(
+        @Path("id") coinId: String,
+        @Query("vs_currency") currency: String,
+        @Query("days") days: String,
+        @Query("precision") precision: String? = null,
+        @Header("x-cg-demo-api-key") apiKey: String
+    ): Response<CoinPrice>
 }

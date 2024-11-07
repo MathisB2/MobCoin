@@ -1,5 +1,6 @@
 package com.mobcoin.app.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,39 +14,31 @@ import com.mobcoin.app.model.Coin
 import com.mobcoin.app.utils.CoinUtils
 import com.squareup.picasso.Picasso
 
-class CoinItemAdapter(
+class FavoriteCoinItemAdapter(
     private val context: Context,
-    private var dataset: List<Coin>,
-    private val onItemClick: (Coin) -> Unit
-) : Adapter<CoinItemAdapter.ItemViewHolder>() {
+    private var dataset: List<Coin>
+) : Adapter<FavoriteCoinItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val coinSymbole: TextView = view.findViewById(R.id.coinSymbole)
-        val coinPrice: TextView = view.findViewById(R.id.coinPrice)
-        val coinChanges: TextView = view.findViewById(R.id.coinChanges)
-        val coinIcon: ImageView = view.findViewById(R.id.coinIcon)
+        val coinName: TextView = view.findViewById(R.id.favorite_item_coin_name)
+        val coinEvolution: TextView = view.findViewById(R.id.favorite_item_coin_evolution)
+        val coinIcon: ImageView = view.findViewById(R.id.favorite_item_coin_icon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_coinitem, parent, false)
+            .inflate(R.layout.favorite_item, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, coinId: Int) {
         val item = dataset[coinId]
-        holder.coinSymbole.text = item.symbol.uppercase()
-        holder.coinPrice.text = "$" + item.currentPrice.toString()
-        CoinUtils.setPercentageText(item.percentagePriceChange24h,holder.coinChanges)
+        holder.coinName.text = item.name.uppercase()
+        CoinUtils.setPercentageText(item.percentagePriceChange24h,holder.coinEvolution)
 
         Picasso.get().load(item.image).into(holder.coinIcon)
-
-        holder.itemView.setOnClickListener {
-            onItemClick(item)
-        }
-
     }
 
     override fun getItemCount() = dataset.size
