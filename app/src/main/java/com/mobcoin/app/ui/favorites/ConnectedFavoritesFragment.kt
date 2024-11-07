@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mobcoin.app.R
@@ -37,17 +38,18 @@ class ConnectedFavoritesFragment : Fragment() {
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.layoutManager = gridLayoutManager
 
-        val coinTest : Coin = Coin("bitcoin", "","10",10.0,10,10,10,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,emptyList())
-        val adapter = CoinItemAdapter(requireContext(), emptyList())
+//        val coinTest : Coin = Coin("bitcoin", "","10",10.0,10,10,10,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,emptyList())
+//        val adapter = CoinItemAdapter(requireContext(), emptyList(), onFavoriteItemClick())
 
-        val coinsTestList : ArrayList<Coin> = ArrayList()
-        coinsTestList.add(coinTest)
-        coinsTestList.add(coinTest)
-        coinsTestList.add(coinTest)
-        adapter.setDataset(coinsTestList)
-
-        recyclerView.adapter = adapter
+//        val coinsTestList : ArrayList<Coin> = ArrayList()
+//        coinsTestList.add(coinTest)
+//        coinsTestList.add(coinTest)
+//        coinsTestList.add(coinTest)
+//        adapter.setDataset(coinsTestList)
+//
+//        recyclerView.adapter = adapter
 
         return root
     }
+    
 }
