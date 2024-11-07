@@ -16,7 +16,8 @@ import com.squareup.picasso.Picasso
 
 class SearchCoinItemAdapter(
     private val context: Context,
-    private var dataset: List<SearchCoin>
+    private var dataset: List<SearchCoin>,
+    private val onItemClick: (SearchCoin) -> Unit
 ) : Adapter<SearchCoinItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -42,6 +43,9 @@ class SearchCoinItemAdapter(
 
         Picasso.get().load(item.coinIcon).into(holder.coinIcon)
 
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount() = dataset.size
