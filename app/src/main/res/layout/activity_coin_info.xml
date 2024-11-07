@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="8dp"
     android:paddingBottom="8dp"
-    tools:context=".CoinInfo">
+    tools:context=".CoinInfoActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -75,15 +75,18 @@
                 app:layout_constraintStart_toEndOf="@+id/coin_price"
                 app:layout_constraintTop_toTopOf="@+id/coin_price" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/curve_container"
-                android:name="com.mobcoin.app.ui.me.MeFragment"
-                android:layout_width="0dp"
-                android:layout_height="240dp"
+            <com.patrykandpatrick.vico.views.chart.ChartView
+                android:id="@+id/coin_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:axisStyle="@color/colorSuccess"
+                app:chart="line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_evolution" />
+                app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_evolution"
+                app:showBottomAxis="true"
+                app:showStartAxis="true" />
 
             <TableLayout
                 android:id="@+id/evolution_container"
@@ -96,7 +99,7 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/curve_container">
+                app:layout_constraintTop_toBottomOf="@+id/coin_chart">
 
                 <TableRow
                     android:layout_width="match_parent"
