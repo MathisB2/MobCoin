@@ -17,9 +17,7 @@ import com.mobcoin.app.services.ConnectivityService
 import com.mobcoin.app.ui.others.LoggedOutFragment
 
 class ConnectedFavoritesFragment : Fragment() {
-
     private var _binding: FragmentConnectedFavoritesBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(

@@ -14,14 +14,10 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "API_KEY", "\"toto>\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        buildConfig=true
-    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -111,9 +107,6 @@ dependencies {
     implementation("app.futured.donut:donut:2.2.4")
 
 
-    implementation("com.patrykandpatrick.vico:compose:1.15.0")
-    implementation("com.patrykandpatrick.vico:compose-m2:1.15.0")
-    implementation("com.patrykandpatrick.vico:compose-m3:1.15.0")
-    implementation("com.patrykandpatrick.vico:core:1.15.0")
-    implementation("com.patrykandpatrick.vico:views:1.15.0")
+    //chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

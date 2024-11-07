@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.FragmentMeBinding
+import com.mobcoin.app.ui.chart.ChartFragment
 import com.mobcoin.app.ui.others.LoggedOutFragment
 
 class MeFragment : Fragment(){
@@ -28,13 +29,7 @@ class MeFragment : Fragment(){
 
 
 
-        var logged: Boolean = false
-
-        if(logged){
-//            childFragmentManager.beginTransaction().replace(fragmentId, LoggedOutFragment()).commit()
-        }else{
-            childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoggedOutFragment()).commit()
-        }
+        childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, ChartFragment()).commit()
 
 
         return root

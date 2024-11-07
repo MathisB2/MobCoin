@@ -1,6 +1,5 @@
 package com.mobcoin.app.domain.database
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 
