@@ -1,17 +1,23 @@
 package com.mobcoin.app.ui.login
 
+import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.mobcoin.app.CoinInfoViewModel
+import android.Manifest
 import com.mobcoin.app.databinding.ActivityRegisterBinding
+import com.mobcoin.app.services.ImageService
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private var currentBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +36,12 @@ class RegisterActivity : AppCompatActivity() {
             ViewModelProvider(this).get(RegisterViewModel::class.java)
 
 
+        val avatarPicker = binding.customAvatarPickerButton
         val usernameInput = binding.loginViewNameInput
         val emailInput = binding.loginViewEmailInput
         val passwordInput = binding.registerViewPasswordInput
         val passwordConfirmInput = binding.registerViewPasswordConfirmInput
+
 
         val usernameInputLayout = binding.loginViewNameInputLayout
         val emailInputLayout = binding.loginViewEmailInputLayout
@@ -52,8 +60,6 @@ class RegisterActivity : AppCompatActivity() {
             val username = usernameInput.text.toString()
             val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
-
-
 
             if(username.isEmpty()){
                 usernameInputLayout.error = "Name is required"
@@ -87,14 +93,58 @@ class RegisterActivity : AppCompatActivity() {
                 if (exists) {
                     emailInputLayout.error = "This email is already used"
                 }else{
-                    registerViewModel.createUser(username, email, password)
+                    registerViewModel.createUser(username, email, password, currentBitmap)
                     Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
                     finish()
+
                 }
             }
         }
 
+
+        val avatarPickerButton = binding.customAvatarPickerButton
+
+        val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let {
+                currentBitmap = ImageService.getBitmapFromUri(contentResolver, it)
+                if(currentBitmap != null){
+                    currentBitmap = ImageService.resizeBitmap(ImageService.cropCenterSquare(currentBitmap!!), 128)
+                    avatarPickerButton.setImageBitmap(currentBitmap)
+                }
+            }
+        }
+
+        val requestPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                pickImageLauncher.launch("image/*")
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        avatarPickerButton.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
 
 
     override fun onSupportNavigateUp(): Boolean {

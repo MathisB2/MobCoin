@@ -65,13 +65,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/imageButton"
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/customAvatarPickerButton"
+                        style="@style/Circular"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         android:background="@drawable/circle"
-                        app:srcCompat="@drawable/add"
-                        />
+                        app:shapeAppearanceOverlay="@style/Circular"
+                        app:srcCompat="@drawable/ic_add_96dp" />
                 </LinearLayout>
             </LinearLayout>
 
