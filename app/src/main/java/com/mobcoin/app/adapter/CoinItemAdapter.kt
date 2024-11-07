@@ -16,7 +16,8 @@ import com.squareup.picasso.Picasso
 
 class CoinItemAdapter(
     private val context: Context,
-    private var dataset: List<Coin>
+    private var dataset: List<Coin>,
+    private val onItemClick: (Coin) -> Unit
 ) : Adapter<CoinItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -41,6 +42,10 @@ class CoinItemAdapter(
         CoinUtils.setPercentageText(item.percentagePriceChange24h,holder.coinChanges)
 
         Picasso.get().load(item.image).into(holder.coinIcon)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
 
     }
 
