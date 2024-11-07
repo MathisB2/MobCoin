@@ -77,9 +77,9 @@ class HomeFragment : Fragment() {
         val dominanceValueText: TextView = binding.textViewDominanceValue
         val dominanceCoinText: TextView = binding.textViewDominanceCoin
         homeViewModel.getGlobalMarketData().observe(viewLifecycleOwner){
-            mcValueText.text = CoinUtils.formatLargeNumber(it?.totalMarketCap?.get("usd"))
+            mcValueText.text = "$" + CoinUtils.formatLargeNumber(it?.totalMarketCap?.get("usd"))
             CoinUtils.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
-            volumeValueText.text = CoinUtils.formatLargeNumber(it?.totalVolume?.get("usd"))
+            volumeValueText.text = "$" + CoinUtils.formatLargeNumber(it?.totalVolume?.get("usd"))
 
             val dominanceMap: Map.Entry<String, Double>? = it?.marketCapPercentage?.maxByOrNull { it.value }
 

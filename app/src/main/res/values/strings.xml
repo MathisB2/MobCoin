@@ -22,4 +22,9 @@
     <string name="meFragment_login_register_button">Login/Register</string>
     <string name="meFragment_guestMessage">You are using the app as guest</string>
     <string name="favorites">Favorites</string>
+    <string name="homeView_topBarTitle">Markets</string>
+    <string name="home_card_fear_greed"><![CDATA[Fear & Greed]]></string>
+    <string name="fear">Fear</string>
+    <string name="greed">Greed</string>
+    <string name="home_view_popularCoinsTitle">Popular coins</string>
 </resources>

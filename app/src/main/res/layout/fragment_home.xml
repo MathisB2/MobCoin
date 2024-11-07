@@ -6,12 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/HeadlineSmallTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/homeView_topBarTitle"
+        android:textColor="@color/md_theme_onSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingHorizontal="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,33 +36,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/md_theme_surfaceContainer">
+                android:background="@drawable/rounded_corners">
 
 
                 <TextView
                     android:id="@+id/textViewMC"
+                    style="@style/LabelLargeTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Market Cap"
+                    android:textColor="@color/md_theme_onSurfaceVariant"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textViewMCValue"
+                    style="@style/BodyMediumTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="TextView"
+                    android:textColor="@color/md_theme_onBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewMC" />
 
                 <TextView
                     android:id="@+id/textViewMCChange"
+                    style="@style/BodyMediumTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -66,27 +84,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/md_theme_surfaceContainer">
+                android:background="@drawable/rounded_corners">
 
 
                 <TextView
                     android:id="@+id/textViewVolume"
+                    style="@style/LabelLargeTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Volume"
+                    android:textColor="@color/md_theme_onSurfaceVariant"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textViewVolumeValue"
+                    style="@style/BodyMediumTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="TextView"
+                    android:textColor="@color/md_theme_onBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewVolume" />
@@ -101,33 +123,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/md_theme_surfaceContainer">
+                android:background="@drawable/rounded_corners">
 
 
                 <TextView
                     android:id="@+id/textViewDominance"
+                    style="@style/LabelLargeTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="Dominance"
+                    android:textColor="@color/md_theme_onSurfaceVariant"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textViewDominanceValue"
+                    style="@style/BodyMediumTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="TextView"
+                    android:textColor="@color/md_theme_onBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDominance" />
 
                 <TextView
                     android:id="@+id/textViewDominanceCoin"
+                    style="@style/BodyMediumTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
@@ -148,39 +175,97 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:background="@color/md_theme_surfaceContainer">
-
-            <TextView
-                android:id="@+id/fng_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/rounded_corners">
 
             <app.futured.donut.DonutProgressView
                 android:id="@+id/fng_donut"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:donut_bgLineColor="@color/md_theme_inverseOnSurface"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:donut_bgLineColor="@color/md_theme_surfaceContainerHighest"
                 app:donut_gapAngle="90"
                 app:donut_gapWidth="120"
-                app:donut_strokeWidth="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:donut_strokeWidth="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/fng_value"
+                style="@style/DisplaySmallTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/md_theme_onSurface"
+                app:layout_constraintBottom_toBottomOf="@+id/fng_donut"
+                app:layout_constraintEnd_toEndOf="@+id/fng_donut"
+                app:layout_constraintStart_toStartOf="@+id/fng_donut"
+                app:layout_constraintTop_toTopOf="@+id/fng_donut" />
+
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/LabelLargeTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/home_card_fear_greed"
+                android:textColor="@color/md_theme_onSurfaceVariant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/LabelLargeTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/fear"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                app:layout_constraintBottom_toBottomOf="@+id/fng_donut"
+                app:layout_constraintStart_toStartOf="@+id/fng_donut" />
+
+            <TextView
+                android:id="@+id/textView6"
+                style="@style/LabelLargeTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/greed"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                app:layout_constraintBottom_toBottomOf="@+id/fng_donut"
+                app:layout_constraintEnd_toEndOf="@+id/fng_donut" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/TitleMediumTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/home_view_popularCoinsTitle"
+        android:textColor="@color/md_theme_onBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_coin_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
