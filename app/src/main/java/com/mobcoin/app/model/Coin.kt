@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Coin (
+    @SerializedName("id")val id: String,
     @SerializedName("symbol")val symbol: String,
     @SerializedName("name")val name: String,
     @SerializedName("image")val image: String,

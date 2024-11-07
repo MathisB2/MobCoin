@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/favorite_item_coin_icon"
+                android:id="@+id/item_coin_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
@@ -32,18 +32,17 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/favorite_item_coin_name"
+                android:id="@+id/item_coin_name"
                 style="titre"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:gravity="center_vertical"
-                android:text="BTC"
                 android:textAlignment="gravity"
                 android:textSize="34sp"
-                app:layout_constraintBottom_toBottomOf="@+id/favorite_item_coin_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/item_coin_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/favorite_item_coin_icon"
+                app:layout_constraintStart_toEndOf="@+id/item_coin_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -55,20 +54,20 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="48dp"
                 android:gravity="center_vertical"
-                android:text="50,560.05$"
+                android:text="0,0$"
                 android:textAlignment="gravity"
                 android:textSize="34sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_icon" />
+                app:layout_constraintTop_toBottomOf="@+id/item_coin_icon" />
 
             <TextView
-                android:id="@+id/favorite_item_coin_evolution"
+                android:id="@+id/item_coin_evolution"
                 style="titre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:gravity="center_vertical"
-                android:text="▴ 1.16%"
+                android:text="0%"
                 android:textAlignment="gravity"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/coin_price"
@@ -84,7 +83,7 @@
                 app:chart="line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favorite_item_coin_evolution"
+                app:layout_constraintTop_toBottomOf="@+id/item_coin_evolution"
                 app:showBottomAxis="true"
                 app:showStartAxis="true" />
 
@@ -171,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_weight="1"
-                        android:text="1h"
+                        android:text="0%"
                         android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="27dp" />
@@ -182,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_weight="1"
-                        android:text="24h"
+                        android:text="0%"
                         android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="91dp" />
@@ -193,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_weight="1"
-                        android:text="7d"
+                        android:text="0%"
                         android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="171dp" />
@@ -204,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_weight="1"
-                        android:text="30d"
+                        android:text="0%"
                         android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="244dp" />
@@ -215,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:layout_weight="1"
-                        android:text="efg"
+                        android:text="0%"
                         android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="330dp" />
@@ -264,7 +263,7 @@
                             android:id="@+id/market_cap_rank_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="#1"
+                            android:text="#0"
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
 
@@ -285,7 +284,7 @@
                             android:id="@+id/total_supply_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="210000"
+                            android:text="0"
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>
@@ -309,7 +308,7 @@
                             android:id="@+id/market_cap_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="$1,381,651,251,183"
+                            android:text="$0"
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
 
@@ -330,7 +329,52 @@
                             android:id="@+id/ath_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="7532 $"
+                            android:text="0 $"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+                </TableRow>
+                <TableRow android:gravity="center_horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/volume_24h_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="24h Volume :" />
+
+                        <TextView
+                            android:id="@+id/volume_24h_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$0"
+                            android:textColorHighlight="@color/md_theme_primary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp">
+
+                        <TextView
+                            android:id="@+id/atl_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ATL :" />
+
+                        <TextView
+                            android:id="@+id/atl_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 $"
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>

@@ -1,17 +1,18 @@
 package com.mobcoin.app
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.GeckoRepository
 import com.mobcoin.app.model.CoinPrice
-import com.patrykandpatrick.vico.core.entry.*
+import com.mobcoin.app.model.DetailedCoin
+import com.patrykandpatrick.vico.core.entry.ChartEntry
+import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
+import com.patrykandpatrick.vico.core.entry.entryOf
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.random.Random
 
 
 class CoinInfoViewModel : ViewModel() {
@@ -40,7 +41,6 @@ class CoinInfoViewModel : ViewModel() {
 
                     val entry = entryOf(value, date)
 
-                    Log.d("TAAAG", entry.toString())
                     entries.add(entry)
                 }
             }
@@ -49,6 +49,22 @@ class CoinInfoViewModel : ViewModel() {
         } else {
             Timber.e("No coin price data available to update the chart.")
         }
+    }
+
+    fun getCoinById(id: String): LiveData<DetailedCoin?>{
+        val livedata = MutableLiveData<DetailedCoin?>()
+
+        viewModelScope.launch {
+            val data = GeckoRepository.getCoinById(id)
+            data.catch { e ->
+                println(e.message)
+            }.collect { response ->
+                livedata.postValue(response.body())
+            }
+
+        }
+
+        return livedata
     }
 
 }

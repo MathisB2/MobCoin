@@ -4,6 +4,7 @@ import com.mobcoin.app.domain.api.GeckoNetworkDataSource
 import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.CoinPrice
+import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -31,6 +32,12 @@ object GeckoRepository {
     suspend fun getCoinsPrices(coinId: String, currency: String, days: String, precision: String? = null): Flow<Response<CoinPrice>> = flow {
         emit(
             GeckoNetworkDataSource.apiService.getCoinPrices(coinId, currency, days, precision, "CG-soMb1tvkPUXUcqmJXvd3He5g")
+        )
+    }
+
+    suspend fun getCoinById(id: String): Flow<Response<DetailedCoin>> = flow {
+        emit(
+            GeckoNetworkDataSource.apiService.getCoinById(id,"CG-soMb1tvkPUXUcqmJXvd3He5g")
         )
     }
 
