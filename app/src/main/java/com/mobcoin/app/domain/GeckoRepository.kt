@@ -1,5 +1,6 @@
 package com.mobcoin.app.domain
 
+import com.mobcoin.app.BuildConfig
 import com.mobcoin.app.domain.api.GeckoNetworkDataSource
 import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
 import com.mobcoin.app.model.Coin
@@ -14,19 +15,19 @@ object GeckoRepository {
 
     suspend fun getCoins(marketCoinsQuery: MarketCoinsQuery): Flow<Response<List<Coin>>> = flow {
         emit(
-            GeckoNetworkDataSource.apiService.getCoins("CG-soMb1tvkPUXUcqmJXvd3He5g", marketCoinsQuery.toMap())
+            GeckoNetworkDataSource.apiService.getCoins(BuildConfig.API_KEY, marketCoinsQuery.toMap())
         )
     }
 
     suspend fun getGlobalMarketData(): Flow<Response<GlobalMarketDataContainer>> = flow {
         emit(
-            GeckoNetworkDataSource.apiService.getGlobalMarketData("CG-soMb1tvkPUXUcqmJXvd3He5g")
+            GeckoNetworkDataSource.apiService.getGlobalMarketData(BuildConfig.API_KEY)
         )
     }
 
     suspend fun searchCoin(query: String): Flow<Response<SearchContainer>> = flow {
         emit(
-            GeckoNetworkDataSource.apiService.searchCoin("CG-soMb1tvkPUXUcqmJXvd3He5g",query)
+            GeckoNetworkDataSource.apiService.searchCoin(BuildConfig.API_KEY,query)
         )
     }
 
