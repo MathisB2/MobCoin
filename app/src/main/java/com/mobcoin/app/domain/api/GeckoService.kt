@@ -6,6 +6,7 @@ import com.mobcoin.app.model.search.SearchContainer
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
 interface GeckoService {
@@ -24,6 +25,6 @@ interface GeckoService {
     @GET("search")
     suspend fun searchCoin(
         @Header("x-cg-demo-api-key") apiKey: String,
-        @Header("query") query: String
+        @Query("query") query: String
     ): Response<SearchContainer>
 }
