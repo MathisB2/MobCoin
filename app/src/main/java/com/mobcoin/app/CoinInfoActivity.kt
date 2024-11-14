@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.ui.chart.ChartFragment
+import com.mobcoin.app.ui.CoinInfoViewModel
 import com.mobcoin.app.utils.CoinUtils
 import com.squareup.picasso.Picasso
 
@@ -30,6 +32,10 @@ class CoinInfoActivity : AppCompatActivity() {
             finish()
             return
         }
+
+        val chartFragment = ChartFragment.newInstance(coinId, "usd", "1")
+        supportFragmentManager.beginTransaction().replace(binding.coinChart.id, chartFragment).commit()
+
 
         //DetailedCoin
         coinInfoViewModel.getCoinById(coinId).observe(this){

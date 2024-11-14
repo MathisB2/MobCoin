@@ -5,27 +5,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.components.YAxis.AxisDependency
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.mobcoin.app.R
+import com.github.mikephil.charting.utils.Utils
 import com.mobcoin.app.databinding.FragmentChartBinding
-import com.mobcoin.app.databinding.FragmentConnectedFavoritesBinding
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.mobcoin.app.ui.CoinInfoViewModel
+import java.util.Currency
 import java.util.concurrent.TimeUnit
+
+private const val COIN_ID_PARAM = "coinId"
+private const val CURRENCY_PARAM = "currency"
+private const val DAYS_PARAM = "days"
 
 class ChartFragment : Fragment() {
     private var _binding: FragmentChartBinding? = null
@@ -34,6 +34,20 @@ class ChartFragment : Fragment() {
     private val dataset = LineDataSet(emptyList(), "DataSet 1")
     private lateinit var chart: LineChart
 
+    private var coinId: String? = null
+    private var currency: String? = null
+    private var days: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            coinId = it.getString(COIN_ID_PARAM)
+            currency = it.getString(CURRENCY_PARAM)
+            days = it.getString(DAYS_PARAM)
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +55,6 @@ class ChartFragment : Fragment() {
         _binding = FragmentChartBinding.inflate(inflater, container, false)
 
         chart = binding.lineChart
-
 
         chart.setTouchEnabled(true)
         chart.dragDecelerationFrictionCoef = 0.9f
@@ -88,12 +101,15 @@ class ChartFragment : Fragment() {
         dataset.highLightColor = Color.rgb(244, 117, 117)
         dataset.setDrawCircleHole(false)
 
-        //setRandomData(100, 50.0f)
+        val coinInfoViewModel = ViewModelProvider(this)[CoinInfoViewModel::class.java]
+        coinInfoViewModel.getCoinPrices(coinId!!, currency!!, days!!).observe(viewLifecycleOwner){
+            this.setData(it)
+        }
 
         return binding.root
     }
 
-    private fun setRandomData(count: Int, range: Float) {
+    fun setRandomData(count: Int, range: Float) {
         val now = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis())
 
         val values = ArrayList<Entry>()
@@ -105,16 +121,29 @@ class ChartFragment : Fragment() {
             values.add(Entry(x, y)) // add one entry per hour
             x++
         }
-
-        this.setData(values);
+        this.setData(values)
     }
 
-    fun setData(values: ArrayList<Entry>) {
+    fun setData(values: List<Entry>) {
+        Utils.init(requireContext())
         dataset.values = values
         chart.data = LineData(dataset)
     }
 
     private fun getRandom(range: Float, start: Float): Float {
         return (Math.random() * range).toFloat() + start
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(coinId: String, currency: String, days: String, precision: String? = null) =
+            ChartFragment().apply {
+                arguments = Bundle().apply {
+                    putString(COIN_ID_PARAM, coinId)
+                    putString(CURRENCY_PARAM, currency)
+                    putString(DAYS_PARAM, days)
+                }
+            }
     }
 }
