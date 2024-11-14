@@ -30,8 +30,8 @@ data class CoinMarketData(
     @SerializedName("price_change_percentage_200d")val percentagePriceChange200d: Double?,
     @SerializedName("price_change_percentage_1y")val percentagePriceChange1y: Double?,
     @SerializedName("price_change_percentage_1h_in_currency")val percentagePriceChange1h: Map<String, Double>?,
-    @SerializedName("total_supply")val totalSupply: Long?,
-    @SerializedName("market_cap") val marketCap: Map<String, Long>? = null,
+    @SerializedName("total_supply")val totalSupply: Double?,
+    @SerializedName("market_cap") val marketCap: Map<String, Double>? = null,
     @SerializedName("ath") val ath: Map<String, Double>? = null,
     @SerializedName("atl") val atl: Map<String, Double>? = null,
 ){
