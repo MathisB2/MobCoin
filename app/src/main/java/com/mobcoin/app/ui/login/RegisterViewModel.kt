@@ -1,27 +1,31 @@
 package com.mobcoin.app.ui.login
 
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mobcoin.app.domain.database.DBDataSource
-import com.mobcoin.app.domain.database.model.User
-import com.mobcoin.app.services.ImageService
+import com.mobcoin.app.domain.UserRepository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
-    fun createUser(username: String, email: String, password: String, bitmap: Bitmap?){
-        val user = User(
-            surname = username,
-            email =  email,
-            password = password,
-            profileImage = if (bitmap != null) ImageService.bitmapToByteArray(bitmap) else null
-        )
-
+    fun createUser(username: String, email: String, password: String, bitmap: Bitmap?, context: Context){
         viewModelScope.launch {
-            DBDataSource.getDatabase().userDao().insert(user)
+            UserRepository.createUser(username, email, password, bitmap).collect{
+                UserRepository.login(it, context).collect{
+                    Log.d("RegisterViewModel", it.toString())
+                    UserRepository.getCurrentUser(context).collect{
+                        Log.d("RegisterViewModel", it!!.email)
+                    }
+                }
+
+
+
+
+            }
         }
     }
 
@@ -29,7 +33,9 @@ class RegisterViewModel : ViewModel() {
         val isUserExisting = MutableLiveData<Boolean>()
 
         viewModelScope.launch {
-            isUserExisting.postValue(DBDataSource.getDatabase().userDao().isUserExisting(email))
+            UserRepository.checkUserExists(email).collect {
+                isUserExisting.postValue(it)
+            }
         }
         return isUserExisting
     }

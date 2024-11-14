@@ -93,7 +93,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (exists) {
                     emailInputLayout.error = "This email is already used"
                 }else{
-                    registerViewModel.createUser(username, email, password, currentBitmap)
+                    registerViewModel.createUser(username, email, password, currentBitmap, this)
                     Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
                     finish()
 
