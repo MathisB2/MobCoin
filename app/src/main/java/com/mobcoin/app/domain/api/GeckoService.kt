@@ -2,6 +2,7 @@ package com.mobcoin.app.domain.api
 
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.CoinPrice
+import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import retrofit2.Response
 import retrofit2.http.GET
@@ -31,4 +32,10 @@ interface GeckoService {
         @Query("precision") precision: String? = null,
         @Header("x-cg-demo-api-key") apiKey: String
     ): Response<CoinPrice>
+
+    @GET("coins/{id}")
+    suspend fun getCoinById(
+        @Path("id") coinId: String,
+        @Header("x-cg-demo-api-key") apiKey: String,
+    ): Response<DetailedCoin>
 }
