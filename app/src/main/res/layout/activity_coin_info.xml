@@ -73,19 +73,14 @@
                 app:layout_constraintBottom_toBottomOf="@+id/coin_price"
                 app:layout_constraintStart_toEndOf="@+id/coin_price"
                 app:layout_constraintTop_toTopOf="@+id/coin_price" />
-
-            <com.patrykandpatrick.vico.views.chart.ChartView
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/coin_chart"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginTop="16dp"
-                app:axisStyle="@color/colorSuccess"
-                app:chart="line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_coin_evolution"
-                app:showBottomAxis="true"
-                app:showStartAxis="true" />
+                app:layout_constraintTop_toBottomOf="@+id/item_coin_evolution" />
 
             <TableLayout
                 android:id="@+id/evolution_container"
@@ -223,6 +218,80 @@
 
             </TableLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout_convert"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/evolution_container">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:background="@drawable/rounded_corners">
+
+
+                    <TextView
+                        android:id="@+id/textView_coin_convert_count"
+                        style="@style/LabelLargeTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="1.00"
+                        android:textColor="@color/md_theme_onSurfaceVariant"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_coin_convert_name"
+                        style="@style/BodyMediumTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="TextView"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:background="@drawable/rounded_corners">
+
+
+                    <TextView
+                        android:id="@+id/textView_converted_coin_count"
+                        style="@style/LabelLargeTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="0.00"
+                        android:textColor="@color/md_theme_onSurfaceVariant"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/spinner_converted_coin_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <FrameLayout
                 android:id="@+id/info_coin_separator_start"
                 android:layout_width="0dp"
@@ -233,7 +302,7 @@
                 android:background="@color/md_theme_inverseOnSurface"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/evolution_container" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_convert" />
 
             <TableLayout
                 android:id="@+id/info_coin_container"

@@ -1,7 +1,9 @@
 package com.mobcoin.app
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -21,8 +23,7 @@ class CoinInfoActivity : AppCompatActivity() {
         binding = ActivityCoinInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val coinInfoViewModel =
-            ViewModelProvider(this).get(CoinInfoViewModel::class.java)
+        val coinInfoViewModel = ViewModelProvider(this)[CoinInfoViewModel::class.java]
 
         val coinId = intent.getStringExtra("COIN_ID")
         if(coinId == null) {
@@ -30,19 +31,14 @@ class CoinInfoActivity : AppCompatActivity() {
             return
         }
 
-        val chart1 = binding.coinChart
-        chart1.entryProducer = coinInfoViewModel.coinChart1EntryModelProducer
-        coinInfoViewModel.fetchCoinPrices(coinId,"usd","1")
-
         //DetailedCoin
         coinInfoViewModel.getCoinById(coinId).observe(this){
-            Log.e("TAAAAG", it.toString())
-            setPageDatas(it ?: return@observe)
+            setPageData(it ?: return@observe)
         }
 
     }
 
-    private fun setPageDatas(coin: DetailedCoin){
+    private fun setPageData(coin: DetailedCoin){
         binding.itemCoinName.text = coin.name
         Picasso.get().load(coin.getImageUrlLarge()).into(binding.itemCoinIcon)
         CoinUtils.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
@@ -58,6 +54,31 @@ class CoinInfoActivity : AppCompatActivity() {
         binding.athValue.text = coin.marketData?.getAthByCurrency("usd").toString()
         binding.atlValue.text = coin.marketData?.getAtlByCurrency("usd").toString()
 
+
+
+        //converter
+        binding.textViewCoinConvertName.text = coin.name
+
+        val spinner: Spinner = findViewById(R.id.spinner_converted_coin_name)
+
+        val items = coin.getConvertCoinsNames()?.toList() ?: emptyList()
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        val defaultPosition = items.indexOf("usd")
+        if (defaultPosition != -1) {
+            spinner.setSelection(defaultPosition)
+        }else{
+            spinner.setSelection(0)
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
+                binding.textViewConvertedCoinCount.text = coin.getPriceByCurrency(parentView.getItemAtPosition(position).toString()).toString()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
     }
 
 }

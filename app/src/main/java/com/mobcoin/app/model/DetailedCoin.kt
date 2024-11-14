@@ -12,12 +12,9 @@ data class DetailedCoin (
     @SerializedName("market_cap_rank")val marketCapRank: Long,
 ) : Serializable {
 
-    fun getImageUrlLarge(): String? {
-        return image?.get("large")
-    }
-    fun getPriceByCurrency(currency: String): Double? {
-        return marketData?.currentPrice?.get(currency)
-    }
+    fun getImageUrlLarge(): String? = image?.get("large")
+    fun getPriceByCurrency(currency: String): Double? = marketData?.currentPrice?.get(currency)
+    fun getConvertCoinsNames():Set<String>? = marketData?.currentPrice?.keys
 }
 
 data class CoinMarketData(
