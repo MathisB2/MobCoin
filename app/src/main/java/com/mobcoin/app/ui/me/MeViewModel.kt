@@ -19,4 +19,10 @@ class MeViewModel : ViewModel() {
         return isUserConnected
     }
 
+    fun logout(context: Context) {
+        viewModelScope.launch {
+            UserRepository.logout(context)
+        }
+    }
+
 }

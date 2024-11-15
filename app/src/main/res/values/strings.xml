@@ -28,4 +28,5 @@
     <string name="greed">Greed</string>
     <string name="home_view_popularCoinsTitle">Popular coins</string>
     <string name="searchText">Search for a coin</string>
+    <string name="Logout">Logout</string>
 </resources>
