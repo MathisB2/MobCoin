@@ -23,8 +23,8 @@ object UserRepository {
             profileImage = if (bitmap != null) ImageService.bitmapToByteArray(bitmap) else null
         )
 
-        DBDataSource.getDatabase().userDao().insert(user)
-        emit(user)
+        val id = DBDataSource.getDatabase().userDao().insert(user)
+        emit(DBDataSource.getDatabase().userDao().getById(id.toInt())!!)
     }
 
 
@@ -53,9 +53,10 @@ object UserRepository {
 
 
 
-    fun login(user: User, context: Context): Flow<Boolean> = flow{
+    fun login(user: User, context: Context): Flow<User?> = flow{
+        Log.d("login", user.id.toString())
         UserService.saveUserId(context, user.id.toInt())
-        emit(true)
+        emit(user)
     }
 
     fun logout(context: Context) {
