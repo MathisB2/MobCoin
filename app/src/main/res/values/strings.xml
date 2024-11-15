@@ -30,4 +30,6 @@
     <string name="connected_me_view_distribution">Distribution</string>
     <string name="connected_me_view_assets">Assets</string>
     <string name="searchText">Search for a coin</string>
+    <string name="buyText">buy</string>
+    <string name="sellText">sell</string>
 </resources>
