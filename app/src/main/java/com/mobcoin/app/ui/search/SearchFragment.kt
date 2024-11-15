@@ -9,16 +9,10 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mobcoin.app.CoinInfoActivity
-import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.adapter.SearchCoinItemAdapter
 import com.mobcoin.app.databinding.FragmentSearchBinding
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withTimeout
+import com.mobcoin.app.ui.CoinInfoActivity
 
 
 class SearchFragment : Fragment(){

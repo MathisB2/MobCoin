@@ -9,9 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
-import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.search.SearchCoin
-import com.mobcoin.app.utils.CoinUtils
 import com.squareup.picasso.Picasso
 
 class SearchCoinItemAdapter(
