@@ -9,42 +9,49 @@
     android:paddingBottom="8dp"
     tools:context=".ui.CoinInfoActivity">
 
-    <ScrollView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/md_theme_background"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+    <ImageView
+        android:id="@+id/actionBarCoinIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="4dp"
+        android:contentDescription="Coin icon" />
+
+        <CheckBox
+            android:id="@+id/favorite_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/selector_favorite_checkbox"
+            android:button="@null"
+            android:scaleX="0.64"
+            android:scaleY="0.64"
+            android:layout_marginEnd="16dp"
+             />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/item_coin_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/item_coin_name"
-                style="titre"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:gravity="center_vertical"
-                android:textAlignment="gravity"
-                android:textSize="34sp"
-                app:layout_constraintBottom_toBottomOf="@+id/item_coin_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/item_coin_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/coin_price"
@@ -52,13 +59,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 android:text="0,0$"
                 android:textAlignment="gravity"
                 android:textSize="34sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_coin_icon" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_coin_evolution"
@@ -154,9 +161,9 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@color/md_theme_onSurfaceVariant"/>
+                    android:background="@color/md_theme_onSurfaceVariant" />
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -225,7 +232,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout_convert"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
@@ -237,8 +244,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:background="@drawable/rounded_corners">
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corners"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="8dp">
 
 
                     <TextView
@@ -268,8 +278,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:background="@drawable/rounded_corners">
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corners"
+                    android:paddingHorizontal="4dp"
+                    android:paddingVertical="8dp">
 
 
                     <TextView
@@ -311,11 +324,11 @@
             <TableLayout
                 android:id="@+id/info_coin_container"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                app:layout_constraintRight_toLeftOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info_coin_separator_start"
-                android:layout_height="match_parent">
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_coin_separator_start">
 
                 <TableRow android:gravity="center_horizontal">
 
@@ -361,8 +374,10 @@
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>
-                <TableRow android:gravity="center_horizontal"
-                    android:layout_marginTop="16dp">
+
+                <TableRow
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -406,8 +421,10 @@
                             android:textColorHighlight="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>
-                <TableRow android:gravity="center_horizontal"
-                    android:layout_marginTop="16dp">
+
+                <TableRow
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
