@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.ui.chart.ChartFragment
 import com.mobcoin.app.ui.CoinInfoViewModel
-import com.mobcoin.app.utils.CoinUtils
 import com.squareup.picasso.Picasso
 
 class CoinInfoActivity : AppCompatActivity() {
@@ -47,13 +47,13 @@ class CoinInfoActivity : AppCompatActivity() {
     private fun setPageData(coin: DetailedCoin){
         binding.itemCoinName.text = coin.name
         Picasso.get().load(coin.getImageUrlLarge()).into(binding.itemCoinIcon)
-        CoinUtils.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
+        CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
         binding.coinPrice.text = coin.getPriceByCurrency("usd").toString()
-        CoinUtils.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency("usd"),binding.evolution1h)
-        CoinUtils.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.evolution24h)
-        CoinUtils.setPercentageText(coin.marketData?.percentagePriceChange7d,binding.evolution7d)
-        CoinUtils.setPercentageText(coin.marketData?.percentagePriceChange30d,binding.evolution30d)
-        CoinUtils.setPercentageText(coin.marketData?.percentagePriceChange1y,binding.evolution1y)
+        CoinService.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency("usd"),binding.evolution1h)
+        CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.evolution24h)
+        CoinService.setPercentageText(coin.marketData?.percentagePriceChange7d,binding.evolution7d)
+        CoinService.setPercentageText(coin.marketData?.percentagePriceChange30d,binding.evolution30d)
+        CoinService.setPercentageText(coin.marketData?.percentagePriceChange1y,binding.evolution1y)
         binding.marketCapRankValue.text = coin.marketCapRank.toString()
         binding.totalSupplyValue.text = coin.marketData?.totalSupply.toString()
         binding.marketCapValue.text = coin.marketData?.marketCap?.get("usd").toString()
