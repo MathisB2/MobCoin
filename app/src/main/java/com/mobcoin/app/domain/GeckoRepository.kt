@@ -29,9 +29,9 @@ object GeckoRepository {
         )
     }
 
-    suspend fun getCoinsPrices(coinId: String, currency: String, days: String, precision: String? = null): Flow<Response<CoinPrice>> = flow {
+    suspend fun getCoinsPrices(coinId: String, currency: String, days: Int, precision: String? = null): Flow<Response<CoinPrice>> = flow {
         emit(
-            GeckoNetworkDataSource.apiService.getCoinPrices(coinId, currency, days, precision, "CG-soMb1tvkPUXUcqmJXvd3He5g")
+            GeckoNetworkDataSource.apiService.getCoinPrices(coinId, currency, days.toString(), precision, "CG-soMb1tvkPUXUcqmJXvd3He5g")
         )
     }
 

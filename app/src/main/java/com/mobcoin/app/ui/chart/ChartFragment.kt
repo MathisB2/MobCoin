@@ -29,21 +29,22 @@ private const val DAYS_PARAM = "days"
 
 class ChartFragment : Fragment() {
     private var _binding: FragmentChartBinding? = null
+    private var viewModel: ChartViewModel? = null
     private val binding get() = _binding!!
 
     private val dataset = LineDataSet(emptyList(), "DataSet 1")
     private lateinit var chart: LineChart
 
-    private var coinId: String? = null
-    private var currency: String? = null
-    private var days: String? = null
+    private lateinit var coinId: String
+    private lateinit var currency: String
+    private var days: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            coinId = it.getString(COIN_ID_PARAM)
-            currency = it.getString(CURRENCY_PARAM)
-            days = it.getString(DAYS_PARAM)
+            coinId = it.getString(COIN_ID_PARAM)!!
+            currency = it.getString(CURRENCY_PARAM)!!
+            days = it.getString(DAYS_PARAM)!!.toInt()
         }
     }
 
@@ -101,33 +102,27 @@ class ChartFragment : Fragment() {
         dataset.highLightColor = Color.rgb(244, 117, 117)
         dataset.setDrawCircleHole(false)
 
-        val coinInfoViewModel = ViewModelProvider(this)[CoinInfoViewModel::class.java]
-        coinInfoViewModel.getCoinPrices(coinId!!, currency!!, days!!).observe(viewLifecycleOwner){
+        viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
+        viewModel!!.getCoinPrices(coinId, currency, days).observe(viewLifecycleOwner){
             this.setData(it)
         }
 
         return binding.root
     }
 
-    fun setRandomData(count: Int, range: Float) {
-        val now = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis())
-
-        val values = ArrayList<Entry>()
-        val to = (now + count).toFloat()
-        var x = now.toFloat()
-
-        while (x < to) {
-            val y: Float = getRandom(range, 50f)
-            values.add(Entry(x, y)) // add one entry per hour
-            x++
+    fun setDays(days: Int) {
+        this.days = days
+        viewModel!!.getCoinPrices(coinId, currency, days).observe(viewLifecycleOwner){
+            this.setData(it)
         }
-        this.setData(values)
     }
 
     fun setData(values: List<Entry>) {
-        Utils.init(requireContext())
         dataset.values = values
         chart.data = LineData(dataset)
+
+        chart.notifyDataSetChanged()
+        chart.invalidate()
     }
 
     private fun getRandom(range: Float, start: Float): Float {
@@ -137,12 +132,12 @@ class ChartFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(coinId: String, currency: String, days: String, precision: String? = null) =
+        fun newInstance(coinId: String, currency: String, days: Int = 1, precision: String? = null) =
             ChartFragment().apply {
                 arguments = Bundle().apply {
                     putString(COIN_ID_PARAM, coinId)
                     putString(CURRENCY_PARAM, currency)
-                    putString(DAYS_PARAM, days)
+                    putString(DAYS_PARAM, days.toString())
                 }
             }
     }

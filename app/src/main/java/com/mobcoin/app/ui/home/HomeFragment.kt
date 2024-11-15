@@ -1,13 +1,10 @@
 package com.mobcoin.app.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -15,18 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
-import com.mobcoin.app.CoinInfoActivity
+import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.databinding.FragmentHomeBinding
-import com.mobcoin.app.model.Coin
-import com.mobcoin.app.model.FNG
-import com.mobcoin.app.model.GlobalMarketData
 import com.mobcoin.app.utils.CoinUtils
-import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
-import java.util.Locale
-import kotlin.math.log
 
 class HomeFragment : Fragment() {
 

@@ -24,12 +24,7 @@ class MeFragment : Fragment(){
         _binding = FragmentMeBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
-        val meViewModel =
-            ViewModelProvider(this).get(MeViewModel::class.java)
-
-
-
-        childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, ChartFragment()).commit()
+        val meViewModel = ViewModelProvider(this).get(MeViewModel::class.java)
 
 
         return root

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="8dp"
     android:paddingBottom="8dp"
-    tools:context=".CoinInfoActivity">
+    tools:context=".ui.CoinInfoActivity">
 
     <ScrollView
         android:layout_width="match_parent"
