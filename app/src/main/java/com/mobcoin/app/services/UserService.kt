@@ -2,6 +2,7 @@ package com.mobcoin.app.services
 
 import android.content.Context
 import android.content.SharedPreferences
+import java.security.MessageDigest
 
 
 object UserService {
@@ -24,6 +25,16 @@ object UserService {
         val editor = sharedPreferences.edit()
         editor.remove(userIdKey)
         editor.apply()
+    }
+
+
+    fun hashPassword(password: String): String {
+        val bytes = password.toByteArray()
+
+        val md = MessageDigest.getInstance("SHA-256")
+        val digest = md.digest(bytes)
+
+        return digest.joinToString("") { "%02x".format(it) }
     }
 
 
