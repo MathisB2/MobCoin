@@ -39,7 +39,7 @@ class SearchFragment : Fragment(){
         val llm = LinearLayoutManager(requireContext())
         val adapter = SearchCoinItemAdapter(requireContext(), searchViewModel.searchCoins.value ?: emptyList()) { searchCoin ->
             val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
-                putExtra("COIN_ID", searchCoin.name.lowercase())
+                putExtra("COIN_ID", searchCoin.id)
             }
             startActivity(intent)
         }
