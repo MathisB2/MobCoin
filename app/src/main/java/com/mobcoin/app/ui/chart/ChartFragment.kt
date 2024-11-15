@@ -106,21 +106,23 @@ class ChartFragment : Fragment() {
         dataset.setDrawCircleHole(false)
 
         viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
-        viewModel!!.getCoinPrices(coinId, currency, days).observe(viewLifecycleOwner){
-            this.setData(it)
-        }
+        this.updateCoinData()
 
         return binding.root
     }
 
     fun setDays(days: Int) {
         this.days = days
+        this.updateCoinData()
+    }
+
+    private fun updateCoinData(){
         viewModel?.getCoinPrices(coinId, currency, days)?.observe(viewLifecycleOwner){
             this.setData(it)
         }
     }
 
-    fun setData(values: List<Entry>) {
+    private fun setData(values: List<Entry>) {
         dataset.values = values
         chart.data = LineData(dataset)
 
