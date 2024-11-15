@@ -2,11 +2,7 @@ package com.mobcoin.app.ui.login
 
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.UserRepository
 import com.mobcoin.app.services.UserService

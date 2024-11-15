@@ -2,15 +2,12 @@ package com.mobcoin.app.domain
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import com.mobcoin.app.domain.database.DBDataSource
 import com.mobcoin.app.domain.database.model.User
 import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.services.UserService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.security.MessageDigest
-import kotlin.math.log
 
 object UserRepository {
 
