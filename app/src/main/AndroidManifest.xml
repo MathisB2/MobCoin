@@ -23,7 +23,7 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".CoinInfoActivity"
+            android:name=".ui.CoinInfoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

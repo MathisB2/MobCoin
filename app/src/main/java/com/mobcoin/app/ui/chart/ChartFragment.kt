@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.Utils
+import com.mobcoin.app.R
 import com.mobcoin.app.databinding.FragmentChartBinding
 import com.mobcoin.app.ui.CoinInfoViewModel
 import java.util.Currency
@@ -29,21 +31,22 @@ private const val DAYS_PARAM = "days"
 
 class ChartFragment : Fragment() {
     private var _binding: FragmentChartBinding? = null
+    private var viewModel: ChartViewModel? = null
     private val binding get() = _binding!!
 
     private val dataset = LineDataSet(emptyList(), "DataSet 1")
     private lateinit var chart: LineChart
 
-    private var coinId: String? = null
-    private var currency: String? = null
-    private var days: String? = null
+    private lateinit var coinId: String
+    private lateinit var currency: String
+    private var days: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            coinId = it.getString(COIN_ID_PARAM)
-            currency = it.getString(CURRENCY_PARAM)
-            days = it.getString(DAYS_PARAM)
+            coinId = it.getString(COIN_ID_PARAM)!!
+            currency = it.getString(CURRENCY_PARAM)!!
+            days = it.getString(DAYS_PARAM)!!.toInt()
         }
     }
 
@@ -66,83 +69,75 @@ class ChartFragment : Fragment() {
         chart.isHighlightPerDragEnabled = true
 
         chart.setBackgroundColor(Color.TRANSPARENT)
+        chart.setGridBackgroundColor(Color.TRANSPARENT)
 
         chart.description.isEnabled = false
         chart.legend.isEnabled = false
+        chart.axisRight.isEnabled = false
 
+        val textColor = ContextCompat.getColor(requireContext(), R.color.md_theme_onSurfaceVariant)
         val xAxis = chart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.textSize = 10f
         xAxis.textColor = Color.WHITE
         xAxis.setDrawAxisLine(false)
-        xAxis.setDrawGridLines(true)
-        xAxis.textColor = Color.rgb(255, 192, 56)
+        xAxis.setDrawGridLines(false)
+        xAxis.textColor = textColor
         xAxis.granularity = 1f // one hour
-
         xAxis.valueFormatter = DateValueFormatter()
 
         val leftAxis = chart.axisLeft
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
-        leftAxis.textColor = ColorTemplate.getHoloBlue()
         leftAxis.setDrawGridLines(true)
+        leftAxis.setDrawAxisLine(false)
         leftAxis.isGranularityEnabled = true
-        leftAxis.textColor = Color.rgb(255, 192, 56)
+        leftAxis.textColor = textColor
 
-        chart.axisRight.isEnabled = false
-
+        val dataSetColor = ContextCompat.getColor(requireContext(), R.color.colorSuccess)
         dataset.axisDependency = AxisDependency.LEFT
-        dataset.color = ColorTemplate.getHoloBlue()
-        dataset.valueTextColor = ColorTemplate.getHoloBlue()
+        dataset.color = dataSetColor
+        dataset.valueTextColor = dataSetColor
         dataset.lineWidth = 1.5f
         dataset.setDrawCircles(false)
         dataset.setDrawValues(false)
         dataset.fillAlpha = 65
-        dataset.fillColor = ColorTemplate.getHoloBlue()
-        dataset.highLightColor = Color.rgb(244, 117, 117)
+        dataset.fillColor = dataSetColor
+
         dataset.setDrawCircleHole(false)
 
-        val coinInfoViewModel = ViewModelProvider(this)[CoinInfoViewModel::class.java]
-        coinInfoViewModel.getCoinPrices(coinId!!, currency!!, days!!).observe(viewLifecycleOwner){
-            this.setData(it)
-        }
+        viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
+        this.updateCoinData()
 
         return binding.root
     }
 
-    fun setRandomData(count: Int, range: Float) {
-        val now = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis())
-
-        val values = ArrayList<Entry>()
-        val to = (now + count).toFloat()
-        var x = now.toFloat()
-
-        while (x < to) {
-            val y: Float = getRandom(range, 50f)
-            values.add(Entry(x, y)) // add one entry per hour
-            x++
-        }
-        this.setData(values)
+    fun setDays(days: Int) {
+        this.days = days
+        this.updateCoinData()
     }
 
-    fun setData(values: List<Entry>) {
-        Utils.init(requireContext())
+    private fun updateCoinData(){
+        viewModel?.getCoinPrices(coinId, currency, days)?.observe(viewLifecycleOwner){
+            this.setData(it)
+        }
+    }
+
+    private fun setData(values: List<Entry>) {
         dataset.values = values
         chart.data = LineData(dataset)
-    }
 
-    private fun getRandom(range: Float, start: Float): Float {
-        return (Math.random() * range).toFloat() + start
+        chart.notifyDataSetChanged()
+        chart.invalidate()
     }
 
     companion object {
-
         @JvmStatic
-        fun newInstance(coinId: String, currency: String, days: String, precision: String? = null) =
+        fun newInstance(coinId: String, currency: String, days: Int = 1, precision: String? = null) =
             ChartFragment().apply {
                 arguments = Bundle().apply {
                     putString(COIN_ID_PARAM, coinId)
                     putString(CURRENCY_PARAM, currency)
-                    putString(DAYS_PARAM, days)
+                    putString(DAYS_PARAM, days.toString())
                 }
             }
     }

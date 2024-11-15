@@ -25,11 +25,6 @@ class MeFragment : Fragment(){
 
         val root: View = binding.root
         val meViewModel = ViewModelProvider(this).get(MeViewModel::class.java)
-
-
-
-
-
         childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoggedOutFragment()).commit()
 
         meViewModel.isConnected(requireContext()).observe(viewLifecycleOwner) { isConnected ->
@@ -38,8 +33,6 @@ class MeFragment : Fragment(){
                     .replace(binding.meFragmentContainer.id, ConnectedMeFragment()).commit()
             }
         }
-
-
         return root
     }
 

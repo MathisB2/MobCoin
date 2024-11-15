@@ -1,4 +1,4 @@
-package com.mobcoin.app
+package com.mobcoin.app.ui
 
 import android.os.Bundle
 import android.widget.AdapterView
@@ -7,11 +7,12 @@ import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.ui.chart.ChartFragment
-import com.mobcoin.app.ui.CoinInfoViewModel
+
 import com.squareup.picasso.Picasso
 
 class CoinInfoActivity : AppCompatActivity() {
@@ -33,7 +34,7 @@ class CoinInfoActivity : AppCompatActivity() {
             return
         }
 
-        val chartFragment = ChartFragment.newInstance(coinId, "usd", "1")
+        val chartFragment = ChartFragment.newInstance(coinId, "usd", 1)
         supportFragmentManager.beginTransaction().replace(binding.coinChart.id, chartFragment).commit()
 
 

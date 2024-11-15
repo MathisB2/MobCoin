@@ -8,9 +8,9 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class DateValueFormatter: ValueFormatter() {
-    private val mFormat = SimpleDateFormat("dd MMM HH:mm", Locale.ENGLISH)
+    private val mFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 
-    override fun getFormattedValue(value: Float, axis: AxisBase): String {
+    override fun getFormattedValue(value: Float): String {
         val millis = TimeUnit.HOURS.toMillis(value.toLong())
         return mFormat.format(Date(millis))
     }

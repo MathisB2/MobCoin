@@ -29,4 +29,5 @@
     <string name="home_view_popularCoinsTitle">Popular coins</string>
     <string name="connected_me_view_distribution">Distribution</string>
     <string name="connected_me_view_assets">Assets</string>
+    <string name="searchText">Search for a coin</string>
 </resources>

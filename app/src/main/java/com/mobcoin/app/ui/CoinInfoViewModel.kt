@@ -13,42 +13,6 @@ import kotlinx.coroutines.launch
 
 
 class CoinInfoViewModel : ViewModel() {
-    fun getCoinPrices(coinId: String, currency: String, days: String, precision: String? = null): LiveData<List<Entry>> {
-        val liveData = MutableLiveData<List<Entry>>()
-        viewModelScope.launch {
-            GeckoRepository.getCoinsPrices(coinId, currency, days, precision)
-                .catch {
-                    println(it)
-                }
-                .collect {
-                    liveData.postValue(formatCoinToChartEntries(it.body()))
-                }
-        }
-
-        return liveData
-    }
-
-    private fun formatCoinToChartEntries(coinPrices: CoinPrice?): List<Entry> {
-        if (coinPrices == null) {
-            return emptyList()
-        }
-
-        val entries = mutableListOf<Entry>()
-
-        for (priceEntry in coinPrices.prices) {
-            if (priceEntry.size == 2) {
-                val value = priceEntry[0].toFloat()
-                val date = priceEntry[1].toFloat()
-
-                val entry = Entry(value, date)
-
-                entries.add(entry)
-            }
-        }
-
-        return entries
-    }
-
     fun getCoinById(id: String): LiveData<DetailedCoin?>{
         val livedata = MutableLiveData<DetailedCoin?>()
 
