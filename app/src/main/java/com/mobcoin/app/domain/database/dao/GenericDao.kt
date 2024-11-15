@@ -6,10 +6,10 @@ import androidx.room.Update
 
 interface GenericDao<ENTITY> {
     @Insert
-    suspend fun insert(entity: ENTITY)
+    suspend fun insert(entity: ENTITY) : Long
 
     @Insert
-    suspend fun insertAll(entity: List<ENTITY>)
+    suspend fun insertAll(entity: List<ENTITY>) :List<Long>
 
     @Update
     suspend fun update(entity: ENTITY)

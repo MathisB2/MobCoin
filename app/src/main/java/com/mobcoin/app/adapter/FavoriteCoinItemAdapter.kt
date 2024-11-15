@@ -1,6 +1,5 @@
 package com.mobcoin.app.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
 import com.mobcoin.app.model.Coin
-import com.mobcoin.app.utils.CoinUtils
+import com.mobcoin.app.services.CoinService
 import com.squareup.picasso.Picasso
 
 class FavoriteCoinItemAdapter(
@@ -36,7 +35,7 @@ class FavoriteCoinItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, coinId: Int) {
         val item = dataset[coinId]
         holder.coinName.text = item.name.uppercase()
-        CoinUtils.setPercentageText(item.percentagePriceChange24h,holder.coinEvolution)
+        CoinService.setPercentageText(item.percentagePriceChange24h,holder.coinEvolution)
 
         Picasso.get().load(item.image).into(holder.coinIcon)
     }

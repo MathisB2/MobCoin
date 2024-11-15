@@ -16,7 +16,7 @@ import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.databinding.FragmentHomeBinding
-import com.mobcoin.app.utils.CoinUtils
+import com.mobcoin.app.services.CoinService
 
 class HomeFragment : Fragment() {
 
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -77,13 +77,13 @@ class HomeFragment : Fragment() {
         val dominanceValueText: TextView = binding.textViewDominanceValue
         val dominanceCoinText: TextView = binding.textViewDominanceCoin
         homeViewModel.getGlobalMarketData().observe(viewLifecycleOwner){
-            mcValueText.text = "$" + CoinUtils.formatLargeNumber(it?.totalMarketCap?.get("usd"))
-            CoinUtils.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
-            volumeValueText.text = "$" + CoinUtils.formatLargeNumber(it?.totalVolume?.get("usd"))
+            mcValueText.text = "$" + CoinService.formatLargeNumber(it?.totalMarketCap?.get("usd"))
+            CoinService.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
+            volumeValueText.text = "$" + CoinService.formatLargeNumber(it?.totalVolume?.get("usd"))
 
             val dominanceMap: Map.Entry<String, Double>? = it?.marketCapPercentage?.maxByOrNull { it.value }
 
-            dominanceValueText.text = CoinUtils.roundDoubleToTwoDecimals(dominanceMap?.value) + "%"
+            dominanceValueText.text = CoinService.roundDoubleToTwoDecimals(dominanceMap?.value) + "%"
             dominanceCoinText.text = dominanceMap?.key?.uppercase() ?: "-"
 
         }
