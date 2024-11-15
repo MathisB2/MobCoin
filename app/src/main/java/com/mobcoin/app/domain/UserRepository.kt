@@ -19,7 +19,7 @@ object UserRepository {
         val user = User(
             surname = username,
             email =  email,
-            password = hashPassword(password),
+            password = UserService.hashPassword(password),
             profileImage = if (bitmap != null) ImageService.bitmapToByteArray(bitmap) else null
         )
 
@@ -34,33 +34,27 @@ object UserRepository {
     }
 
 
-    private fun hashPassword(password: String): String {
-        val bytes = password.toByteArray()
 
-        val md = MessageDigest.getInstance("SHA-256")
-        val digest = md.digest(bytes)
-
-        return digest.joinToString("") { "%02x".format(it) }
-    }
 
 
     fun getCurrentUser(context: Context): Flow<User?> = flow {
         val currentUserId = UserService.getUserId(context)
-        Log.d("currentId", currentUserId.toString())
         val user = DBDataSource.getDatabase().userDao().getById(currentUserId)
         emit(user)
     }
 
 
 
-    fun login(user: User, context: Context): Flow<User?> = flow{
-        Log.d("login", user.id.toString())
+    fun login(user: User, context: Context){
         UserService.saveUserId(context, user.id.toInt())
-        emit(user)
     }
 
     fun logout(context: Context) {
         UserService.clearUserId(context)
+    }
+
+    fun getUserByEmail(email: String): Flow<User?> = flow {
+        emit(DBDataSource.getDatabase().userDao().getByEmail(email))
     }
 
 

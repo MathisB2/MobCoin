@@ -36,18 +36,22 @@ class LoginActivity : AppCompatActivity() {
 
 
         findViewById<MaterialButton>(R.id.loginView_login_button).setOnClickListener {
-            vm.login(emailInput.text.toString(), passwordInput.text.toString()).observe(this){ isExistingUser ->
-                //todo
-                if(isExistingUser){
-                    Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show()
+
+
+            vm.login(
+                email = emailInput.text.toString(),
+                password = passwordInput.text.toString(),
+                context = this,
+                onSuccess = {
+                    Toast.makeText(this, "login successfull", Toast.LENGTH_SHORT).show()
                     finish()
-                }else{
+                },
+                onFailure = {
                     Toast.makeText(this, "login failed", Toast.LENGTH_SHORT).show()
                 }
-
-            }
-
+            )
         }
+
 
 
 
