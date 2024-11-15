@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 
         // coins list
         val recyclerView: RecyclerView = binding.recyclerViewCoinList
-        val adapter = CoinItemAdapter(requireContext(), homeViewModel.coins.value ?: emptyList()) { coin ->
+        val adapter = CoinItemAdapter(homeViewModel.coins.value ?: emptyList()) { coin ->
             val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
                 putExtra("COIN_ID", coin.id)
             }

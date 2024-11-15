@@ -40,7 +40,7 @@ class ConnectedFavoritesFragment : Fragment() {
         recyclerView.layoutManager = gridLayoutManager
 
         val coinTest = Coin("bitcoin", "","10", "bitcoin", 10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0,10.0, emptyList())
-        val adapter = FavoriteCoinItemAdapter(requireContext(), emptyList(), childFragmentManager)
+        val adapter = FavoriteCoinItemAdapter(emptyList(), childFragmentManager, onFavoriteItemClick())
 
         val coinsTestList : ArrayList<Coin> = ArrayList()
         coinsTestList.add(coinTest)
@@ -53,13 +53,13 @@ class ConnectedFavoritesFragment : Fragment() {
         return root
     }
 
-//    private fun onFavoriteItemClick(): (Coin) -> Unit = { coin ->
-//        val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
-//            putExtra("COIN_ID", coin.id)
-//        }
-//
-//        startActivity(intent)
-//    }
+    private fun onFavoriteItemClick(): (Coin) -> Unit = { coin ->
+        val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
+            putExtra("COIN_ID", coin.id)
+        }
+
+        startActivity(intent)
+    }
 
 
 }

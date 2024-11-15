@@ -18,9 +18,9 @@ import com.squareup.picasso.Picasso
 import kotlin.math.log
 
 class FavoriteCoinItemAdapter(
-    private val context: Context,
     private var dataset: List<Coin>,
-    private val fragmentManager: FragmentManager
+    private val fragmentManager: FragmentManager,
+    private val onItemClick: (Coin) -> Unit
 ) : Adapter<FavoriteCoinItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -49,8 +49,11 @@ class FavoriteCoinItemAdapter(
         fragmentManager.beginTransaction().replace(holder.coinChart.id, chart).commit()
 
         CoinService.setPercentageText(item.percentagePriceChange24h,holder.coinEvolution)
-
         Picasso.get().load(item.image).into(holder.coinIcon)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount() = dataset.size
