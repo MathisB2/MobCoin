@@ -13,6 +13,7 @@ data class DetailedCoin (
 ) : Serializable {
 
     fun getImageUrlLarge(): String? = image?.get("large")
+    fun getImageUrlSmall(): String? = image?.get("small")
     fun getPriceByCurrency(currency: String): Double? = marketData?.currentPrice?.get(currency)
     fun getConvertCoinsNames():Set<String>? = marketData?.currentPrice?.keys
 }

@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
 import com.mobcoin.app.model.Coin
+import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.ui.chart.ChartFragment
 import com.squareup.picasso.Picasso
 import kotlin.math.log
 
 class FavoriteCoinItemAdapter(
-    private var dataset: List<Coin>,
+    private var dataset: List<DetailedCoin>,
     private val fragmentManager: FragmentManager,
-    private val onItemClick: (Coin) -> Unit
+    private val onItemClick: (DetailedCoin) -> Unit
 ) : Adapter<FavoriteCoinItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -48,8 +49,8 @@ class FavoriteCoinItemAdapter(
         val chart = ChartFragment.newInstance(item.id, "usd", 1, false)
         fragmentManager.beginTransaction().replace(holder.coinChart.id, chart).commit()
 
-        CoinService.setPercentageText(item.percentagePriceChange24h,holder.coinEvolution)
-        Picasso.get().load(item.image).into(holder.coinIcon)
+        CoinService.setPercentageText(item.marketData?.percentagePriceChange24h ?: 0.0, holder.coinEvolution)
+        Picasso.get().load(item.getImageUrlSmall()).into(holder.coinIcon)
 
         holder.itemView.setOnClickListener {
             onItemClick(item)
@@ -58,7 +59,7 @@ class FavoriteCoinItemAdapter(
 
     override fun getItemCount() = dataset.size
 
-    fun setDataset(dataset: List<Coin>){
+    fun setDataset(dataset: List<DetailedCoin>){
         this.dataset = dataset
         notifyDataSetChanged()
     }
