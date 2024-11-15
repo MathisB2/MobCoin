@@ -31,7 +31,7 @@ object CoinService {
         textView.text = formattedValue
     }
 
-    fun formatLargeNumber(number: Double?): String {
+    fun formatNumber(number: Double?): String {
         return when {
             number == null -> "0"
             number >= 1_000_000_000_000 -> "${roundDoubleToTwoDecimals(number / 1_000_000_000_000)} T"

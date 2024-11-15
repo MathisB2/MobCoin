@@ -52,6 +52,6 @@ class CoinItemAdapter(
 
     fun setDataset(dataset: List<Coin>){
         this.dataset = dataset
-        notifyDataSetChanged()
+        this.notifyDataSetChanged()
     }
 }
