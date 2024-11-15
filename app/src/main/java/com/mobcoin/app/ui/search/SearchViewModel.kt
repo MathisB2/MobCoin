@@ -25,8 +25,6 @@ class SearchViewModel : ViewModel(){
                     Timber.e(it)
                 }
                 .collect {
-                    Log.e("TAAAG", query)
-                    Log.e("TAAAG", it.body().toString())
                     _searchCoins.postValue(it.body()?.coins)
                 }
         }
