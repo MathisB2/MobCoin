@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +19,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.Utils
+import com.mobcoin.app.R
 import com.mobcoin.app.databinding.FragmentChartBinding
 import com.mobcoin.app.ui.CoinInfoViewModel
 import java.util.Currency
@@ -67,39 +69,40 @@ class ChartFragment : Fragment() {
         chart.isHighlightPerDragEnabled = true
 
         chart.setBackgroundColor(Color.TRANSPARENT)
+        chart.setGridBackgroundColor(Color.TRANSPARENT)
 
         chart.description.isEnabled = false
         chart.legend.isEnabled = false
+        chart.axisRight.isEnabled = false
 
+        val textColor = ContextCompat.getColor(requireContext(), R.color.md_theme_onSurfaceVariant)
         val xAxis = chart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.textSize = 10f
         xAxis.textColor = Color.WHITE
         xAxis.setDrawAxisLine(false)
-        xAxis.setDrawGridLines(true)
-        xAxis.textColor = Color.rgb(255, 192, 56)
+        xAxis.setDrawGridLines(false)
+        xAxis.textColor = textColor
         xAxis.granularity = 1f // one hour
-
         xAxis.valueFormatter = DateValueFormatter()
 
         val leftAxis = chart.axisLeft
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
-        leftAxis.textColor = ColorTemplate.getHoloBlue()
         leftAxis.setDrawGridLines(true)
+        leftAxis.setDrawAxisLine(false)
         leftAxis.isGranularityEnabled = true
-        leftAxis.textColor = Color.rgb(255, 192, 56)
+        leftAxis.textColor = textColor
 
-        chart.axisRight.isEnabled = false
-
+        val dataSetColor = ContextCompat.getColor(requireContext(), R.color.colorSuccess)
         dataset.axisDependency = AxisDependency.LEFT
-        dataset.color = ColorTemplate.getHoloBlue()
-        dataset.valueTextColor = ColorTemplate.getHoloBlue()
+        dataset.color = dataSetColor
+        dataset.valueTextColor = dataSetColor
         dataset.lineWidth = 1.5f
         dataset.setDrawCircles(false)
         dataset.setDrawValues(false)
         dataset.fillAlpha = 65
-        dataset.fillColor = ColorTemplate.getHoloBlue()
-        dataset.highLightColor = Color.rgb(244, 117, 117)
+        dataset.fillColor = dataSetColor
+
         dataset.setDrawCircleHole(false)
 
         viewModel = ViewModelProvider(this)[ChartViewModel::class.java]
@@ -112,7 +115,7 @@ class ChartFragment : Fragment() {
 
     fun setDays(days: Int) {
         this.days = days
-        viewModel!!.getCoinPrices(coinId, currency, days).observe(viewLifecycleOwner){
+        viewModel?.getCoinPrices(coinId, currency, days)?.observe(viewLifecycleOwner){
             this.setData(it)
         }
     }
@@ -125,12 +128,7 @@ class ChartFragment : Fragment() {
         chart.invalidate()
     }
 
-    private fun getRandom(range: Float, start: Float): Float {
-        return (Math.random() * range).toFloat() + start
-    }
-
     companion object {
-
         @JvmStatic
         fun newInstance(coinId: String, currency: String, days: Int = 1, precision: String? = null) =
             ChartFragment().apply {

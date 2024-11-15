@@ -37,10 +37,10 @@ class ChartViewModel : ViewModel() {
 
         for (priceEntry in coinPrices.prices) {
             if (priceEntry.size == 2) {
-                val value = priceEntry[0].toFloat()
-                val date = priceEntry[1].toFloat()
+                val value = priceEntry[0]
+                val date = priceEntry[1]
 
-                val entry = Entry(value, date)
+                val entry = Entry(value.toFloat(), date.toFloat())
 
                 entries.add(entry)
             }
