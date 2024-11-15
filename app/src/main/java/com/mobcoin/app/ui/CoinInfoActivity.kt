@@ -60,8 +60,10 @@ class CoinInfoActivity : AppCompatActivity() {
         binding.favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 Toast.makeText(this, "Ajouté aux favoris", Toast.LENGTH_SHORT).show()
+                //todo : add to db
             } else {
                 Toast.makeText(this, "Retiré des favoris", Toast.LENGTH_SHORT).show()
+                //todo : remove from db
             }
         }
 
@@ -69,6 +71,7 @@ class CoinInfoActivity : AppCompatActivity() {
 
     private fun setPageData(coin: DetailedCoin){
         supportActionBar?.title = coin.name
+        binding.favoriteCheckbox.isChecked = true //todo : set according to db
         Picasso.get().load(coin.getImageUrlLarge()).into(binding.actionBarCoinIcon)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
         binding.coinPrice.text = "$ " + coin.getPriceByCurrency("usd").toString()
