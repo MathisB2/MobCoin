@@ -4,6 +4,7 @@ import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.CoinPrice
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.GlobalMarketDataContainer
+import com.mobcoin.app.model.search.SearchContainer
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -23,6 +24,12 @@ interface GeckoService {
     suspend fun getGlobalMarketData(
         @Header("x-cg-demo-api-key") apiKey: String
     ): Response<GlobalMarketDataContainer>
+
+    @GET("search")
+    suspend fun searchCoin(
+        @Header("x-cg-demo-api-key") apiKey: String,
+        @Query("query") query: String
+    ): Response<SearchContainer>
 
     @GET("coins/{id}/market_chart")
     suspend fun getCoinPrices(
