@@ -26,6 +26,7 @@ import java.util.Currency
 import java.util.concurrent.TimeUnit
 
 private const val COIN_ID_PARAM = "coinId"
+private const val SHOW_CHART_INFO_PARAM = "showChartInfo"
 private const val CURRENCY_PARAM = "currency"
 private const val DAYS_PARAM = "days"
 
@@ -39,6 +40,7 @@ class ChartFragment : Fragment() {
 
     private lateinit var coinId: String
     private lateinit var currency: String
+    private var showChartInfo: Boolean = true
     private var days: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +48,8 @@ class ChartFragment : Fragment() {
         arguments?.let {
             coinId = it.getString(COIN_ID_PARAM)!!
             currency = it.getString(CURRENCY_PARAM)!!
-            days = it.getString(DAYS_PARAM)!!.toInt()
+            days = it.getInt(DAYS_PARAM)
+            showChartInfo = it.getBoolean(SHOW_CHART_INFO_PARAM)
         }
     }
 
@@ -59,13 +62,13 @@ class ChartFragment : Fragment() {
 
         chart = binding.lineChart
 
-        chart.setTouchEnabled(true)
+        chart.setTouchEnabled(showChartInfo)
         chart.dragDecelerationFrictionCoef = 0.9f
 
         // enable scaling and dragging
-        chart.isDragEnabled = true
+        chart.isDragEnabled = showChartInfo
         chart.setScaleEnabled(true)
-        chart.setDrawGridBackground(true)
+        chart.setDrawGridBackground(showChartInfo)
         chart.isHighlightPerDragEnabled = true
 
         chart.setBackgroundColor(Color.TRANSPARENT)
@@ -77,6 +80,7 @@ class ChartFragment : Fragment() {
 
         val textColor = ContextCompat.getColor(requireContext(), R.color.md_theme_onSurfaceVariant)
         val xAxis = chart.xAxis
+        xAxis.isEnabled = showChartInfo
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.textSize = 10f
         xAxis.textColor = Color.WHITE
@@ -87,6 +91,7 @@ class ChartFragment : Fragment() {
         xAxis.valueFormatter = DateValueFormatter()
 
         val leftAxis = chart.axisLeft
+        leftAxis.isEnabled = showChartInfo
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
         leftAxis.setDrawGridLines(true)
         leftAxis.setDrawAxisLine(false)
@@ -132,12 +137,13 @@ class ChartFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(coinId: String, currency: String, days: Int = 1, precision: String? = null) =
+        fun newInstance(coinId: String, currency: String, days: Int = 1, showChartInfo: Boolean = true, precision: String? = null) =
             ChartFragment().apply {
                 arguments = Bundle().apply {
                     putString(COIN_ID_PARAM, coinId)
                     putString(CURRENCY_PARAM, currency)
-                    putString(DAYS_PARAM, days.toString())
+                    putInt(DAYS_PARAM, days)
+                    putBoolean(SHOW_CHART_INFO_PARAM, showChartInfo)
                 }
             }
     }

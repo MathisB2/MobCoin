@@ -36,7 +36,7 @@ class SearchFragment : Fragment(){
         // search coins list
         val recyclerView = binding.recyclerViewCoinSearchList
         val llm = LinearLayoutManager(requireContext())
-        val adapter = SearchCoinItemAdapter(requireContext(), searchViewModel.searchCoins.value ?: emptyList()) { searchCoin ->
+        val adapter = SearchCoinItemAdapter(searchViewModel.searchCoins.value ?: emptyList()) { searchCoin ->
             val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
                 putExtra("COIN_ID", searchCoin.id)
             }

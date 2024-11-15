@@ -32,4 +32,5 @@
     <string name="searchText">Search for a coin</string>
     <string name="buyText">buy</string>
     <string name="sellText">sell</string>
+    <string name="Logout">Logout</string>
 </resources>
