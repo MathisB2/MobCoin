@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.FragmentFavoritesBinding
+import com.mobcoin.app.ui.others.LoadingFragment
 import com.mobcoin.app.ui.others.LoggedOutFragment
 
 class FavoritesFragment : Fragment(){
@@ -29,11 +30,13 @@ class FavoritesFragment : Fragment(){
         val containerId = binding.favoritesFragmentContainer.id
 
 
-        childFragmentManager.beginTransaction().replace(containerId, LoggedOutFragment.newInstance(getString(R.string.favorites_not_logged_helper_message))).commit()
+        childFragmentManager.beginTransaction().replace(containerId, LoadingFragment()).commit()
 
         favoritesViewModel.isConnected(requireContext()).observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
                 childFragmentManager.beginTransaction().replace(containerId, ConnectedFavoritesFragment()).commit()
+            }else{
+                childFragmentManager.beginTransaction().replace(containerId, LoggedOutFragment.newInstance(getString(R.string.favorites_not_logged_helper_message))).commit()
             }
         }
 
