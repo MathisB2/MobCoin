@@ -28,10 +28,13 @@ class FavoritesFragment : Fragment(){
 
         val fragmentId = binding.favoritesFragmentContainer.id
 
-        if(ConnectivityService.isOnline(requireContext())){
-            childFragmentManager.beginTransaction().replace(fragmentId, ConnectedFavoritesFragment()).commit()
-        }else{
-            childFragmentManager.beginTransaction().replace(fragmentId, LoggedOutFragment()).commit()
+
+        childFragmentManager.beginTransaction().replace(fragmentId, LoggedOutFragment()).commit()
+
+        favoritesViewModel.isConnected(requireContext()).observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                childFragmentManager.beginTransaction().replace(fragmentId, ConnectedFavoritesFragment()).commit()
+            }
         }
 
         return root
