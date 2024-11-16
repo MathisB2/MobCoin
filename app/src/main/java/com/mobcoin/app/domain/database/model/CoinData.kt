@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class CoinData(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
-
+    val geckoId: String,
     val code: String,
     val name: String,
     val icon: ByteArray,

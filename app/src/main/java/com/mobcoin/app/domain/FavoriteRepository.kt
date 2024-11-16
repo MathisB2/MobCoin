@@ -28,7 +28,6 @@ object FavoriteRepository {
 
 
     suspend fun setFavorite(coin: DetailedCoin, context: Context) {
-        Timber.d("hello")
         UserRepository.getCurrentUser(context).collect{ user ->
 
             // ensure user is logged in
@@ -41,6 +40,7 @@ object FavoriteRepository {
             // add coin to database if it doesn't exist
             if(coinData == null){
                 val insertedCoinId = DBDataSource.getDatabase().favoriteDao().insert(CoinData(
+                    geckoId = coin.id,
                     name = coin.name,
                     code = coin.symbol,
                     icon = withContext(Dispatchers.IO) { ImageService.bitmapToByteArray(Picasso.get().load(coin.getImageUrlSmall()).get()) },
