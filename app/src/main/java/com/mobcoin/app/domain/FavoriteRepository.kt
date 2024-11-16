@@ -4,12 +4,15 @@ import android.content.Context
 import com.mobcoin.app.domain.database.DBDataSource
 import com.mobcoin.app.domain.database.model.CoinData
 import com.mobcoin.app.domain.database.model.UserCoin
-import com.mobcoin.app.model.Coin
+import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.ImageService
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 object FavoriteRepository {
     suspend fun getFavorites(context: Context): Flow<List<CoinData>> = flow{
@@ -24,19 +27,23 @@ object FavoriteRepository {
     }
 
 
-    suspend fun setFavorite(coin: Coin, context: Context) {
+    suspend fun setFavorite(coin: DetailedCoin, context: Context) {
+        Timber.d("hello")
         UserRepository.getCurrentUser(context).collect{ user ->
+
+            // ensure user is logged in
             if(user == null)
                 throw Exception("User not logged in")
 
 
             var coinData = DBDataSource.getDatabase().favoriteDao().getByCode(coin.symbol)
 
+            // add coin to database if it doesn't exist
             if(coinData == null){
                 val insertedCoinId = DBDataSource.getDatabase().favoriteDao().insert(CoinData(
                     name = coin.name,
                     code = coin.symbol,
-                    icon = ImageService.bitmapToByteArray(Picasso.get().load(coin.image).get()),
+                    icon = withContext(Dispatchers.IO) { ImageService.bitmapToByteArray(Picasso.get().load(coin.getImageUrlSmall()).get()) },
                 ))
                 coinData = DBDataSource.getDatabase().favoriteDao().getById(insertedCoinId)
             }
@@ -44,6 +51,12 @@ object FavoriteRepository {
             if(coinData == null)
                 throw Exception("Error inserting coin")
 
+
+            // check if coin is already in user's favorites
+            if(DBDataSource.getDatabase().userCoinDao().isCoinFavoriteForUser(user.id, coinData.id))
+                throw Exception("Coin already in favorites")
+
+            // add coin to user's favorites
             DBDataSource.getDatabase().userCoinDao().insert(UserCoin(user.id, coinData.id))
 
         }
