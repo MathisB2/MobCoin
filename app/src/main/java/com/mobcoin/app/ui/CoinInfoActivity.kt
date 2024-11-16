@@ -60,11 +60,20 @@ class CoinInfoActivity : AppCompatActivity() {
     private fun setupFavoriteClickAction(coin: DetailedCoin, coinInfoViewModel: CoinInfoViewModel){
         binding.favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                coinInfoViewModel.setFavorite(coin, this)
-                Toast.makeText(this, "Ajouté aux favoris", Toast.LENGTH_SHORT).show()
+                coinInfoViewModel.setFavorite(
+                    coin = coin,
+                    context = this,
+                    onSuccess = {
+                        Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "Error adding to favorites", Toast.LENGTH_SHORT).show()
+                    }
+                )
+
             } else {
 //                coinInfoViewModel.removeFavorite(coin, this)
-                Toast.makeText(this, "Retiré des favoris", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
             }
         }
     }

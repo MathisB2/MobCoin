@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.FavoriteRepository
 import com.mobcoin.app.domain.GeckoRepository
-import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.DetailedCoin
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -31,9 +30,14 @@ class CoinInfoViewModel : ViewModel() {
     }
 
 
-    fun setFavorite(coin : DetailedCoin, context: Context){
+    fun setFavorite(coin : DetailedCoin, context: Context, onSuccess: () -> Unit, onFailure: () -> Unit){
         viewModelScope.launch {
-            FavoriteRepository.setFavorite(coin, context)
+            try{
+                FavoriteRepository.setFavorite(coin, context)
+                onSuccess()
+            }catch (e: Exception){
+                onFailure()
+            }
         }
     }
 
