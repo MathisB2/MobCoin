@@ -120,14 +120,4 @@ class CoinInfoActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-//            R.id.action_settings -> {
-//                // Action pour l'option de menu
-//                return true
-//            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 }
