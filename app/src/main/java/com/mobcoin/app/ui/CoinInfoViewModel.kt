@@ -1,12 +1,13 @@
 package com.mobcoin.app.ui
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.mikephil.charting.data.Entry
+import com.mobcoin.app.domain.FavoriteRepository
 import com.mobcoin.app.domain.GeckoRepository
-import com.mobcoin.app.model.CoinPrice
+import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.DetailedCoin
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
@@ -27,6 +28,13 @@ class CoinInfoViewModel : ViewModel() {
         }
 
         return livedata
+    }
+
+
+    fun setFavorite(coin : DetailedCoin, context: Context){
+        viewModelScope.launch {
+            FavoriteRepository.setFavorite(coin, context)
+        }
     }
 
 }

@@ -1,12 +1,10 @@
 package com.mobcoin.app.ui
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
@@ -51,23 +49,26 @@ class CoinInfoActivity : AppCompatActivity() {
 
 
         //DetailedCoin
-        coinInfoViewModel.getCoinById(coinId).observe(this){
-            setPageData(it ?: return@observe)
-        }
-
-
-
-        binding.favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Toast.makeText(this, "Ajouté aux favoris", Toast.LENGTH_SHORT).show()
-                //todo : add to db
-            } else {
-                Toast.makeText(this, "Retiré des favoris", Toast.LENGTH_SHORT).show()
-                //todo : remove from db
-            }
+        coinInfoViewModel.getCoinById(coinId).observe(this){ coin ->
+            setPageData(coin ?: return@observe)
+            setupFavoriteClickAction(coin, coinInfoViewModel)
         }
 
     }
+
+
+    private fun setupFavoriteClickAction(coin: DetailedCoin, coinInfoViewModel: CoinInfoViewModel){
+        binding.favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                coinInfoViewModel.setFavorite(coin, this)
+                Toast.makeText(this, "Ajouté aux favoris", Toast.LENGTH_SHORT).show()
+            } else {
+//                coinInfoViewModel.removeFavorite(coin, this)
+                Toast.makeText(this, "Retiré des favoris", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun setPageData(coin: DetailedCoin){
         supportActionBar?.title = coin.name
