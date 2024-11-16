@@ -41,4 +41,15 @@ class CoinInfoViewModel : ViewModel() {
         }
     }
 
+    fun removeFavorite (coin: DetailedCoin, context: Context, onSuccess: () -> Unit, onFailure: () -> Unit){
+        viewModelScope.launch {
+            try{
+                FavoriteRepository.removeFavorite(coin, context)
+                onSuccess()
+            }catch (e: Exception){
+                onFailure()
+            }
+        }
+    }
+
 }

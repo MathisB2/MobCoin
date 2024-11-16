@@ -59,6 +59,7 @@ class CoinInfoActivity : AppCompatActivity() {
 
     private fun setupFavoriteClickAction(coin: DetailedCoin, coinInfoViewModel: CoinInfoViewModel){
         binding.favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            //todo : disable checkbox when not logged in
             if (isChecked) {
                 coinInfoViewModel.setFavorite(
                     coin = coin,
@@ -72,8 +73,16 @@ class CoinInfoActivity : AppCompatActivity() {
                 )
 
             } else {
-//                coinInfoViewModel.removeFavorite(coin, this)
-                Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                coinInfoViewModel.removeFavorite(
+                    coin = coin,
+                    context = this,
+                    onSuccess = {
+                        Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "Error removing from favorites", Toast.LENGTH_SHORT).show()
+                    }
+                )
             }
         }
     }

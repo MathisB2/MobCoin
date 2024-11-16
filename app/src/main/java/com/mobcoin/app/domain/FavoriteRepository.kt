@@ -61,4 +61,28 @@ object FavoriteRepository {
 
         }
     }
+
+
+    suspend fun removeFavorite(coin: DetailedCoin, context: Context) {
+        UserRepository.getCurrentUser(context).collect{ user ->
+            // ensure user is logged in
+            if(user == null)
+                throw Exception("User not logged in")
+
+
+            val coinData = DBDataSource.getDatabase().favoriteDao().getByCode(coin.symbol)
+
+            // ensure coin exists
+            if(coinData == null)
+                throw Exception("Coin not found")
+
+            // ensure coin is in user's favorites
+            if(!DBDataSource.getDatabase().userCoinDao().isCoinFavoriteForUser(user.id, coinData.id))
+                throw Exception("Coin not in favorites")
+
+            // remove coin from user's favorites
+            DBDataSource.getDatabase().userCoinDao().delete(UserCoin(user.id, coinData.id))
+
+        }
+    }
 }
