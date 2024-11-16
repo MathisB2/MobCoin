@@ -50,8 +50,11 @@ class CoinInfoActivity : AppCompatActivity() {
 
         //DetailedCoin
         coinInfoViewModel.getCoinById(coinId).observe(this){ coin ->
-            setPageData(coin ?: return@observe)
-            setupFavoriteClickAction(coin, coinInfoViewModel)
+            setPageData(coin ?: return@observe, coinInfoViewModel)
+            coinInfoViewModel.isFavorite(coin, this).observe(this){
+                binding.favoriteCheckbox.isChecked = it
+                setupFavoriteClickAction(coin, coinInfoViewModel)
+            }
         }
 
     }
@@ -88,9 +91,8 @@ class CoinInfoActivity : AppCompatActivity() {
     }
 
 
-    private fun setPageData(coin: DetailedCoin){
+    private fun setPageData(coin: DetailedCoin, coinInfoViewModel: CoinInfoViewModel){
         supportActionBar?.title = coin.name
-        binding.favoriteCheckbox.isChecked = true //todo : set according to db
         Picasso.get().load(coin.getImageUrlLarge()).into(binding.actionBarCoinIcon)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
         binding.coinPrice.text = "$ " + coin.getPriceByCurrency("usd").toString()

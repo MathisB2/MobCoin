@@ -29,6 +29,21 @@ class CoinInfoViewModel : ViewModel() {
         return livedata
     }
 
+    fun isFavorite(coin: DetailedCoin, context: Context) : LiveData<Boolean>{
+        val isFavorite = MutableLiveData<Boolean>()
+
+        viewModelScope.launch {
+            FavoriteRepository.isFavorite(coin, context).catch {
+                isFavorite.postValue(false)
+            }.collect {
+                isFavorite.postValue(it)
+            }
+
+
+        }
+        return isFavorite
+    }
+
 
     fun setFavorite(coin : DetailedCoin, context: Context, onSuccess: () -> Unit, onFailure: () -> Unit){
         viewModelScope.launch {

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 object FavoriteRepository {
     suspend fun getFavorites(context: Context): Flow<List<CoinData>> = flow{
@@ -23,6 +22,22 @@ object FavoriteRepository {
                 emit(DBDataSource.getDatabase().favoriteDao().getCoinsFor(user.id))
             else
                 emit(emptyList())
+        }
+    }
+
+    suspend fun isFavorite(coin: DetailedCoin, context: Context): Flow<Boolean> = flow {
+        UserRepository.getCurrentUser(context).catch {
+            emit(false)
+        }.collect{ user ->
+            if(user == null)
+                emit(false)
+            else {
+                val coinData = DBDataSource.getDatabase().favoriteDao().getByCode(coin.symbol)
+                if(coinData == null)
+                    emit(false)
+                else
+                    emit(DBDataSource.getDatabase().userCoinDao().isCoinFavoriteForUser(user.id, coinData.id))
+            }
         }
     }
 
