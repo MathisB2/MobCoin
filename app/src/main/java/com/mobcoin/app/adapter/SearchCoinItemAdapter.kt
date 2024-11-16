@@ -13,12 +13,11 @@ import com.mobcoin.app.model.search.SearchCoin
 import com.squareup.picasso.Picasso
 
 class SearchCoinItemAdapter(
-    private val context: Context,
     private var dataset: List<SearchCoin>,
     private val onItemClick: (SearchCoin) -> Unit
 ) : Adapter<SearchCoinItemAdapter.ItemViewHolder>() {
 
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val coinSymbole: TextView = view.findViewById(R.id.searchCoinSymbole)
         val coinName: TextView = view.findViewById(R.id.searchCoinName)
         val coinRank: TextView = view.findViewById(R.id.searchCoinRank)

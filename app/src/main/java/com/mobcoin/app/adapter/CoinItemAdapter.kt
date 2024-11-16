@@ -14,12 +14,11 @@ import com.mobcoin.app.services.CoinService
 import com.squareup.picasso.Picasso
 
 class CoinItemAdapter(
-    private val context: Context,
     private var dataset: List<Coin>,
     private val onItemClick: (Coin) -> Unit
 ) : Adapter<CoinItemAdapter.ItemViewHolder>() {
 
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val coinSymbole: TextView = view.findViewById(R.id.coinSymbole)
         val coinPrice: TextView = view.findViewById(R.id.coinPrice)
         val coinChanges: TextView = view.findViewById(R.id.coinChanges)
@@ -52,6 +51,6 @@ class CoinItemAdapter(
 
     fun setDataset(dataset: List<Coin>){
         this.dataset = dataset
-        notifyDataSetChanged()
+        this.notifyDataSetChanged()
     }
 }

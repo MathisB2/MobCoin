@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 
         // coins list
         val recyclerView: RecyclerView = binding.recyclerViewCoinList
-        val adapter = CoinItemAdapter(requireContext(), homeViewModel.coins.value ?: emptyList()) { coin ->
+        val adapter = CoinItemAdapter(homeViewModel.coins.value ?: emptyList()) { coin ->
             val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
                 putExtra("COIN_ID", coin.id)
             }
@@ -77,9 +77,9 @@ class HomeFragment : Fragment() {
         val dominanceValueText: TextView = binding.textViewDominanceValue
         val dominanceCoinText: TextView = binding.textViewDominanceCoin
         homeViewModel.getGlobalMarketData().observe(viewLifecycleOwner){
-            mcValueText.text = "$" + CoinService.formatLargeNumber(it?.totalMarketCap?.get("usd"))
+            mcValueText.text = "$" + CoinService.formatNumber(it?.totalMarketCap?.get("usd"))
             CoinService.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
-            volumeValueText.text = "$" + CoinService.formatLargeNumber(it?.totalVolume?.get("usd"))
+            volumeValueText.text = "$" + CoinService.formatNumber(it?.totalVolume?.get("usd"))
 
             val dominanceMap: Map.Entry<String, Double>? = it?.marketCapPercentage?.maxByOrNull { it.value }
 
