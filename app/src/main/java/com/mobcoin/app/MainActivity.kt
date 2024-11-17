@@ -1,7 +1,6 @@
 package com.mobcoin.app
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
