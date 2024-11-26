@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.FragmentConnectedMeBinding
 import com.mobcoin.app.databinding.FragmentMeBinding
+import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.ui.others.LoggedOutFragment
 
 
@@ -30,6 +31,18 @@ class ConnectedMeFragment : Fragment() {
         binding.meConnectedLogoutButton.setOnClickListener {
             meViewModel.logout(requireContext())
         }
+
+
+        meViewModel.getUser(requireContext()).observe(viewLifecycleOwner) {
+            binding.meConnectedUsername.text = it.surname
+
+            if(it.profileImage != null){
+                val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
+                binding.meConnectedProfilePicture.setImageBitmap(userBitmap)
+            }   
+
+        }
+
 
         return root
     }
