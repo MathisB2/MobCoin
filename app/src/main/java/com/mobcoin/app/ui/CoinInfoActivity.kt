@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.appbar.MaterialToolbar
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.DetailedCoin
@@ -21,10 +22,19 @@ class CoinInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
 
         binding = ActivityCoinInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val toolbar: MaterialToolbar = binding.toolbar
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
 
         val coinInfoViewModel = ViewModelProvider(this)[CoinInfoViewModel::class.java]
 
@@ -39,17 +49,53 @@ class CoinInfoActivity : AppCompatActivity() {
 
 
         //DetailedCoin
-        coinInfoViewModel.getCoinById(coinId).observe(this){
-            setPageData(it ?: return@observe)
+        coinInfoViewModel.getCoinById(coinId).observe(this){ coin ->
+            setPageData(coin ?: return@observe)
+            coinInfoViewModel.isFavorite(coin, this).observe(this){
+                binding.favoriteCheckbox.isChecked = it
+                setupFavoriteClickAction(coin, coinInfoViewModel)
+            }
         }
 
     }
 
+
+    private fun setupFavoriteClickAction(coin: DetailedCoin, coinInfoViewModel: CoinInfoViewModel){
+        binding.favoriteCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            //todo : disable checkbox when not logged in
+            if (isChecked) {
+                coinInfoViewModel.setFavorite(
+                    coin = coin,
+                    context = this,
+                    onSuccess = {
+                        Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "Error adding to favorites", Toast.LENGTH_SHORT).show()
+                    }
+                )
+
+            } else {
+                coinInfoViewModel.removeFavorite(
+                    coin = coin,
+                    context = this,
+                    onSuccess = {
+                        Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                    },
+                    onFailure = {
+                        Toast.makeText(this, "Error removing from favorites", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+        }
+    }
+
+
     private fun setPageData(coin: DetailedCoin){
-        binding.itemCoinName.text = coin.name
-        Picasso.get().load(coin.getImageUrlLarge()).into(binding.itemCoinIcon)
+        supportActionBar?.title = coin.name
+        Picasso.get().load(coin.getImageUrlLarge()).into(binding.actionBarCoinIcon)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
-        binding.coinPrice.text = coin.getPriceByCurrency("usd").toString()
+        binding.coinPrice.text = "$ " + coin.getPriceByCurrency("usd").toString()
         CoinService.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency("usd"),binding.evolution1h)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.evolution24h)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange7d,binding.evolution7d)
@@ -86,6 +132,13 @@ class CoinInfoActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
+    }
+
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
 }

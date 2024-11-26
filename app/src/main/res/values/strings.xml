@@ -34,4 +34,5 @@
     <string name="sellText">sell</string>
     <string name="Logout">Logout</string>
     <string name="account_quantity">Account Quantity : </string>
+    <string name="favorites_not_logged_helper_message">You must log in to add favorites</string>
 </resources>

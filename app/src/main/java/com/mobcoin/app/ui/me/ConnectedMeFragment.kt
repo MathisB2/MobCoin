@@ -10,6 +10,10 @@ import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.FragmentConnectedMeBinding
 import com.mobcoin.app.ui.me.addCoin.AddCoinActivity
+import com.mobcoin.app.databinding.FragmentMeBinding
+import com.mobcoin.app.services.ImageService
+import com.mobcoin.app.ui.others.LoggedOutFragment
+
 
 class ConnectedMeFragment : Fragment() {
 
@@ -33,6 +37,16 @@ class ConnectedMeFragment : Fragment() {
             startActivity(intent)
         }
 
+
+        meViewModel.getUser(requireContext()).observe(viewLifecycleOwner) {
+            binding.meConnectedUsername.text = it.surname
+
+            if(it.profileImage != null){
+                val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
+                binding.meConnectedProfilePicture.setImageBitmap(userBitmap)
+            }   
+
+        }
 
         return root
     }

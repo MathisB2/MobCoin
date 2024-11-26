@@ -15,7 +15,7 @@
         android:text="@string/connected_me_view_distribution"
         android:textColor="@color/md_theme_onBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/me_connected_profile_picture" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -76,5 +76,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/button_connected_me" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/me_connected_profile_picture"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/Circular" />
+
+
+    <TextView
+        android:id="@+id/me_connected_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Username"
+        android:textAppearance="@style/HeadlineSmallTextStyle"
+        app:layout_constraintStart_toEndOf="@+id/me_connected_profile_picture"
+        app:layout_constraintTop_toTopOf="@+id/me_connected_profile_picture" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/meConnectedLogoutButton"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/Logout"
+        app:layout_constraintStart_toStartOf="@+id/me_connected_username"
+        app:layout_constraintTop_toBottomOf="@+id/me_connected_username" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

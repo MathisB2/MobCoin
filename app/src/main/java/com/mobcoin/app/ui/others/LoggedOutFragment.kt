@@ -7,17 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.lifecycle.ViewModelProvider
+import com.mobcoin.app.R
 import com.mobcoin.app.databinding.FragmentLoggedOutBinding
 import com.mobcoin.app.ui.login.LoginActivity
-import com.mobcoin.app.ui.me.MeViewModel
 
+
+private const val TEXT_MESSAGE_PARAM = "textMessage"
 
 class LoggedOutFragment : Fragment() {
+    private var textMessage: String? = null
 
     private var _binding: FragmentLoggedOutBinding? = null
-
     private val binding get() = _binding!!
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            textMessage = it.getString(TEXT_MESSAGE_PARAM)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +37,13 @@ class LoggedOutFragment : Fragment() {
         val root: View = binding.root
 
 
+        if(textMessage != null){
+            binding.loggedOutFragmentGuestMessage.text = textMessage
+        }else{
+            binding.loggedOutFragmentGuestMessage.text = getString(R.string.meFragment_guestMessage)
+        }
 
-        var loginButton: Button = binding.loggedOutFragmentLoginButton
+        val loginButton: Button = binding.loggedOutFragmentLoginButton
         loginButton.setOnClickListener{
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)
@@ -42,5 +56,16 @@ class LoggedOutFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun newInstance(textMessage: String?) =
+            LoggedOutFragment().apply {
+                arguments = Bundle().apply {
+                    putString(TEXT_MESSAGE_PARAM, textMessage)
+                }
+            }
     }
 }

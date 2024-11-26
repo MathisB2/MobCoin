@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.FragmentMeBinding
 import com.mobcoin.app.domain.UserRepository
+import com.mobcoin.app.ui.others.LoadingFragment
 import com.mobcoin.app.ui.others.LoggedOutFragment
 
 class MeFragment : Fragment(){
@@ -25,12 +26,16 @@ class MeFragment : Fragment(){
 
         val root: View = binding.root
         val meViewModel = ViewModelProvider(this).get(MeViewModel::class.java)
-        childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoggedOutFragment()).commit()
+
+        childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoadingFragment()).commit()
 
         meViewModel.isConnected(requireContext()).observe(viewLifecycleOwner) { isConnected ->
             if (isConnected) {
                 childFragmentManager.beginTransaction()
                     .replace(binding.meFragmentContainer.id, ConnectedMeFragment()).commit()
+            }else{
+                childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoggedOutFragment()).commit()
+
             }
         }
         return root
