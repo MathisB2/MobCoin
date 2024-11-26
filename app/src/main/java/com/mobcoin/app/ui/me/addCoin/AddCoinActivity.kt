@@ -33,7 +33,7 @@ class AddCoinActivity : AppCompatActivity() {
         val recyclerView = binding.recyclerViewAddCoin
         val llm = LinearLayoutManager(this)
 
-        val adapter = SearchCoinItemAdapter(this, addCoinViewModel.searchCoins.value ?: emptyList()) { searchCoin ->
+        val adapter = SearchCoinItemAdapter( addCoinViewModel.searchCoins.value ?: emptyList()) { searchCoin ->
             val intent = Intent(this, EditCoinValueActivity::class.java).apply {
                 putExtra("COIN_ID", searchCoin.id)
             }
