@@ -1,24 +1,23 @@
 package com.mobcoin.app.ui.me.addCoin
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mobcoin.app.R
 import com.mobcoin.app.adapter.SearchCoinItemAdapter
 import com.mobcoin.app.databinding.ActivityAddCoinBinding
-import com.mobcoin.app.databinding.ActivityCoinInfoBinding
-import com.mobcoin.app.ui.CoinInfoActivity
 
 class AddCoinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddCoinBinding
+    private lateinit var editCoinValueActivityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +25,15 @@ class AddCoinActivity : AppCompatActivity() {
 
         binding = ActivityAddCoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        editCoinValueActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == Activity.RESULT_OK){
+                val isSuccessful = result.data?.getBooleanExtra("isSuccessful", false) ?: false
+                if (isSuccessful){
+                    finish()
+                }
+            }
+        }
 
         val addCoinViewModel = ViewModelProvider(this)[AddCoinViewModel::class.java]
 
@@ -37,7 +45,7 @@ class AddCoinActivity : AppCompatActivity() {
             val intent = Intent(this, EditCoinValueActivity::class.java).apply {
                 putExtra("COIN_ID", searchCoin.id)
             }
-            startActivity(intent)
+            editCoinValueActivityLauncher.launch(intent)
         }
 
         recyclerView.setLayoutManager(llm)

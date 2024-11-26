@@ -1,5 +1,7 @@
 package com.mobcoin.app.ui.me.addCoin
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivityEditCoinValueBinding
-import com.mobcoin.app.domain.database.model.Asset
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
 
@@ -34,27 +35,41 @@ class EditCoinValueActivity : AppCompatActivity() {
             finish()
             return
         }
-
+        println("coinidddddddd" + coinId)
 
         editCoinValueViewModel.getCoinById(coinId).observe(this){
-            startTransaction(it ?: return@observe)
+            if(it == null) return@observe
+            editCoinValueViewModel.getCoinQuantity(this, coinId).observe(this){ asset ->
+                binding.textViewAccountQuantityValue.text = asset?.quantity?.toString() ?: "0"
+                coinQuantity = asset.quantity
+                startTransaction(it)
+            }
+
+
         }
 
         editCoinValueViewModel.getCoinQuantity(this, coinId).observe(this){
             binding.textViewAccountQuantityValue.text = it?.quantity?.toString() ?: "0"
         }
 
-        binding.buttonBuy.setOnClickListener {
 
+        binding.buttonBuy.setOnClickListener {
+            editCoinValueViewModel.editQuantity(this, coinId, binding.countEditText.text.toString().toDouble())
 
             Toast.makeText(this,"buy successful",Toast.LENGTH_SHORT).show()
+            val resultIntent = Intent()
+            resultIntent.putExtra("isSuccessful", true)
+            setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
 
         binding.buttonSell.setOnClickListener {
-
+            editCoinValueViewModel.editQuantity(this, coinId, binding.countEditText.text.toString().toDouble() * -1)
 
             Toast.makeText(this,"sell successful",Toast.LENGTH_SHORT).show()
+            val resultIntent = Intent()
+            resultIntent.putExtra("isSuccessful", true)
+            setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
 
@@ -62,7 +77,7 @@ class EditCoinValueActivity : AppCompatActivity() {
     }
 
     private fun startTransaction(coin: DetailedCoin){
-        binding.textViewCoinName.text = coin.symbol
+        binding.textViewCoinName.text = coin.symbol.uppercase()
         binding.textViewCoinName.setTextColor(ContextCompat.getColor(this,R.color.md_theme_onSurfaceVariant))
 
         val priceEditText = binding.countEditText
@@ -75,15 +90,16 @@ class EditCoinValueActivity : AppCompatActivity() {
             override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
                 totalTransactionPrice.text = CoinService.roundDoubleToTwoDecimals(
                     (charSequence?.toString()?.toDoubleOrNull() ?: 0.0) * (coin.getPriceByCurrency("usd") ?: 1.0)
-                )
+                ) + "$"
 
-                if (!charSequence.isNullOrEmpty() && charSequence.toString().toDouble() == 0.0) {
+                if (!charSequence.isNullOrEmpty() && charSequence.toString().toDouble() != 0.0) {
                     binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onBackground))
 
                     binding.buttonBuy.isEnabled = true
-                    if(charSequence.toString().toDouble() <= coinQuantity){
-                        binding.buttonSell.isEnabled = true
-                    }
+                    println(charSequence.toString().toDouble())
+                    println(coinQuantity)
+                    binding.buttonSell.isEnabled = charSequence.toString().toDouble() <= coinQuantity
+
                 }else{
                     binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onSurfaceVariant))
 
@@ -92,19 +108,12 @@ class EditCoinValueActivity : AppCompatActivity() {
                     binding.buttonSell.isEnabled = false
 
                 }
-
-
-
             }
 
             override fun afterTextChanged(editable: Editable?) {}
         })
 
         binding.textViewCoinName2.text = coin.symbol
-
-    }
-
-    private fun setAccountQuantity(asset: Asset){
 
     }
 }

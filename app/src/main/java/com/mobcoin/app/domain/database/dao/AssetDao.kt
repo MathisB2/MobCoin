@@ -1,6 +1,8 @@
 package com.mobcoin.app.domain.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mobcoin.app.domain.database.model.Asset
 
@@ -12,5 +14,8 @@ interface AssetDao: GenericDao<Asset> {
 
     @Query("SELECT * FROM T_ASSET WHERE id_user = :userId")
     suspend fun getListByUserId(userId: Long) : List<Asset>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrUpdate(asset: Asset)
 
 }

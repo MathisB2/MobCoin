@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.AssetRepository
 import com.mobcoin.app.domain.GeckoRepository
-import com.mobcoin.app.domain.UserRepository
 import com.mobcoin.app.domain.database.model.Asset
 import com.mobcoin.app.model.DetailedCoin
 import kotlinx.coroutines.flow.catch
@@ -42,6 +41,12 @@ class EditCoinValueViewModel : ViewModel() {
         }
 
         return asset
+    }
+
+    fun editQuantity(context: Context, coinId: String, newQuantity: Double){
+        viewModelScope.launch {
+            AssetRepository.checkAndUpdateQuantity(context, coinId, newQuantity)
+        }
     }
 
 }
