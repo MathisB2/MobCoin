@@ -30,8 +30,8 @@ class EditCoinValueViewModel : ViewModel() {
         return livedata
     }
 
-    fun getCoinQuantity(context: Context, coinId: String): LiveData<Asset> {
-        val asset = MutableLiveData<Asset>()
+    fun getCoinQuantity(context: Context, coinId: String): LiveData<Asset?> {
+        val asset = MutableLiveData<Asset?>()
 
         viewModelScope.launch {
             AssetRepository.getAssetWithCoinIdAndUserId(context, coinId).collect {

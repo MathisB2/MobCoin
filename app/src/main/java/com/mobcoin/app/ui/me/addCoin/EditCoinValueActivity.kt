@@ -41,7 +41,7 @@ class EditCoinValueActivity : AppCompatActivity() {
             if(it == null) return@observe
             editCoinValueViewModel.getCoinQuantity(this, coinId).observe(this){ asset ->
                 binding.textViewAccountQuantityValue.text = asset?.quantity?.toString() ?: "0"
-                coinQuantity = asset.quantity
+                coinQuantity = asset?.quantity ?: 0.0
                 startTransaction(it)
             }
 
