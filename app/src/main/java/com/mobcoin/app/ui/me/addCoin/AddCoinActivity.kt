@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobcoin.app.adapter.SearchCoinItemAdapter
 import com.mobcoin.app.databinding.ActivityAddCoinBinding
+import com.mobcoin.app.ui.me.MeFragment
+import com.mobcoin.app.ui.me.MeViewModel
 
 class AddCoinActivity : AppCompatActivity() {
 
@@ -21,7 +23,6 @@ class AddCoinActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityAddCoinBinding.inflate(layoutInflater)
         setContentView(binding.root)

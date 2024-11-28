@@ -10,14 +10,11 @@ object AssetRepository {
 
     fun getAssetWithCoinIdAndUserId(context: Context, coinId: String): Flow<Asset?> = flow {
         UserRepository.getCurrentUser(context).collect{
-            if (it != null) {
-                emit(DBDataSource.getDatabase().assetDao().getByCoinIdAndUserId(coinId,it.id))
-            }else{
-                throw Exception("unknown user")
-            }
+            if (it == null) throw Exception("unknown user")
+
+            emit(DBDataSource.getDatabase().assetDao().getByCoinIdAndUserId(coinId,it.id))
         }
     }
-
 
     suspend fun checkAndUpdateQuantity(context: Context, idCoin: String, newQuantity: Double) {
         UserRepository.getCurrentUser(context).collect{
@@ -30,6 +27,15 @@ object AssetRepository {
             } else {
                 DBDataSource.getDatabase().assetDao().insertOrUpdate(Asset(id = 0, coinId = idCoin, idUser = it.id, quantity = newQuantity))
             }
+        }
+    }
+
+    suspend fun getAllAssetWithUserId(context: Context): Flow<List<Asset>> = flow{
+        UserRepository.getCurrentUser(context).collect{
+            if (it == null)
+                throw Exception("unknown user")
+
+            emit(DBDataSource.getDatabase().assetDao().getListByUserId(it.id))
         }
     }
 

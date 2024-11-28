@@ -7,15 +7,30 @@
     tools:context=".ui.me.ConnectedMeFragment">
 
     <TextView
+        android:id="@+id/account_value"
+        style="titre"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:text="0,0$"
+        android:textAlignment="gravity"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/me_connected_profile_picture" />
+
+    <TextView
         android:id="@+id/textView_connected_me_dist"
         style="@style/TitleMediumTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/connected_me_view_distribution"
         android:textColor="@color/md_theme_onBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/me_connected_profile_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/account_value" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -57,7 +72,7 @@
         android:layout_marginStart="8dp"
         android:text="@string/connected_me_view_assets"
         android:textColor="@color/md_theme_onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_asset_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -72,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recyclerView_asset_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/button_connected_me" />
