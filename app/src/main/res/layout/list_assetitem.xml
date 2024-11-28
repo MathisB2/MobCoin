@@ -83,10 +83,11 @@
         android:id="@+id/quantity_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:gravity="right"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/edit_button"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -105,5 +106,16 @@
             android:text="TextView"
             android:textAlignment="textEnd" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerInParent="true"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

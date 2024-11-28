@@ -152,4 +152,9 @@
     <color name="colorOnSuccess_highContrast">#FFFFFF</color>
     <color name="colorSuccessContainer_highContrast">#1B4C23</color>
     <color name="colorOnSuccessContainer_highContrast">#FFFFFF</color>
+    <color name="donut_1">#3E3C8D</color>
+    <color name="donut_2">#0DA5E9</color>
+    <color name="donut_3">#6CEAC0</color>
+    <color name="donut_4">#F7931A</color>
+    <color name="donut_5">#F7931A</color>
 </resources>

@@ -3,18 +3,20 @@ package com.mobcoin.app.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
-import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.services.CoinService
 import com.squareup.picasso.Picasso
 
 class AssetItemAdapter(
-    private var dataset: List<DisplayedAsset>
+    private var dataset: List<DisplayedAsset>,
+    private val onItemClick: (DisplayedAsset) -> Unit,
+    private val onEditButtonClick: (DisplayedAsset) -> Unit
 ) : Adapter<AssetItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -25,6 +27,7 @@ class AssetItemAdapter(
         val coinChange: TextView = view.findViewById(R.id.textView_coin_change)
         val currencyQuantity: TextView = view.findViewById(R.id.textView_currency_quantity)
         val coinQuantity: TextView = view.findViewById(R.id.textView_coin_quantity)
+        val editButton: ImageButton = view.findViewById(R.id.edit_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -38,13 +41,19 @@ class AssetItemAdapter(
         val item = dataset[coinId]
 
         holder.coinName.text = item.coinName
-        holder.coinSymbol.text = item.coinSymbol
+        holder.coinSymbol.text = item.coinSymbol.uppercase()
         holder.coinPrice.text = "$" + item.coinPrice.toString()
         CoinService.setPercentageText(item.coinChange,holder.coinChange)
         holder.currencyQuantity.text = (CoinService.roundDoubleToTwoDecimals(item.quantity * item.coinPrice)) + " $"
-        holder.coinQuantity.text = CoinService.roundDoubleToTwoDecimals(item.quantity)
+        holder.coinQuantity.text = CoinService.roundDoubleToTwoDecimals(item.quantity) + " " + item.coinSymbol.uppercase()
         Picasso.get().load(item.coinIcon).into(holder.coinIcon)
 
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
+        holder.editButton.setOnClickListener {
+            onEditButtonClick(item)
+        }
     }
 
     override fun getItemCount() = dataset.size

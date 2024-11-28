@@ -81,6 +81,7 @@ class MeViewModel : ViewModel() {
                         }
                     }
                 }
+                dAssets.sortByDescending { it.quantity * it.coinPrice }
                 _displayedAssets.postValue(dAssets)
                 _accountValue.postValue(totalAccountValue)
             }
