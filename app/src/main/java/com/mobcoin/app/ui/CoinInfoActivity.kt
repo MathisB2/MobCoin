@@ -1,11 +1,13 @@
 package com.mobcoin.app.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
 import com.mobcoin.app.R
@@ -56,6 +58,9 @@ class CoinInfoActivity : AppCompatActivity() {
             }
         }
 
+        binding.converterAddButton.setOnClickListener { increaseCoinCount(1.0) }
+        binding.converterRemoveButton.setOnClickListener { increaseCoinCount(-1.0) }
+
 
 
         //DetailedCoin
@@ -64,6 +69,7 @@ class CoinInfoActivity : AppCompatActivity() {
             coinInfoViewModel.isFavorite(coin, this).observe(this){
                 binding.favoriteCheckbox.isChecked = it
                 setupFavoriteClickAction(coin, coinInfoViewModel)
+                setupConvertCoinEditAction(coin)
             }
         }
 
@@ -100,6 +106,19 @@ class CoinInfoActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupConvertCoinEditAction(coin: DetailedCoin){
+        binding.convertInputEditTextValue.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                updateConverterResult(coin)
+            }
+
+            override fun afterTextChanged(editable: Editable?) {}
+        })
+    }
+
 
     private fun setPageData(coin: DetailedCoin){
         supportActionBar?.title = coin.name
@@ -111,18 +130,20 @@ class CoinInfoActivity : AppCompatActivity() {
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange7d,binding.evolution7d)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange30d,binding.evolution30d)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange1y,binding.evolution1y)
-        binding.marketCapRankValue.text = coin.marketCapRank.toString()
+        binding.marketCapRankValue.text = "#"+coin.marketCapRank.toString()
         binding.totalSupplyValue.text = coin.marketData?.totalSupply.toString()
-        binding.marketCapValue.text = coin.marketData?.marketCap?.get("usd").toString()
-        binding.athValue.text = coin.marketData?.getAthByCurrency("usd").toString()
-        binding.atlValue.text = coin.marketData?.getAtlByCurrency("usd").toString()
+        binding.marketCapValue.text = "$"+coin.marketData?.marketCap?.get("usd").toString()
+        binding.athValue.text = "$"+coin.marketData?.getAthByCurrency("usd").toString()
+        binding.atlValue.text = "$"+coin.marketData?.getAtlByCurrency("usd").toString()
 
 
 
         //converter
-        binding.textViewCoinConvertName.text = coin.name
+        binding.textViewCoinConvertName.text = coin.symbol.uppercase()
 
-        val spinner: Spinner = findViewById(R.id.spinner_converted_coin_name)
+        val spinner = binding.spinnerConvertedCoinName
+
+
 
         val items = coin.getConvertCoinsNames()?.toList() ?: emptyList()
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
@@ -138,7 +159,7 @@ class CoinInfoActivity : AppCompatActivity() {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parentView: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
-                binding.textViewConvertedCoinCount.text = coin.getPriceByCurrency(parentView.getItemAtPosition(position).toString()).toString()
+                updateConverterResult(coin)
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
@@ -149,6 +170,18 @@ class CoinInfoActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    private fun increaseCoinCount(quantity: Double) {
+        val currentValue = binding.convertInputEditTextValue.text.toString().toDoubleOrNull() ?: 1.0
+        binding.convertInputEditTextValue.setText((currentValue + quantity).toString())
+    }
+
+    private fun updateConverterResult(coin: DetailedCoin) {
+        val valueToConvert = binding.convertInputEditTextValue.text.toString().toDoubleOrNull() ?: 1.0
+        val selectedCurrency = binding.spinnerConvertedCoinName.selectedItem.toString()
+        val result = coin.getPriceByCurrency(selectedCurrency)!! * valueToConvert
+        binding.textViewConvertedCoinCount.text = result.toString()
     }
 
 }
