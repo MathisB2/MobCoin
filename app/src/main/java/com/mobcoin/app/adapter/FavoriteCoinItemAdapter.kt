@@ -46,8 +46,7 @@ class FavoriteCoinItemAdapter(
         val item = dataset[coinId]
         holder.coinName.text = item.name
 
-        val chart = ChartFragment.newInstance(item.id, "usd", 1, false)
-        fragmentManager.beginTransaction().replace(holder.coinChart.id, chart).commit()
+
 
         CoinService.setPercentageText(item.marketData?.percentagePriceChange24h ?: 0.0, holder.coinEvolution)
         Picasso.get().load(item.getImageUrlSmall()).into(holder.coinIcon)
@@ -55,6 +54,9 @@ class FavoriteCoinItemAdapter(
         holder.itemView.setOnClickListener {
             onItemClick(item)
         }
+
+        val chart = ChartFragment.newInstance(item.id, "usd", 1, false)
+        fragmentManager.beginTransaction().replace(holder.coinChart.id, chart).commit()
     }
 
     override fun getItemCount() = dataset.size
