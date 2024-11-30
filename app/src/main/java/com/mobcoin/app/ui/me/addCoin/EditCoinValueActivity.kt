@@ -1,10 +1,13 @@
 package com.mobcoin.app.ui.me.addCoin
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +59,7 @@ class EditCoinValueActivity : AppCompatActivity() {
 
         editCoinValueViewModel.getCoinQuantity(this, coinId).observe(this){
             binding.textViewAccountQuantityValue.text = it?.quantity?.toString() ?: "0"
+            showKeyboard(binding.countEditText)
         }
 
 
@@ -123,6 +127,12 @@ class EditCoinValueActivity : AppCompatActivity() {
 
     }
 
+
+    private fun showKeyboard(focusableEditText: EditText) {
+        focusableEditText.requestFocus()
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(focusableEditText, InputMethodManager.SHOW_IMPLICIT)
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
