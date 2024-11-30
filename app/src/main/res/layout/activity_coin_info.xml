@@ -49,49 +49,99 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/coin_price"
-                style="titre"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+            <LinearLayout
+                android:id="@+id/price_section"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_vertical"
-                android:text="0,0$"
-                android:textAlignment="gravity"
-                android:textSize="34sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/item_coin_evolution"
-                style="titre"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/coin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center_vertical"
+                    android:text="0,0$"
+                    android:textAppearance="@style/DisplaySmallTextStyle"
+                    android:textColor="@color/md_theme_onBackground" />
+
+                <TextView
+                    android:id="@+id/item_coin_evolution"
+                    style="titre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:gravity="center_vertical"
+                    android:text="0%"
+                    android:textAppearance="@style/BodyLargeTextStyle" />
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/chartRangeSelector"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:gravity="center_vertical"
-                android:text="0%"
-                android:textAlignment="gravity"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/coin_price"
-                app:layout_constraintStart_toEndOf="@+id/coin_price"
-                app:layout_constraintTop_toTopOf="@+id/coin_price" />
+                android:paddingHorizontal="8dp"
+                app:selectionRequired="true"
+                app:singleSelection="true"
+                app:checkedButton="@+id/button24h">
+
+                <Button
+                    android:id="@+id/button24h"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="24h" />
+
+                <Button
+                    android:id="@+id/button7d"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="7d" />
+
+                <Button
+                    android:id="@+id/button30d"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30d" />
+
+                <Button
+                    android:id="@+id/button90d"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="90d" />
+
+                <Button
+                    android:id="@+id/button1y"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1y" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/coin_chart"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
 
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_coin_evolution" />
+                />
 
             <TableLayout
                 android:id="@+id/evolution_container"
@@ -102,9 +152,7 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_corners"
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coin_chart">
+                >
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -236,10 +284,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/evolution_container">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -311,24 +356,18 @@
 
             <FrameLayout
                 android:id="@+id/info_coin_separator_start"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@color/md_theme_inverseOnSurface"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout_convert" />
+                android:background="@color/md_theme_inverseOnSurface" />
 
             <TableLayout
                 android:id="@+id/info_coin_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintRight_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info_coin_separator_start">
+                android:layout_marginTop="16dp">
 
                 <TableRow android:gravity="center_horizontal">
 
@@ -477,12 +516,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@color/md_theme_inverseOnSurface"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/info_coin_container" />
+                android:background="@color/md_theme_inverseOnSurface" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
