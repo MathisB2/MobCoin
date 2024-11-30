@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -17,13 +15,8 @@ import com.github.mikephil.charting.components.YAxis.AxisDependency
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.utils.ColorTemplate
-import com.github.mikephil.charting.utils.Utils
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.FragmentChartBinding
-import com.mobcoin.app.ui.CoinInfoViewModel
-import java.util.Currency
-import java.util.concurrent.TimeUnit
 
 private const val COIN_ID_PARAM = "coinId"
 private const val SHOW_CHART_INFO_PARAM = "showChartInfo"
@@ -88,7 +81,7 @@ class ChartFragment : Fragment() {
         xAxis.setDrawGridLines(false)
         xAxis.textColor = textColor
         xAxis.granularity = 1f // one hour
-        xAxis.valueFormatter = DateValueFormatter()
+        xAxis.valueFormatter = HourValueFormatter()
 
         val leftAxis = chart.axisLeft
         leftAxis.isEnabled = showChartInfo
@@ -118,12 +111,24 @@ class ChartFragment : Fragment() {
 
     fun setDays(days: Int) {
         this.days = days
+
+        chart.xAxis.granularity = 1f // one hour
+        if(days>1){
+            chart.xAxis.valueFormatter = DateValueFormatter()
+        }else{
+            chart.xAxis.valueFormatter = HourValueFormatter()
+        }
+
         this.updateCoinData()
     }
 
     private fun updateCoinData(){
+        binding.lineChart.visibility = View.GONE
+        binding.chartLoadingAnimationContainer.visibility = View.VISIBLE
         viewModel?.getCoinPrices(coinId, currency, days)?.observe(viewLifecycleOwner){
             this.setData(it)
+            binding.lineChart.visibility = View.VISIBLE
+            binding.chartLoadingAnimationContainer.visibility = View.GONE
         }
     }
 

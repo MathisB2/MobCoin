@@ -22,18 +22,13 @@ class CoinInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
 
         binding = ActivityCoinInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val toolbar: MaterialToolbar = binding.toolbar
-
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
 
         val coinInfoViewModel = ViewModelProvider(this)[CoinInfoViewModel::class.java]
@@ -46,6 +41,21 @@ class CoinInfoActivity : AppCompatActivity() {
 
         val chartFragment = ChartFragment.newInstance(coinId, "usd", 1)
         supportFragmentManager.beginTransaction().replace(binding.coinChart.id, chartFragment).commit()
+
+        binding.chartRangeSelector.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+            if (isChecked) {
+                val days = when (checkedId) {
+                    binding.button24h.id -> 1
+                    binding.button7d.id -> 7
+                    binding.button30d.id -> 30
+                    binding.button90d.id -> 90
+                    binding.button1y.id -> 365
+                    else -> 1
+                }
+                chartFragment.setDays(days)
+            }
+        }
+
 
 
         //DetailedCoin
