@@ -58,8 +58,8 @@
                 android:id="@+id/price_section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -141,18 +141,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
 
-                />
+                android:layout_marginBottom="16dp" />
 
             <TableLayout
                 android:id="@+id/evolution_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_corners"
+                android:layout_marginBottom="8dp"
 
-                >
+                android:background="@drawable/rounded_corners">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -166,8 +165,9 @@
                         android:layout_weight="1"
                         android:text="1h"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="27dp" />
+                        android:textAppearance="@style/LabelLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurface"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/title_evolution_24h"
@@ -175,8 +175,9 @@
                         android:layout_weight="1"
                         android:text="24h"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="91dp" />
+                        android:textAppearance="@style/LabelLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurface"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <TextView
                         android:id="@+id/title_evolution_7d"
@@ -184,8 +185,9 @@
                         android:layout_weight="1"
                         android:text="7d"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="171dp" />
+                        android:textAppearance="@style/LabelLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurface"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <TextView
                         android:id="@+id/title_evolution_30d"
@@ -194,7 +196,8 @@
                         android:text="30d"
                         android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="244dp" />
+                        android:textAppearance="@style/LabelLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurface"/>
 
                     <TextView
                         android:id="@+id/title_evolution_1y"
@@ -202,8 +205,9 @@
                         android:layout_weight="1"
                         android:text="1y"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="330dp" />
+                        android:textAppearance="@style/LabelLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurface"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                 </TableRow>
 
@@ -222,56 +226,51 @@
                         android:id="@+id/evolution_1h"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_weight="1"
                         android:text="0%"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="27dp" />
+                        android:textAppearance="@style/BodyMediumTextStyle"
+                        android:textColor="@color/md_theme_onSurface"/>
 
                     <TextView
                         android:id="@+id/evolution_24h"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_weight="1"
                         android:text="0%"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="91dp" />
+                        android:textAppearance="@style/BodyMediumTextStyle"
+                        android:textColor="@color/md_theme_onSurface"/>
 
                     <TextView
                         android:id="@+id/evolution_7d"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_weight="1"
                         android:text="0%"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="171dp" />
+                        android:textAppearance="@style/BodyMediumTextStyle"
+                        android:textColor="@color/md_theme_onSurface"/>
 
                     <TextView
                         android:id="@+id/evolution_30d"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_weight="1"
                         android:text="0%"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="244dp" />
+                        android:textAppearance="@style/BodyMediumTextStyle"
+                        android:textColor="@color/md_theme_onSurface"/>
 
                     <TextView
                         android:id="@+id/evolution_1y"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_weight="1"
                         android:text="0%"
                         android:textAlignment="center"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="330dp" />
+                        android:textAppearance="@style/BodyMediumTextStyle"
+                        android:textColor="@color/md_theme_onSurface"/>
 
                 </TableRow>
 
@@ -282,8 +281,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -292,32 +291,63 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_corners"
-                    android:paddingHorizontal="4dp"
-                    android:paddingVertical="8dp">
+                    android:gravity="center_vertical"
+                    android:padding="8dp">
 
 
-                    <TextView
-                        android:id="@+id/textView_coin_convert_count"
-                        style="@style/LabelLargeTextStyle"
+                    <Button
+                        android:id="@+id/converterRemoveButton"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="4dp"
+                        android:insetTop="0dp"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="0dp"
+                        android:paddingRight="0dp"
+                        android:paddingBottom="0dp"
+                        app:icon="@drawable/ic_remove24dp"
+                        app:iconPadding="0dp"
+                        app:iconSize="24dp"
+                        app:iconTint="@color/md_theme_secondary" />
+
+                    <EditText
+                        android:id="@+id/convertInput_editTextValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="1.00"
-                        android:textColor="@color/md_theme_onSurfaceVariant"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="1.0"
+                        android:inputType="numberDecimal"
+                        android:text="1.0"
+                        android:textAlignment="viewEnd"
+                        android:textAppearance="@style/BodyLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurfaceVariant" />
 
                     <TextView
                         android:id="@+id/textView_coin_convert_name"
-                        style="@style/BodyMediumTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:text="TextView"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginLeft="4dp"
+                        android:text="coin"
+                        android:textAppearance="@style/LabelLargeTextStyle"
+                        android:textColor="@color/md_theme_onSurfaceVariant" />
+
+                    <Button
+                        android:id="@+id/converterAddButton"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="4dp"
+                        android:insetTop="0dp"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="0dp"
+                        android:paddingRight="0dp"
+                        android:paddingBottom="0dp"
+                        app:icon="@drawable/add"
+                        app:iconPadding="0dp"
+                        app:iconSize="24dp"
+                        app:iconTint="@color/md_theme_secondary" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -326,29 +356,25 @@
                     android:layout_marginLeft="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_corners"
+                    android:gravity="right|center_vertical"
                     android:paddingHorizontal="4dp"
                     android:paddingVertical="8dp">
 
 
                     <TextView
                         android:id="@+id/textView_converted_coin_count"
-                        style="@style/LabelLargeTextStyle"
+                        android:textAppearance="@style/BodyLargeTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="0.00"
-                        android:textColor="@color/md_theme_onSurfaceVariant"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textColor="@color/md_theme_onSurfaceVariant" />
 
                     <Spinner
                         android:id="@+id/spinner_converted_coin_name"
+                        style="@style/BodyLargeTextStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -358,16 +384,16 @@
                 android:id="@+id/info_coin_separator_start"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/md_theme_inverseOnSurface" />
 
             <TableLayout
                 android:id="@+id/info_coin_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <TableRow android:gravity="center_horizontal">
 
@@ -382,14 +408,17 @@
                             android:id="@+id/market_cap_rank_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Market Cap Rank : " />
+                            android:text="Market Cap Rank : "
+                            android:textAppearance="@style/LabelLargeTextStyle"
+                            android:textColor="@color/md_theme_onBackground" />
 
                         <TextView
                             android:id="@+id/market_cap_rank_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="#0"
-                            android:textColorHighlight="@color/md_theme_primary" />
+                            android:textAppearance="@style/TitleMediumTextStyle"
+                            android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -403,14 +432,17 @@
                             android:id="@+id/total_supply_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total supply :" />
+                            android:text="Total supply :"
+                            android:textAppearance="@style/LabelLargeTextStyle"
+                            android:textColor="@color/md_theme_onBackground" />
 
                         <TextView
                             android:id="@+id/total_supply_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textColorHighlight="@color/md_theme_primary" />
+                            android:textAppearance="@style/TitleMediumTextStyle"
+                            android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>
 
@@ -429,14 +461,17 @@
                             android:id="@+id/market_cap_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Market Cap :" />
+                            android:text="Market Cap :"
+                            android:textAppearance="@style/LabelLargeTextStyle"
+                            android:textColor="@color/md_theme_onBackground" />
 
                         <TextView
                             android:id="@+id/market_cap_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="$0"
-                            android:textColorHighlight="@color/md_theme_primary" />
+                            android:textAppearance="@style/TitleMediumTextStyle"
+                            android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -450,14 +485,17 @@
                             android:id="@+id/ath_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="ATH :" />
+                            android:text="ATH :"
+                            android:textAppearance="@style/LabelLargeTextStyle"
+                            android:textColor="@color/md_theme_onBackground" />
 
                         <TextView
                             android:id="@+id/ath_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0 $"
-                            android:textColorHighlight="@color/md_theme_primary" />
+                            android:textAppearance="@style/TitleMediumTextStyle"
+                            android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>
 
@@ -476,14 +514,17 @@
                             android:id="@+id/volume_24h_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="24h Volume :" />
+                            android:text="24h Volume :"
+                            android:textAppearance="@style/LabelLargeTextStyle"
+                            android:textColor="@color/md_theme_onBackground" />
 
                         <TextView
                             android:id="@+id/volume_24h_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="$0"
-                            android:textColorHighlight="@color/md_theme_primary" />
+                            android:textAppearance="@style/TitleMediumTextStyle"
+                            android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -497,26 +538,20 @@
                             android:id="@+id/atl_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="ATL :" />
+                            android:text="ATL :"
+                            android:textAppearance="@style/LabelLargeTextStyle"
+                            android:textColor="@color/md_theme_onBackground" />
 
                         <TextView
                             android:id="@+id/atl_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0 $"
-                            android:textColorHighlight="@color/md_theme_primary" />
+                            android:textAppearance="@style/TitleMediumTextStyle"
+                            android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
                 </TableRow>
             </TableLayout>
-
-            <FrameLayout
-                android:id="@+id/info_coin_separator_end"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@color/md_theme_inverseOnSurface" />
 
         </LinearLayout>
     </ScrollView>
