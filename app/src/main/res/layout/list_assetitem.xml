@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingVertical="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/coinIcon"
@@ -29,93 +28,97 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/coinIcon">
+            app:layout_constraintStart_toEndOf="@+id/coinIcon"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView_coin_name"
-                style="@style/BodySmallTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd"
+                android:textAppearance="@style/TitleMediumTextStyle"
+                android:textColor="@color/md_theme_onBackground" />
 
             <TextView
                 android:id="@+id/textView_coin_symbol"
-                style="@style/BodySmallTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd"
+                android:textAllCaps="true"
+                android:textAppearance="@style/BodySmallTextStyle"
+                android:textColor="@color/md_theme_secondary" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
 
     <LinearLayout
         android:id="@+id/price_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/quantity_layout"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView_coin_price"
-            style="@style/BodySmallTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TitleSmallTextStyle"
+            android:textColor="@color/md_theme_secondary" />
 
         <TextView
             android:id="@+id/textView_coin_change"
-            style="@style/BodySmallTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/BodyMediumTextStyle" />
     </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:id="@+id/quantity_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:gravity="right"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/edit_button"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView_currency_quantity"
-            style="@style/BodySmallTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TitleSmallTextStyle"
+            android:textColor="@color/md_theme_onBackground" />
 
         <TextView
             android:id="@+id/textView_coin_quantity"
-            style="@style/BodySmallTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textColor="@color/md_theme_secondary" />
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/edit_button"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_centerInParent="true"
+        android:layout_marginLeft="4dp"
         android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add" />
+        android:src="@drawable/ic_trade_24dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
