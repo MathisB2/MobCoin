@@ -9,21 +9,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="128dp"
-        android:layout_rowSpan="1"
-        android:layout_rowWeight="1"
-        android:layout_columnSpan="1"
-        android:layout_columnWeight="1"
-        android:background="@drawable/rounded_corners">
+        android:background="@drawable/rounded_corners"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/favorite_item_coin_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:gravity="center_vertical|fill_vertical"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/poppins"
             android:text="TextView"
-            android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TitleMediumTextStyle"
+            android:textColor="@color/md_theme_onSurface"
             app:layout_constraintBottom_toBottomOf="@+id/favorite_item_coin_icon"
+            app:layout_constraintEnd_toStartOf="@+id/favorite_item_coin_evolution"
             app:layout_constraintStart_toEndOf="@+id/favorite_item_coin_icon"
             app:layout_constraintTop_toTopOf="@+id/favorite_item_coin_icon" />
 
@@ -35,18 +37,15 @@
             android:gravity="center_vertical"
             android:text="▴ 1.16%"
             android:textAlignment="gravity"
-            android:textSize="10sp"
+            android:textAppearance="@style/BodyMediumTextStyle"
             app:layout_constraintBottom_toBottomOf="@+id/favorite_item_coin_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/favorite_item_coin_name"
             app:layout_constraintTop_toTopOf="@+id/favorite_item_coin_name" />
 
         <ImageView
             android:id="@+id/favorite_item_coin_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -55,10 +54,10 @@
             android:id="@+id/favorite_coin_chart"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="-8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="-8dp"
+            android:layout_marginBottom="-8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

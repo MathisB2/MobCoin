@@ -44,7 +44,7 @@ class FavoriteCoinItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, coinId: Int) {
         val item = dataset[coinId]
-        holder.coinName.text = item.name.uppercase()
+        holder.coinName.text = item.name
 
         val chart = ChartFragment.newInstance(item.id, "usd", 1, false)
         fragmentManager.beginTransaction().replace(holder.coinChart.id, chart).commit()
