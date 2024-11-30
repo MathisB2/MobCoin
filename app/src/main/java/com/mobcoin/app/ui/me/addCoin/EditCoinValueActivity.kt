@@ -14,6 +14,7 @@ import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivityEditCoinValueBinding
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
+import com.squareup.picasso.Picasso
 
 class EditCoinValueActivity : AppCompatActivity() {
 
@@ -23,10 +24,14 @@ class EditCoinValueActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         binding = ActivityEditCoinValueBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val topAppBar = binding.toolbar
+        setSupportActionBar(topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val editCoinValueViewModel = ViewModelProvider(this)[EditCoinValueViewModel::class.java]
 
@@ -35,10 +40,11 @@ class EditCoinValueActivity : AppCompatActivity() {
             finish()
             return
         }
-        println("coinidddddddd" + coinId)
 
         editCoinValueViewModel.getCoinById(coinId).observe(this){
             if(it == null) return@observe
+            Picasso.get().load(it.getImageUrlLarge()).into(binding.actionBarCoinIcon)
+            supportActionBar?.title = it.name
             editCoinValueViewModel.getCoinQuantity(this, coinId).observe(this){ asset ->
                 binding.textViewAccountQuantityValue.text = asset?.quantity?.toString() ?: "0"
                 coinQuantity = asset?.quantity ?: 0.0
@@ -115,5 +121,11 @@ class EditCoinValueActivity : AppCompatActivity() {
 
         binding.textViewCoinName2.text = coin.symbol
 
+    }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }

@@ -7,108 +7,155 @@
     android:layout_height="match_parent"
     tools:context=".ui.me.addCoin.EditCoinValueActivity">
 
-    <EditText
-        android:id="@+id/countEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:contentDescription="Saisie du prix"
-        android:focusableInTouchMode="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:hint="0"
-        android:importantForAccessibility="yes"
-        android:inputType="numberDecimal"
-        android:textColorHint="#B0B0B0"
-        android:textSize="64sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView_coin_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="134dp"
-        android:text="name"
-        android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@+id/countEditText"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_coin_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0.00$"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countEditText"
-        android:textSize="16sp"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView_coin_value"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/md_theme_background"
+        android:theme="@style/ThemeOverlay.Material3.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView_account_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/account_quantity" />
+        <ImageView
+            android:id="@+id/actionBarCoinIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
+            android:contentDescription="Coin icon" />
 
-        <TextView
-            android:id="@+id/textView_account_quantity_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0" />
 
-        <TextView
-            android:id="@+id/textView_coin_name_2"
-            android:layout_width="wrap_content"
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="name" />
-    </LinearLayout>
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/countEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Saisie du prix"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_vertical|center_horizontal"
+                android:hint="0"
+                android:importantForAccessibility="yes"
+                android:includeFontPadding="false"
+                android:inputType="numberDecimal"
+                android:textAppearance="@style/DisplayLargeTextStyle"
+                android:textColor="@color/md_theme_onBackground"
+                android:textColorHint="@color/md_theme_secondaryFixed_mediumContrast"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="12" />
+
+            <TextView
+                android:id="@+id/textView_coin_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textAllCaps="true"
+                android:textAppearance="@style/HeadlineSmallTextStyle"
+                android:textColor="@color/md_theme_onBackground_mediumContrast"
+                app:layout_constraintStart_toEndOf="@+id/countEditText"
+                app:layout_constraintTop_toTopOf="@+id/countEditText" />
+
+            <TextView
+                android:id="@+id/textView_coin_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00$"
+                android:textAppearance="@style/BodyLargeTextStyle"
+                android:textColor="@color/md_theme_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/countEditText" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/countEditText">
+
+                <TextView
+                    android:id="@+id/textView_account_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/account_quantity"
+                    android:textAppearance="@style/LabelLargeTextStyle"
+                    android:textColor="@color/md_theme_secondary" />
+
+                <TextView
+                    android:id="@+id/textView_account_quantity_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:text="0"
+                    android:textAppearance="@style/BodyLargeTextStyle"
+                    android:textColor="@color/md_theme_onBackground" />
+
+                <TextView
+                    android:id="@+id/textView_coin_name_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="name"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/BodyLargeTextStyle"
+                    android:textColor="@color/md_theme_onBackground" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:layout_editor_absoluteX="0dp">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+        android:paddingHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button_buy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/buyText" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
+            style="@style/Widget.Material3.Button.TonalButton"
             android:id="@+id/button_sell"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:layout_weight="1"
+            android:enabled="true"
             android:text="@string/sellText" />
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/button_buy"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:enabled="true"
+            android:text="@string/buyText" />
 
     </LinearLayout>
 
