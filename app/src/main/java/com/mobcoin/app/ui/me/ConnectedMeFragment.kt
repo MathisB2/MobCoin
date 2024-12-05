@@ -20,16 +20,14 @@ import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.AssetItemAdapter
-import com.mobcoin.app.adapter.CoinItemAdapter
+import com.mobcoin.app.adapter.ChartItemAdapter
 import com.mobcoin.app.databinding.FragmentConnectedMeBinding
 import com.mobcoin.app.ui.me.addCoin.AddCoinActivity
-import com.mobcoin.app.databinding.FragmentMeBinding
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.ui.me.addCoin.EditCoinValueActivity
-import com.mobcoin.app.ui.others.LoggedOutFragment
 import java.util.Arrays
 
 
@@ -74,7 +72,7 @@ class ConnectedMeFragment : Fragment() {
         }
 
         // Asset List
-        val recyclerView: RecyclerView = binding.recyclerViewAssetList
+        val recyclerViewAsset: RecyclerView = binding.recyclerViewAssetList
         val adapter = AssetItemAdapter(meViewModel.displayedAssets.value ?: emptyList(),{
             val intent = Intent(requireContext(), CoinInfoActivity::class.java)
             intent.putExtra("COIN_ID", it.coinId)
@@ -90,8 +88,8 @@ class ConnectedMeFragment : Fragment() {
             setDonut(it ?: emptyList())
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
+        recyclerViewAsset.layoutManager = LinearLayoutManager(requireContext())
+        recyclerViewAsset.adapter = adapter
         meViewModel.fetchDisplayedAssets(requireContext())
 
         meViewModel.accountValue.observe(viewLifecycleOwner){
@@ -118,8 +116,26 @@ class ConnectedMeFragment : Fragment() {
             otherValue += (assets[i-1].coinPrice * assets[i-1].quantity).toFloat()
         }
         priceList.add(DonutSection("Others", ContextCompat.getColor(requireContext(), R.color.md_theme_primary), otherValue))
-
+        println(priceList)
         donut.cap = 1f
         donut.submitData(priceList)
+
+
+        setChartTitles(priceList)
     }
+
+    fun setChartTitles(donnutSections: List<DonutSection>){
+
+        var totalCount = 0.0
+        for (section in donnutSections){
+            totalCount += section.amount
+        }
+
+        val recyclerViewChart: RecyclerView = binding.recyclerViewCoinChart
+        val adapter = ChartItemAdapter(donnutSections, totalCount)
+        recyclerViewChart.layoutManager = LinearLayoutManager(requireContext())
+
+        recyclerViewChart.adapter = adapter
+    }
+
 }
