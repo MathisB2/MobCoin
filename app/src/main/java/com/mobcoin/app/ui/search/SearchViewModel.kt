@@ -16,6 +16,9 @@ class SearchViewModel : ViewModel(){
     private var _searchCoins : MutableLiveData<List<SearchCoin>?> = MutableLiveData()
     val searchCoins : LiveData<List<SearchCoin>?> = _searchCoins
 
+    private var _trendingCoins : MutableLiveData<List<SearchCoin>?> = MutableLiveData()
+    val trendingCoins : LiveData<List<SearchCoin>?> = _trendingCoins
+
     fun fetchSearchCoins(query: String) {
         viewModelScope.launch {
             GeckoRepository.searchCoin(query)
@@ -27,4 +30,17 @@ class SearchViewModel : ViewModel(){
                 }
         }
     }
+
+    fun fetchTrendingCoins() {
+        viewModelScope.launch {
+            GeckoRepository.getTrendingCoins()
+                .catch {
+                    println(it)
+                }
+                .collect {
+                    _trendingCoins.postValue(it.body()?.getTrendingCoins())
+                }
+        }
+    }
+
 }

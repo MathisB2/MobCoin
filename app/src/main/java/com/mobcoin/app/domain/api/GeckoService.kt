@@ -5,6 +5,7 @@ import com.mobcoin.app.model.CoinPrice
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import com.mobcoin.app.model.search.SearchContainer
+import com.mobcoin.app.model.search.TrendingContainer
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -45,4 +46,9 @@ interface GeckoService {
         @Path("id") coinId: String,
         @Header("x-cg-demo-api-key") apiKey: String,
     ): Response<DetailedCoin>
+
+    @GET("search/trending")
+    suspend fun getTrendingCoins(
+        @Header("x-cg-demo-api-key") apiKey: String
+    ): Response<TrendingContainer>
 }

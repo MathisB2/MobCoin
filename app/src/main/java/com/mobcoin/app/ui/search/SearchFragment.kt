@@ -52,11 +52,29 @@ class SearchFragment : Fragment(){
             adapter.setDataset(it ?: emptyList())
         }
 
-        recyclerView.adapter = adapter
-
         searchView.editText.addTextChangedListener { text ->
             searchViewModel.fetchSearchCoins(text.toString())
         }
+
+        // default search list
+        val trendingRecyclerView = binding.recyclerViewDefaultCoinSearchList
+        val trendingLlm = LinearLayoutManager(requireContext())
+        val trendingtAdapter = SearchCoinItemAdapter(searchViewModel.trendingCoins.value ?: emptyList()) { searchCoin ->
+            val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
+                putExtra("COIN_ID", searchCoin.id)
+            }
+            startActivity(intent)
+        }
+
+        trendingLlm.orientation = LinearLayoutManager.VERTICAL
+        trendingRecyclerView.setLayoutManager(trendingLlm)
+        trendingRecyclerView.setAdapter(trendingtAdapter)
+
+        searchViewModel.trendingCoins.observe(viewLifecycleOwner){
+            trendingtAdapter.setDataset(it ?: emptyList())
+        }
+
+        searchViewModel.fetchTrendingCoins()
 
         return root
     }

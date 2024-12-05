@@ -8,6 +8,7 @@ import com.mobcoin.app.model.CoinPrice
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import com.mobcoin.app.model.search.SearchContainer
+import com.mobcoin.app.model.search.TrendingContainer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -45,4 +46,10 @@ object GeckoRepository {
         )
     }
 
+    suspend fun getTrendingCoins(): Flow<Response<TrendingContainer>> = flow{
+        println("test")
+        emit(
+            GeckoNetworkDataSource.apiService.getTrendingCoins("CG-soMb1tvkPUXUcqmJXvd3He5g")
+        )
+    }
 }
