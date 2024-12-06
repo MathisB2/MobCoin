@@ -408,7 +408,7 @@
                             android:id="@+id/market_cap_rank_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Market Cap Rank : "
+                            android:text="@string/market_cap_rank"
                             android:textAppearance="@style/LabelLargeTextStyle"
                             android:textColor="@color/md_theme_onBackground" />
 
@@ -432,7 +432,7 @@
                             android:id="@+id/total_supply_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total supply :"
+                            android:text="@string/total_supply"
                             android:textAppearance="@style/LabelLargeTextStyle"
                             android:textColor="@color/md_theme_onBackground" />
 
@@ -461,7 +461,7 @@
                             android:id="@+id/market_cap_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Market Cap :"
+                            android:text="@string/market_cap_info"
                             android:textAppearance="@style/LabelLargeTextStyle"
                             android:textColor="@color/md_theme_onBackground" />
 
@@ -514,7 +514,7 @@
                             android:id="@+id/volume_24h_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="24h Volume :"
+                            android:text="@string/_24h_volume_info"
                             android:textAppearance="@style/LabelLargeTextStyle"
                             android:textColor="@color/md_theme_onBackground" />
 

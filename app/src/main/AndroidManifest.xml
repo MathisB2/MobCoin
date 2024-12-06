@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MobCoin"
         tools:targetApi="31">
         <activity
+            android:name=".ui.me.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.me.addCoin.EditCoinValueActivity"
             android:exported="false" />
         <activity

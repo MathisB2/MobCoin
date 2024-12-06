@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MobCoin</string>
     <string name="title_home">Home</string>
@@ -12,7 +13,6 @@
     <string name="loginView_login_button">Login</string>
     <string name="loginView_topBar_title">Login</string>
     <string name="loginView_loginWithGoogle_button">Login with Google</string>
-    <string name="loginView_registerButton_helper" translatable="false">Don\'t have an account ?</string>
     <string name="loginView_registerButton">Register</string>
     <string name="registerView_topBar_title">Register</string>
     <string name="registerView_name_input">Name*</string>
@@ -33,30 +33,30 @@
     <string name="buyText">Buy</string>
     <string name="sellText">Sell</string>
     <string name="Logout">Logout</string>
-    <string name="settingsButton">Parametres du compte</string>
-    <string name="account_quantity">Account quantity : </string>
+    <string name="settingsButton">Account Settings</string>
+    <string name="account_quantity">Account quantity: </string>
     <string name="favorites_not_logged_helper_message">You must log in to add favorites</string>
     <string-array name="languages">
-        <item>Francais</item>
-        <item>Anglais</item>
-        <item>Chinois</item>
+        <item>French</item>
+        <item>English</item>
+        <item>Chinese</item>
     </string-array>
     <string name="language">Language</string>
     <string name="market_cap">Market Cap</string>
     <string name="volume">Volume</string>
     <string name="dominance">Dominance</string>
-    <string name="market_cap_rank">Market Cap Rank : </string>
-    <string name="total_supply">Total supply :</string>
-    <string name="market_cap_info">Market Cap :</string>
-    <string name="_24h_volume_info">24h Volume :</string>
-    <string name="trendings">Trendings :</string>
+    <string name="market_cap_rank">Market Cap Rank: </string>
+    <string name="total_supply">Total supply:</string>
+    <string name="market_cap_info">Market Cap:</string>
+    <string name="_24h_volume_info">24h Volume:</string>
+    <string name="trendings">Trendings:</string>
+    <string name="main_language">English</string>
+    <string name="appliquer">Apply</string>
+    <string name="currency">Currency</string>
     <string-array name="currency">
         <item>usd</item>
         <item>eur</item>
         <item>jpy</item>
     </string-array>
-    <string name="main_language">English</string>
-    <string name="appliquer">Appliquer</string>
-    <string name="currency">Currency</string>
 
 </resources>

@@ -30,7 +30,7 @@
                 app:expandedTitleTextAppearance="@style/HeadlineSmallTextStyle"
                 app:expandedTitleTextColor="@color/md_theme_onBackground"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="Favorites">
+                app:title="@string/favorites">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:layout_width="match_parent"

@@ -16,7 +16,10 @@ import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.databinding.FragmentHomeBinding
+import com.mobcoin.app.model.Currency
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
+import com.mobcoin.app.services.LanguageService
 
 class HomeFragment : Fragment() {
 
@@ -39,7 +42,7 @@ class HomeFragment : Fragment() {
 
         // coins list
         val recyclerView: RecyclerView = binding.recyclerViewCoinList
-        val adapter = CoinItemAdapter(homeViewModel.coins.value ?: emptyList()) { coin ->
+        val adapter = CoinItemAdapter(homeViewModel.coins.value ?: emptyList(), requireContext()) { coin ->
             val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
                 putExtra("COIN_ID", coin.id)
             }
@@ -51,7 +54,7 @@ class HomeFragment : Fragment() {
         }
 
         recyclerView.adapter = adapter
-        homeViewModel.fetchCoins()
+        homeViewModel.fetchCoins(requireContext())
 
 
 
@@ -77,9 +80,10 @@ class HomeFragment : Fragment() {
         val dominanceValueText: TextView = binding.textViewDominanceValue
         val dominanceCoinText: TextView = binding.textViewDominanceCoin
         homeViewModel.getGlobalMarketData().observe(viewLifecycleOwner){
-            mcValueText.text = "$" + CoinService.formatNumber(it?.totalMarketCap?.get("usd"))
+            mcValueText.text = Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext())) + CoinService.formatNumber(it?.totalMarketCap?.get(
+                CurrencyService.getCurrency(requireContext())))
             CoinService.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
-            volumeValueText.text = "$" + CoinService.formatNumber(it?.totalVolume?.get("usd"))
+            volumeValueText.text = CoinService.formatNumber(it?.totalVolume?.get(CurrencyService.getCurrency(requireContext()))) + Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext()))
 
             val dominanceMap: Map.Entry<String, Double>? = it?.marketCapPercentage?.maxByOrNull { it.value }
 

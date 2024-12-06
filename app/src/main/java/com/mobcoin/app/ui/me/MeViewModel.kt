@@ -15,6 +15,7 @@ import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.DisplayedAsset
+import com.mobcoin.app.services.CurrencyService
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -72,12 +73,12 @@ class MeViewModel : ViewModel() {
                                 quantity = asset.quantity,
                                 coinName = response.body()?.name ?: "",
                                 coinSymbol = response.body()?.symbol ?: "",
-                                coinPrice = response.body()?.getPriceByCurrency("usd") ?: 0.0,
+                                coinPrice = response.body()?.getPriceByCurrency(CurrencyService.getCurrency(context)) ?: 0.0,
                                 coinChange = response.body()?.marketData?.percentagePriceChange24h ?: 0.0,
                                 coinIcon = response.body()?.getImageUrlSmall() ?: ""
                             )
                             )
-                            totalAccountValue += asset.quantity * response.body()?.getPriceByCurrency("usd")!!
+                            totalAccountValue += asset.quantity * response.body()?.getPriceByCurrency(CurrencyService.getCurrency(context))!!
                         }
                     }
                 }

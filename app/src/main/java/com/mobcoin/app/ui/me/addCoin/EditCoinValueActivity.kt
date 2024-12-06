@@ -15,8 +15,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivityEditCoinValueBinding
+import com.mobcoin.app.model.Currency
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
+import com.mobcoin.app.services.LanguageService
 import com.squareup.picasso.Picasso
 
 class EditCoinValueActivity : AppCompatActivity() {
@@ -26,6 +29,7 @@ class EditCoinValueActivity : AppCompatActivity() {
     private var coinQuantity: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguageService.applyLanguage(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityEditCoinValueBinding.inflate(layoutInflater)
@@ -99,8 +103,9 @@ class EditCoinValueActivity : AppCompatActivity() {
 
             override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
                 totalTransactionPrice.text = CoinService.roundDoubleToTwoDecimals(
-                    (charSequence?.toString()?.toDoubleOrNull() ?: 0.0) * (coin.getPriceByCurrency("usd") ?: 1.0)
-                ) + "$"
+                    (charSequence?.toString()?.toDoubleOrNull() ?: 0.0) * (coin.getPriceByCurrency(
+                        CurrencyService.getCurrency(this@EditCoinValueActivity)) ?: 1.0)
+                ) + Currency.getCurrencySymbole(CurrencyService.getCurrency(this@EditCoinValueActivity))
 
                 if (!charSequence.isNullOrEmpty() && charSequence.toString().toDouble() != 0.0) {
                     binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onBackground))

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobcoin.app.adapter.SearchCoinItemAdapter
 import com.mobcoin.app.databinding.ActivityAddCoinBinding
+import com.mobcoin.app.services.LanguageService
 import com.mobcoin.app.ui.me.MeFragment
 import com.mobcoin.app.ui.me.MeViewModel
 
@@ -22,6 +23,7 @@ class AddCoinActivity : AppCompatActivity() {
     private lateinit var editCoinValueActivityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguageService.applyLanguage(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddCoinBinding.inflate(layoutInflater)

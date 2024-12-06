@@ -1,5 +1,6 @@
 package com.mobcoin.app.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +10,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
+import com.mobcoin.app.model.Currency
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
 import com.squareup.picasso.Picasso
 
 class AssetItemAdapter(
     private var dataset: List<DisplayedAsset>,
     private val onItemClick: (DisplayedAsset) -> Unit,
-    private val onEditButtonClick: (DisplayedAsset) -> Unit
+    private val onEditButtonClick: (DisplayedAsset) -> Unit,
+    private val context: Context
 ) : Adapter<AssetItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -42,10 +46,10 @@ class AssetItemAdapter(
 
         holder.coinName.text = item.coinName
         holder.coinSymbol.text = item.coinSymbol.uppercase()
-        holder.coinPrice.text = "$" + item.coinPrice.toString()
-        CoinService.setPercentageText(item.coinChange,holder.coinChange)
-        holder.currencyQuantity.text = "$" + (CoinService.roundDoubleToTwoDecimals(item.quantity * item.coinPrice))
-        holder.coinQuantity.text = CoinService.roundDoubleToTwoDecimals(item.quantity) + " " + item.coinSymbol.uppercase()
+        holder.coinPrice.text = item.coinPrice.toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
+                CoinService.setPercentageText(item.coinChange,holder.coinChange)
+        holder.currencyQuantity.text = (CoinService.roundDoubleToTwoDecimals(item.quantity * item.coinPrice)) + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
+                holder.coinQuantity.text = CoinService.roundDoubleToTwoDecimals(item.quantity) + " " + item.coinSymbol.uppercase()
         Picasso.get().load(item.coinIcon).into(holder.coinIcon)
 
         holder.itemView.setOnClickListener {

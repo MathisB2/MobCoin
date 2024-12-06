@@ -32,7 +32,7 @@ class ConnectedFavoritesFragment : Fragment() {
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.layoutManager = gridLayoutManager
 
-        val adapter = FavoriteCoinItemAdapter(emptyList(), childFragmentManager, onFavoriteItemClick())
+        val adapter = FavoriteCoinItemAdapter(emptyList(), childFragmentManager, onFavoriteItemClick(), requireContext())
 
         favoritesViewModel.getFavoriteCoins(requireContext()).observe(viewLifecycleOwner){
             adapter.setDataset(it)

@@ -18,16 +18,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
+import com.google.android.material.button.MaterialButton
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.AssetItemAdapter
 import com.mobcoin.app.adapter.ChartItemAdapter
 import com.mobcoin.app.databinding.FragmentConnectedMeBinding
+import com.mobcoin.app.model.Currency
 import com.mobcoin.app.ui.me.addCoin.AddCoinActivity
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.ui.me.addCoin.EditCoinValueActivity
+import com.mobcoin.app.ui.me.settings.SettingsActivity
 import java.util.Arrays
 
 
@@ -52,6 +56,12 @@ class ConnectedMeFragment : Fragment() {
 
         addCoinValueActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             meViewModel.fetchDisplayedAssets(requireContext())
+        }
+
+        val settingsButton: MaterialButton = binding.meConnectedSettingsButton
+        settingsButton.setOnClickListener {
+            val intent = Intent(requireContext(), SettingsActivity::class.java)
+            startActivity(intent)
         }
 
         val plusButton: ImageButton = binding.buttonConnectedMe
@@ -81,7 +91,8 @@ class ConnectedMeFragment : Fragment() {
             val intent = Intent(requireContext(), EditCoinValueActivity::class.java)
             intent.putExtra("COIN_ID", it.coinId)
             addCoinValueActivityLauncher.launch(intent)
-        })
+        },
+            requireContext())
 
         meViewModel.displayedAssets.observe(viewLifecycleOwner){
             adapter.setDataset(it ?: emptyList())
@@ -93,7 +104,7 @@ class ConnectedMeFragment : Fragment() {
         meViewModel.fetchDisplayedAssets(requireContext())
 
         meViewModel.accountValue.observe(viewLifecycleOwner){
-            binding.accountValue.text =  "$"+ CoinService.roundDoubleToTwoDecimals(it)
+            binding.accountValue.text = CoinService.roundDoubleToTwoDecimals(it) + Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext()))
         }
 
         return root

@@ -14,6 +14,7 @@ import com.mobcoin.app.R
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.ui.chart.ChartFragment
 import com.squareup.picasso.Picasso
 import kotlin.math.log
@@ -21,7 +22,8 @@ import kotlin.math.log
 class FavoriteCoinItemAdapter(
     private var dataset: List<DetailedCoin>,
     private val fragmentManager: FragmentManager,
-    private val onItemClick: (DetailedCoin) -> Unit
+    private val onItemClick: (DetailedCoin) -> Unit,
+    private val context: Context
 ) : Adapter<FavoriteCoinItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -55,7 +57,7 @@ class FavoriteCoinItemAdapter(
             onItemClick(item)
         }
 
-        val chart = ChartFragment.newInstance(item.id, "usd", 1, false)
+        val chart = ChartFragment.newInstance(item.id, CurrencyService.getCurrency(context), 1, false)
         fragmentManager.beginTransaction().replace(holder.coinChart.id, chart).commit()
     }
 

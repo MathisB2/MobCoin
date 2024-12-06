@@ -81,7 +81,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
-                                android:text="Market Cap"
+                                android:text="@string/market_cap"
                                 android:textColor="@color/md_theme_onSurfaceVariant"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -129,7 +129,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
-                                android:text="Volume"
+                                android:text="@string/volume"
                                 android:textColor="@color/md_theme_onSurfaceVariant"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -168,7 +168,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
-                                android:text="Dominance"
+                                android:text="@string/dominance"
                                 android:textColor="@color/md_theme_onSurfaceVariant"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

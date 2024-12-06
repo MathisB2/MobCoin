@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.Manifest
 import com.mobcoin.app.databinding.ActivityRegisterBinding
 import com.mobcoin.app.services.ImageService
+import com.mobcoin.app.services.LanguageService
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,6 +21,7 @@ class RegisterActivity : AppCompatActivity() {
     private var currentBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguageService.applyLanguage(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 

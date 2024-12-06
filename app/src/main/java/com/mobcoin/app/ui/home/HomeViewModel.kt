@@ -1,5 +1,6 @@
 package com.mobcoin.app.ui.home
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.FNG
 import com.mobcoin.app.model.GlobalMarketData
+import com.mobcoin.app.services.CurrencyService
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -40,9 +42,9 @@ class HomeViewModel : ViewModel() {
         return livedata
     }
 
-    fun fetchCoins() {
+    fun fetchCoins(context: Context) {
         viewModelScope.launch {
-            GeckoRepository.getCoins(MarketCoinsQuery())
+            GeckoRepository.getCoins(MarketCoinsQuery(currency = CurrencyService.getCurrency(context)))
                 .catch {
                     Timber.e(it)
                 }

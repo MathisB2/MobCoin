@@ -12,8 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
+import com.mobcoin.app.model.Currency
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
+import com.mobcoin.app.services.LanguageService
 import com.mobcoin.app.ui.chart.ChartFragment
 
 import com.squareup.picasso.Picasso
@@ -23,6 +26,7 @@ class CoinInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCoinInfoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguageService.applyLanguage(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityCoinInfoBinding.inflate(layoutInflater)
@@ -41,7 +45,7 @@ class CoinInfoActivity : AppCompatActivity() {
             return
         }
 
-        val chartFragment = ChartFragment.newInstance(coinId, "usd", 1)
+        val chartFragment = ChartFragment.newInstance(coinId, CurrencyService.getCurrency(this), 1)
         supportFragmentManager.beginTransaction().replace(binding.coinChart.id, chartFragment).commit()
 
         binding.chartRangeSelector.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
@@ -124,17 +128,17 @@ class CoinInfoActivity : AppCompatActivity() {
         supportActionBar?.title = coin.name
         Picasso.get().load(coin.getImageUrlLarge()).into(binding.actionBarCoinIcon)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
-        binding.coinPrice.text = "$ " + coin.getPriceByCurrency("usd").toString()
-        CoinService.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency("usd"),binding.evolution1h)
+        binding.coinPrice.text = coin.getPriceByCurrency(CurrencyService.getCurrency(this)).toString() + " " + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
+                CoinService.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency(CurrencyService.getCurrency(this)),binding.evolution1h)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.evolution24h)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange7d,binding.evolution7d)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange30d,binding.evolution30d)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange1y,binding.evolution1y)
         binding.marketCapRankValue.text = "#"+coin.marketCapRank.toString()
         binding.totalSupplyValue.text = coin.marketData?.totalSupply.toString()
-        binding.marketCapValue.text = "$"+coin.marketData?.marketCap?.get("usd").toString()
-        binding.athValue.text = "$"+coin.marketData?.getAthByCurrency("usd").toString()
-        binding.atlValue.text = "$"+coin.marketData?.getAtlByCurrency("usd").toString()
+        binding.marketCapValue.text = coin.marketData?.marketCap?.get(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
+        binding.athValue.text = coin.marketData?.getAthByCurrency(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
+        binding.atlValue.text = coin.marketData?.getAtlByCurrency(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
 
 
 
@@ -150,7 +154,7 @@ class CoinInfoActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        val defaultPosition = items.indexOf("usd")
+        val defaultPosition = items.indexOf(CurrencyService.getCurrency(this))
         if (defaultPosition != -1) {
             spinner.setSelection(defaultPosition)
         }else{

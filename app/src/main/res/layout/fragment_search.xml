@@ -26,7 +26,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Trendings :"
+            android:text="@string/trendings"
             android:textAppearance="@style/TitleLargeTextStyle"
             android:textColor="@color/md_theme_onBackground" />
 

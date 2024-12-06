@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MobCoin</string>
+    <string name="title_home">主页</string>
+    <string name="title_favorites">收藏夹</string>
+    <string name="title_search">搜索</string>
+    <string name="title_me">我</string>
+    <string name="hello_blank_fragment">你好，空白页面</string>
+    <string name="title_dashboard">仪表盘</string>
+    <string name="title_notifications">通知</string>
+    <string name="loginView_email_input">电子邮件*</string>
+    <string name="loginView_password_input">密码*</string>
+    <string name="loginView_login_button">登录</string>
+    <string name="loginView_topBar_title">登录</string>
+    <string name="loginView_loginWithGoogle_button">使用Google登录</string>
+    <string name="loginView_registerButton">注册</string>
+    <string name="registerView_topBar_title">注册</string>
+    <string name="registerView_name_input">姓名*</string>
+    <string name="registerView_password_input">确认密码*</string>
+    <string name="register">注册</string>
+    <string name="registerView_label_avatar">头像</string>
+    <string name="meFragment_login_register_button">登录/注册</string>
+    <string name="meFragment_guestMessage">您正在以访客身份使用应用程序</string>
+    <string name="favorites">收藏夹</string>
+    <string name="homeView_topBarTitle">市场</string>
+    <string name="home_card_fear_greed"><![CDATA[恐惧与贪婪]]></string>
+    <string name="fear">恐惧</string>
+    <string name="greed">贪婪</string>
+    <string name="home_view_popularCoinsTitle">热门币种</string>
+    <string name="connected_me_view_distribution">分布</string>
+    <string name="connected_me_view_assets">资产</string>
+    <string name="searchText">搜索币种</string>
+    <string name="buyText">购买</string>
+    <string name="sellText">出售</string>
+    <string name="Logout">退出</string>
+    <string name="settingsButton">帐户设置</string>
+    <string name="account_quantity">账户余额: </string>
+    <string name="favorites_not_logged_helper_message">您必须登录才能添加收藏</string>
+    <string-array name="languages">
+        <item>法语</item>
+        <item>英语</item>
+        <item>中文</item>
+    </string-array>
+    <string name="language">语言</string>
+    <string name="market_cap">市值</string>
+    <string name="volume">交易量</string>
+    <string name="dominance">市场主导地位</string>
+    <string name="market_cap_rank">市值排名: </string>
+    <string name="total_supply">总供应量:</string>
+    <string name="market_cap_info">市值:</string>
+    <string name="_24h_volume_info">24小时交易量:</string>
+    <string name="trendings">趋势:</string>
+    <string name="main_language">英语</string>
+    <string name="appliquer">应用</string>
+    <string name="currency">货币</string>
+    <string-array name="currency">
+        <item>usd</item>
+        <item>eur</item>
+        <item>jpy</item>
+    </string-array>
+</resources>
+
