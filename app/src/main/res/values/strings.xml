@@ -58,5 +58,6 @@
     <string name="main_language">English</string>
     <string name="appliquer">Appliquer</string>
     <string name="currency">Currency</string>
+    <string name="available_exchanges">Available Exchanges</string>
 
 </resources>
