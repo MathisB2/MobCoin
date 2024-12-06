@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
+import com.mobcoin.app.MainActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.services.LanguageService
 
@@ -44,7 +45,10 @@ class LoginActivity : AppCompatActivity() {
                 context = this,
                 onSuccess = {
                     Toast.makeText(this, "login successfull", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     finish()
+                    startActivity(intent)
                 },
                 onFailure = {
                     Toast.makeText(this, "login failed", Toast.LENGTH_SHORT).show()

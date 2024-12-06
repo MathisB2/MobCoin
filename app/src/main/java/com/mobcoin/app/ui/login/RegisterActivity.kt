@@ -10,6 +10,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import android.Manifest
+import android.content.Intent
+import com.mobcoin.app.MainActivity
 import com.mobcoin.app.databinding.ActivityRegisterBinding
 import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.services.LanguageService
@@ -97,7 +99,10 @@ class RegisterActivity : AppCompatActivity() {
                 }else{
                     registerViewModel.createUser(username, email, password, currentBitmap, this)
                     Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     finish()
+                    startActivity(intent)
 
                 }
             }
@@ -137,17 +142,6 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
     override fun onSupportNavigateUp(): Boolean {
         finish()

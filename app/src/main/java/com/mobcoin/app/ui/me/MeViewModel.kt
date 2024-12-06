@@ -4,21 +4,15 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.AssetRepository
 import com.mobcoin.app.domain.GeckoRepository
 import com.mobcoin.app.domain.UserRepository
-import com.mobcoin.app.domain.database.model.Asset
 import com.mobcoin.app.domain.database.model.User
-import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
-import com.mobcoin.app.model.Coin
-import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.services.CurrencyService
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class MeViewModel : ViewModel() {
 
@@ -89,8 +83,5 @@ class MeViewModel : ViewModel() {
         }
     }
 
-    fun getTotalAccountValue(){
-
-    }
 
 }

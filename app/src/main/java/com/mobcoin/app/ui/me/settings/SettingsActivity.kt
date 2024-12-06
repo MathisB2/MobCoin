@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputLayout
 import com.mobcoin.app.MainActivity
 import com.mobcoin.app.R
@@ -27,6 +28,8 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+
         val currencyInput: AutoCompleteTextView = binding.autoCompleteTextViewCurrency
         val languageInput: AutoCompleteTextView = binding.autoCompleteTextViewLanguages
         languageInput.addTextChangedListener(object : TextWatcher {
@@ -42,18 +45,27 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
 
-        var applyButton = binding.buttonApply
-        applyButton.setOnClickListener {
+        binding.buttonApply.setOnClickListener {
 
             CurrencyService.setCurrency(this@SettingsActivity, currencyInput.text.toString())
             LanguageService.setLanguage(this@SettingsActivity, Language.getLanguageCode(languageInput.text.toString()))
-            val intent = Intent(this@SettingsActivity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            finish()
-            startActivity(intent)
+            restartApp()
+        }
+
+        binding.SettingsButtonLogout.setOnClickListener {
+            settingsViewModel.logout(this)
+            restartApp()
         }
 
 
+
+    }
+
+    fun restartApp(){
+        val intent = Intent(this@SettingsActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        finish()
+        startActivity(intent)
     }
 
     override fun onResume() {
