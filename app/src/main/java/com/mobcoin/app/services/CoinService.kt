@@ -1,8 +1,10 @@
 package com.mobcoin.app.services
 
+import android.content.Context
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.mobcoin.app.R
+import com.mobcoin.app.model.Currency
 import java.text.DecimalFormat
 import kotlin.math.abs
 
@@ -40,5 +42,23 @@ object CoinService {
             number >= 1_000 -> "${roundDoubleToTwoDecimals(number / 1_000)} K"
             else -> number.toString()
         }
+    }
+
+    fun setValueChangeText(value: Double?, textView: TextView, context: Context){
+        val formattedValue = when {
+            value == null || value == 0.0 -> {
+                textView.setTextColor(ContextCompat.getColor(textView.context,R.color.md_theme_secondary))
+                "+ 0.00" + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
+            }
+            value > 0 -> {
+                textView.setTextColor(ContextCompat.getColor(textView.context,R.color.colorSuccess))
+                "+ " + roundDoubleToTwoDecimals(value) + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
+            }
+            else -> {
+                textView.setTextColor(ContextCompat.getColor(textView.context,R.color.md_theme_error))
+                "- " + roundDoubleToTwoDecimals(value) + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
+            }
+        }
+        textView.text = formattedValue
     }
 }

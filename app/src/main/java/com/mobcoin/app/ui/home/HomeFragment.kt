@@ -1,5 +1,6 @@
 package com.mobcoin.app.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -80,8 +81,8 @@ class HomeFragment : Fragment() {
         val dominanceValueText: TextView = binding.textViewDominanceValue
         val dominanceCoinText: TextView = binding.textViewDominanceCoin
         homeViewModel.getGlobalMarketData().observe(viewLifecycleOwner){
-            mcValueText.text = Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext())) + CoinService.formatNumber(it?.totalMarketCap?.get(
-                CurrencyService.getCurrency(requireContext())))
+            mcValueText.text = Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext())) +
+               CoinService.formatNumber(it?.totalMarketCap?.get(CurrencyService.getCurrency(requireContext())))
             CoinService.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
             volumeValueText.text = CoinService.formatNumber(it?.totalVolume?.get(CurrencyService.getCurrency(requireContext()))) + Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext()))
 

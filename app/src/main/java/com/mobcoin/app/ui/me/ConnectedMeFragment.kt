@@ -1,15 +1,12 @@
 package com.mobcoin.app.ui.me
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -52,7 +49,7 @@ class ConnectedMeFragment : Fragment() {
         _binding = FragmentConnectedMeBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
-        val meViewModel = ViewModelProvider(this).get(MeViewModel::class.java)
+        val meViewModel = ViewModelProvider(this)[MeViewModel::class.java]
 
         addCoinValueActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             meViewModel.fetchDisplayedAssets(requireContext())
@@ -97,6 +94,7 @@ class ConnectedMeFragment : Fragment() {
         meViewModel.displayedAssets.observe(viewLifecycleOwner){
             adapter.setDataset(it ?: emptyList())
             setDonut(it ?: emptyList())
+            setPortfolioChange(it ?: emptyList())
         }
 
         recyclerViewAsset.layoutManager = LinearLayoutManager(requireContext())
@@ -110,15 +108,15 @@ class ConnectedMeFragment : Fragment() {
         return root
     }
 
-    fun setDonut(assets : List<DisplayedAsset>){
+    private fun setDonut(assets : List<DisplayedAsset>){
         if(assets.isEmpty()){
             return
         }
         val donut: DonutProgressView = binding.accountDonut
 
-        val colorList= Arrays.asList(R.color.donut_1,R.color.donut_2,R.color.donut_3,R.color.donut_4)
+        val colorList= listOf(R.color.donut_1,R.color.donut_2,R.color.donut_3,R.color.donut_4)
 
-        var priceList = assets.take(4).mapIndexed { index, asset ->
+        val priceList = assets.take(4).mapIndexed { index, asset ->
             DonutSection(asset.coinName, ContextCompat.getColor(requireContext(), colorList[index]), (asset.coinPrice * asset.quantity).toFloat())
         }.toMutableList()
 
@@ -126,8 +124,9 @@ class ConnectedMeFragment : Fragment() {
         for (i in 5..assets.size){
             otherValue += (assets[i-1].coinPrice * assets[i-1].quantity).toFloat()
         }
-        priceList.add(DonutSection("Others", ContextCompat.getColor(requireContext(), R.color.md_theme_primary), otherValue))
-        println(priceList)
+        if(otherValue > 0){
+            priceList.add(DonutSection("Others", ContextCompat.getColor(requireContext(), R.color.md_theme_primary), otherValue))
+        }
         donut.cap = 1f
         donut.submitData(priceList)
 
@@ -135,7 +134,7 @@ class ConnectedMeFragment : Fragment() {
         setChartTitles(priceList)
     }
 
-    fun setChartTitles(donnutSections: List<DonutSection>){
+    private fun setChartTitles(donnutSections: List<DonutSection>){
 
         var totalCount = 0.0
         for (section in donnutSections){
@@ -147,6 +146,24 @@ class ConnectedMeFragment : Fragment() {
         recyclerViewChart.layoutManager = LinearLayoutManager(requireContext())
 
         recyclerViewChart.adapter = adapter
+    }
+
+    fun setPortfolioChange(assets: List<DisplayedAsset>){
+        var totalInvested = 0.0
+        var totalChange = 0.0
+
+        for (asset in assets) {
+            totalInvested += asset.quantity * asset.coinPrice
+            totalChange += asset.quantity * asset.coinPrice * asset.coinChange
+        }
+
+        val percent = if(totalInvested == 0.0) 0.0 else totalChange/totalInvested
+        val value = if(totalChange == 0.0) 0.0 else totalInvested/totalChange
+
+        CoinService.setPercentageText(percent, binding.textViewPortfolioPercent)
+        binding.textViewPortfolioPercent.setText(binding.textViewPortfolioPercent.text.toString() + "(24h)")
+        CoinService.setValueChangeText(value, binding.textViewPortfolioChange,requireContext())
+        binding.textViewPortfolioChange.setText(binding.textViewPortfolioChange.text.toString() + "(24h)")
     }
 
 }
