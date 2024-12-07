@@ -15,6 +15,7 @@ import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivitySettingsBinding
 import com.mobcoin.app.model.Language
 import com.mobcoin.app.services.CurrencyService
+import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.services.LanguageService
 
 class SettingsActivity : AppCompatActivity() {
@@ -61,6 +62,18 @@ class SettingsActivity : AppCompatActivity() {
             restartApp()
         }
 
+
+
+        settingsViewModel.getUser(this).observe(this) {
+            binding.settingsUsername.text = it.surname
+            binding.settingsEmail.text = it.email
+
+            if(it.profileImage != null){
+                val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
+                binding.settingsProfilePicture.setImageBitmap(userBitmap)
+            }
+
+        }
 
 
     }
