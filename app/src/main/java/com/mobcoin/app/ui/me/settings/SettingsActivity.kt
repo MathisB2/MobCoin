@@ -28,6 +28,10 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val topAppBar = binding.toolbar
+        setSupportActionBar(topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
 
         val currencyInput: AutoCompleteTextView = binding.autoCompleteTextViewCurrency
@@ -79,6 +83,11 @@ class SettingsActivity : AppCompatActivity() {
         val currencyAdapter = ArrayAdapter(this, R.layout.dropdown_item, currency)
         binding.autoCompleteTextViewCurrency.setAdapter(currencyAdapter)
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
 }
