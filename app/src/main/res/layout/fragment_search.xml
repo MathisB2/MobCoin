@@ -6,35 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchView2">
-
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/searchText" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/trendings"
-            android:textAppearance="@style/TitleLargeTextStyle"
-            android:textColor="@color/md_theme_onBackground" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_default_coin_search_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.appbar.AppBarLayout>
+        android:hint="@string/searchText" />
 
     <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
@@ -56,5 +32,28 @@
         </ScrollView>
 
     </com.google.android.material.search.SearchView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="128dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/trendings"
+            android:textAppearance="@style/TitleMediumTextStyle"
+            android:textColor="@color/md_theme_onBackground" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_default_coin_search_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
