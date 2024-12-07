@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="128dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView8"
@@ -46,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins"
+            android:paddingHorizontal="16dp"
             android:text="@string/trendings"
             android:textAppearance="@style/TitleMediumTextStyle"
             android:textColor="@color/md_theme_onBackground" />
