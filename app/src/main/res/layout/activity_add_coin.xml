@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".ui.search.SearchFragment">
 
-    <!-- EditText pour la recherche -->
-    <EditText
-        android:id="@+id/searchEditText"
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/add_coin_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/title_search"
-        android:padding="12dp"
-        android:textSize="16sp"
-        android:background="@android:drawable/edit_text"
-        android:imeOptions="actionSearch" />
+        android:hint="@string/searchText" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_add_coin"
+    <com.google.android.material.search.SearchView
+        android:id="@+id/add_coin_searchView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:hint="@string/searchText"
+        app:layout_anchor="@id/add_coin_search_bar">
 
-</LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_add_coin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.search.SearchView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
