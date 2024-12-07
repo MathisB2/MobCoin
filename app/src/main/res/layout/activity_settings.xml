@@ -98,7 +98,7 @@
             android:paddingTop="16dp">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/me_connected_profile_picture"
+                android:id="@+id/settings_profile_picture"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginRight="8dp"
