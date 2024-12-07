@@ -1,11 +1,8 @@
 package com.mobcoin.app.ui.me.addCoin
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -62,6 +59,11 @@ class AddCoinActivity : AppCompatActivity() {
         val searchView = binding.addCoinSearchView
         searchView.editText.addTextChangedListener { text ->
             addCoinViewModel.fetchSearchCoins(text.toString())
+        }
+
+
+        searchView.toolbar.setNavigationOnClickListener {
+            finish()
         }
 
         val searchBar = binding.addCoinSearchBar
