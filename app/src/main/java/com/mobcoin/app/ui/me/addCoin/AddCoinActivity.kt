@@ -66,6 +66,13 @@ class AddCoinActivity : AppCompatActivity() {
             finish()
         }
 
+
+        searchView.editText.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                finish()
+            }
+        }
+
         val searchBar = binding.addCoinSearchBar
         searchBar.post {
             searchBar.performClick()
@@ -73,4 +80,7 @@ class AddCoinActivity : AppCompatActivity() {
 
 
     }
+
+
+
 }
