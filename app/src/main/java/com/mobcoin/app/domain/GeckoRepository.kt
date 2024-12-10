@@ -6,6 +6,7 @@ import com.mobcoin.app.domain.httpQuery.MarketCoinsQuery
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.CoinPrice
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.model.Exchange
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import com.mobcoin.app.model.search.SearchContainer
 import com.mobcoin.app.model.search.TrendingContainer
@@ -47,9 +48,14 @@ object GeckoRepository {
     }
 
     suspend fun getTrendingCoins(): Flow<Response<TrendingContainer>> = flow{
-        println("test")
         emit(
             GeckoNetworkDataSource.apiService.getTrendingCoins("CG-soMb1tvkPUXUcqmJXvd3He5g")
+        )
+    }
+
+    suspend fun getExchangeById(id: String): Flow<Response<Exchange>> = flow {
+        emit(
+            GeckoNetworkDataSource.apiService.getExchangeByID(id,"CG-soMb1tvkPUXUcqmJXvd3He5g")
         )
     }
 }

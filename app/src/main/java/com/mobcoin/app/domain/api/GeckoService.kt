@@ -3,6 +3,7 @@ package com.mobcoin.app.domain.api
 import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.CoinPrice
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.model.Exchange
 import com.mobcoin.app.model.GlobalMarketDataContainer
 import com.mobcoin.app.model.search.SearchContainer
 import com.mobcoin.app.model.search.TrendingContainer
@@ -51,4 +52,10 @@ interface GeckoService {
     suspend fun getTrendingCoins(
         @Header("x-cg-demo-api-key") apiKey: String
     ): Response<TrendingContainer>
+
+    @GET("exchanges/{id}")
+    suspend fun getExchangeByID(
+        @Path("id") id: String,
+        @Header("x-cg-demo-api-key") apiKey: String,
+    ): Response<Exchange>
 }

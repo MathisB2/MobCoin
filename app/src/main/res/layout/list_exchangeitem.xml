@@ -38,9 +38,11 @@
         <TextView
             android:id="@+id/exchange_name"
             style="@style/LabelMediumTextStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="TextView"
             android:textColor="@color/md_theme_onBackground"
             app:layout_constraintBottom_toBottomOf="parent"

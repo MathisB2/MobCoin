@@ -10,6 +10,7 @@ data class DetailedCoin (
     @SerializedName("image") val image: Map<String, String>? = null,
     @SerializedName("market_data") val marketData: CoinMarketData? = null,
     @SerializedName("market_cap_rank")val marketCapRank: Long,
+    @SerializedName("tickers")val tickers: List<Ticker>?
 ) : Serializable {
 
     fun getImageUrlLarge(): String? = image?.get("large")

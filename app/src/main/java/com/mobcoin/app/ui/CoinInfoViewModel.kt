@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.FavoriteRepository
 import com.mobcoin.app.domain.GeckoRepository
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.model.Exchange
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
@@ -18,6 +19,22 @@ class CoinInfoViewModel : ViewModel() {
 
         viewModelScope.launch {
             val data = GeckoRepository.getCoinById(id)
+            data.catch { e ->
+                println(e.message)
+            }.collect { response ->
+                livedata.postValue(response.body())
+            }
+
+        }
+
+        return livedata
+    }
+
+    fun getExchangeById(id: String): LiveData<Exchange?>{
+        val livedata = MutableLiveData<Exchange?>()
+
+        viewModelScope.launch {
+            val data = GeckoRepository.getExchangeById(id)
             data.catch { e ->
                 println(e.message)
             }.collect { response ->

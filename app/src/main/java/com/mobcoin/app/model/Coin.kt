@@ -20,6 +20,5 @@ data class Coin (
     @SerializedName("price_change_percentage_30d_in_currency")val percentagePriceChange30d: Double?,
     @SerializedName("price_change_percentage_1y_in_currency")val percentagePriceChange1y: Double?,
     @SerializedName("ath")val ath: Double,
-    @SerializedName("atl")val atl: Double,
-    @SerializedName("tickers")val tickers: List<Ticker>?
+    @SerializedName("atl")val atl: Double
 )

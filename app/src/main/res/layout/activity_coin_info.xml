@@ -549,25 +549,34 @@
                             android:textAppearance="@style/TitleMediumTextStyle"
                             android:textColor="@color/md_theme_primary" />
                     </LinearLayout>
+
                 </TableRow>
             </TableLayout>
 
-            <TextView
-                android:id="@+id/textViewExchanges"
-                style="@style/TitleMediumTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/available_exchanges"
-                android:textAppearance="@style/TitleLargeTextStyle"
-                android:textColor="@color/md_theme_onBackground"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/homeDashboardLayout" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_Exchange"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/textViewExchanges"
+                    style="@style/TitleMediumTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/available_exchanges"
+                    android:textAppearance="@style/TitleLargeTextStyle"
+                    android:textColor="@color/md_theme_onBackground"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/homeDashboardLayout" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_Exchange"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

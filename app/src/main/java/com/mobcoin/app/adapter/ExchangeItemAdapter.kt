@@ -1,23 +1,28 @@
 package com.mobcoin.app.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
+import com.mobcoin.app.model.Currency
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.model.Ticker
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.CurrencyService
+import com.mobcoin.app.ui.CoinInfoViewModel
 import com.squareup.picasso.Picasso
 
 class ExchangeItemAdapter(
     private var dataset: List<Ticker>,
-    private val onEditButtonClick: (DisplayedAsset) -> Unit,
     private val context: Context
 ) : Adapter<ExchangeItemAdapter.ItemViewHolder>() {
 
@@ -43,10 +48,15 @@ class ExchangeItemAdapter(
 
         Picasso.get().load(item.exchange.image).into(holder.exchangeIcon)
         holder.exchangeName.text = item.exchange.name
-        holder.exchangeRank.text = coinId.toString()
+        holder.exchangeRank.text = (coinId + 1).toString()
         holder.pair.text = item.base + "/" + item.target
         holder.pairVolume.text = CoinService.formatNumber(item.volume.toDouble())
         holder.coinPrice.text = CoinService.roundDoubleToTwoDecimals(item.lastPrice.toDouble())
+        holder.exchangeButton.setOnClickListener {
+            val url = item.url
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            context.startActivity(intent)
+        }
 
 
     }

@@ -1,6 +1,7 @@
 package com.mobcoin.app.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,8 +9,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.mobcoin.app.R
@@ -17,10 +20,12 @@ import com.mobcoin.app.adapter.ExchangeItemAdapter
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.Currency
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.model.Exchange
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.services.LanguageService
 import com.mobcoin.app.ui.chart.ChartFragment
+import com.mobcoin.app.ui.me.addCoin.EditCoinValueActivity
 
 import com.squareup.picasso.Picasso
 
@@ -77,7 +82,7 @@ class CoinInfoActivity : AppCompatActivity() {
                 binding.favoriteCheckbox.isChecked = it
                 setupFavoriteClickAction(coin, coinInfoViewModel)
                 setupConvertCoinEditAction(coin)
-                setExchangesList(coin)
+                setExchangesList(coin, coinInfoViewModel)
             }
 
         }
@@ -135,7 +140,7 @@ class CoinInfoActivity : AppCompatActivity() {
         Picasso.get().load(coin.getImageUrlLarge()).into(binding.actionBarCoinIcon)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.itemCoinEvolution)
         binding.coinPrice.text = coin.getPriceByCurrency(CurrencyService.getCurrency(this)).toString() + " " + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
-                CoinService.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency(CurrencyService.getCurrency(this)),binding.evolution1h)
+        CoinService.setPercentageText(coin.marketData?.getPercentagePriceChange1hByCurrency(CurrencyService.getCurrency(this)),binding.evolution1h)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange24h,binding.evolution24h)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange7d,binding.evolution7d)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange30d,binding.evolution30d)
@@ -194,9 +199,36 @@ class CoinInfoActivity : AppCompatActivity() {
         binding.textViewConvertedCoinCount.text = result.toString()
     }
 
-    private fun setExchangesList(coin: DetailedCoin){
+    private fun setExchangesList(coin: DetailedCoin, viewModel: CoinInfoViewModel){
+        val coinTicker = coin.tickers?.take(10)
         val exchangeRecyclerView: RecyclerView = binding.recyclerViewExchange
-        val adapter = ExchangeItemAdapter(coin.)
+        val adapter = ExchangeItemAdapter(coinTicker!!, this)
+        exchangeRecyclerView.layoutManager = LinearLayoutManager(this)
+        exchangeRecyclerView.adapter = adapter
+
+        val exchanges = mutableListOf<Exchange>()
+        for (ticker in coinTicker){
+            val foundedExchange  = exchanges.find { it.name == ticker.exchange.name }
+            if(foundedExchange == null){
+                viewModel.getExchangeById(ticker.exchange.identifier).observe(this){
+                    if (it != null) {
+                        exchanges.add(it)
+                        ticker.exchange.image = it.image
+                        adapter.notifyDataSetChanged()
+                    }
+
+                }
+            }else{
+                ticker.exchange.image = foundedExchange.image
+                adapter.notifyDataSetChanged()
+            }
+
+
+        }
+
+
+
+
     }
 
 }

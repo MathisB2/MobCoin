@@ -1,6 +1,8 @@
 package com.mobcoin.app.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Exchange(
-    val name: String,
-    val image: String
+    @SerializedName("name")val name: String,
+    @SerializedName("image")val image: String
 )

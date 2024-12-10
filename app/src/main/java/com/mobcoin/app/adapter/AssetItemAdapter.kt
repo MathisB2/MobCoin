@@ -48,7 +48,7 @@ class AssetItemAdapter(
         holder.coinName.text = item.coinName
         holder.coinSymbol.text = item.coinSymbol.uppercase()
         holder.coinPrice.text = item.coinPrice.toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
-                CoinService.setPercentageText(item.coinChange,holder.coinChange)
+        CoinService.setPercentageText(item.coinChange,holder.coinChange)
         holder.currencyQuantity.text = (CoinService.roundDoubleToTwoDecimals(item.quantity * item.coinPrice)) + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
                 holder.coinQuantity.text = CoinService.roundDoubleToTwoDecimals(item.quantity) + " " + item.coinSymbol.uppercase()
         Picasso.get().load(item.coinIcon).into(holder.coinIcon)
