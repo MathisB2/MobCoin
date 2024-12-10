@@ -59,5 +59,6 @@
     <string name="appliquer">Appliquer</string>
     <string name="currency">Currency</string>
     <string name="available_exchanges">Available Exchanges</string>
+    <string name="settings">Settings</string>
 
 </resources>

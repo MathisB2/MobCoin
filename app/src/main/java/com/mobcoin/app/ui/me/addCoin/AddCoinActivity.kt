@@ -3,19 +3,15 @@ package com.mobcoin.app.ui.me.addCoin
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobcoin.app.adapter.SearchCoinItemAdapter
 import com.mobcoin.app.databinding.ActivityAddCoinBinding
 import com.mobcoin.app.services.LanguageService
-import com.mobcoin.app.ui.me.MeFragment
-import com.mobcoin.app.ui.me.MeViewModel
 
 class AddCoinActivity : AppCompatActivity() {
 
@@ -40,7 +36,6 @@ class AddCoinActivity : AppCompatActivity() {
 
         val addCoinViewModel = ViewModelProvider(this)[AddCoinViewModel::class.java]
 
-        val searchEditText = binding.searchEditText
         val recyclerView = binding.recyclerViewAddCoin
         val llm = LinearLayoutManager(this)
 
@@ -60,15 +55,32 @@ class AddCoinActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
 
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-                addCoinViewModel.fetchSearchCoins(charSequence.toString())
+        val searchView = binding.addCoinSearchView
+        searchView.editText.addTextChangedListener { text ->
+            addCoinViewModel.fetchSearchCoins(text.toString())
+        }
+
+
+        searchView.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
+
+        searchView.editText.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                finish()
             }
+        }
 
-            override fun afterTextChanged(editable: Editable?) {}
-        })
+        val searchBar = binding.addCoinSearchBar
+        searchBar.post {
+            searchBar.performClick()
+        }
+
 
     }
+
+
+
 }

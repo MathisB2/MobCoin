@@ -107,21 +107,27 @@ class EditCoinValueActivity : AppCompatActivity() {
                         CurrencyService.getCurrency(this@EditCoinValueActivity)) ?: 1.0)
                 ) + Currency.getCurrencySymbole(CurrencyService.getCurrency(this@EditCoinValueActivity))
 
-                if (!charSequence.isNullOrEmpty() && charSequence.toString().toDouble() != 0.0) {
-                    binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onBackground))
-
-                    binding.buttonBuy.isEnabled = true
-                    println(charSequence.toString().toDouble())
-                    println(coinQuantity)
-                    binding.buttonSell.isEnabled = charSequence.toString().toDouble() <= coinQuantity
-
-                }else{
-                    binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onSurfaceVariant))
 
 
-                    binding.buttonBuy.isEnabled = false
-                    binding.buttonSell.isEnabled = false
 
+                binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onSurfaceVariant))
+                binding.buttonBuy.isEnabled = false
+                binding.buttonSell.isEnabled = false
+
+                if (!charSequence.isNullOrEmpty()) {
+                    var usedInput = charSequence.toString()
+                    if(usedInput.isNotEmpty() && usedInput.first() == '.'){
+                        usedInput = "0$usedInput"
+                    }
+
+                    if(usedInput.toDouble() != 0.0){
+                        binding.textViewCoinName.setTextColor(ContextCompat.getColor(baseContext,R.color.md_theme_onBackground))
+
+                        binding.buttonBuy.isEnabled = true
+                        println(charSequence.toString().toDouble())
+                        println(coinQuantity)
+                        binding.buttonSell.isEnabled = charSequence.toString().toDouble() <= coinQuantity
+                    }
                 }
             }
 

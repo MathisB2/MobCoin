@@ -280,12 +280,12 @@
 
                 <TextView
                     android:id="@+id/textView7"
-                    style="@style/TitleMediumTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins"
                     android:text="@string/home_view_popularCoinsTitle"
-                    android:textAppearance="@style/TitleLargeTextStyle"
+                    android:textAppearance="@style/TitleMediumTextStyle"
                     android:textColor="@color/md_theme_onBackground"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/homeDashboardLayout" />
@@ -296,6 +296,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
+                    android:nestedScrollingEnabled="false"
                     android:scrollbars="vertical"
                     app:layoutManager="LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"

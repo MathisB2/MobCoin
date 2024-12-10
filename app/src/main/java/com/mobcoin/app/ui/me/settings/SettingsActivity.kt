@@ -15,6 +15,7 @@ import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivitySettingsBinding
 import com.mobcoin.app.model.Language
 import com.mobcoin.app.services.CurrencyService
+import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.services.LanguageService
 
 class SettingsActivity : AppCompatActivity() {
@@ -27,6 +28,10 @@ class SettingsActivity : AppCompatActivity() {
 
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val topAppBar = binding.toolbar
+        setSupportActionBar(topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
 
@@ -59,6 +64,18 @@ class SettingsActivity : AppCompatActivity() {
 
 
 
+        settingsViewModel.getUser(this).observe(this) {
+            binding.settingsUsername.text = it.surname
+            binding.settingsEmail.text = it.email
+
+            if(it.profileImage != null){
+                val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
+                binding.settingsProfilePicture.setImageBitmap(userBitmap)
+            }
+
+        }
+
+
     }
 
     fun restartApp(){
@@ -79,6 +96,11 @@ class SettingsActivity : AppCompatActivity() {
         val currencyAdapter = ArrayAdapter(this, R.layout.dropdown_item, currency)
         binding.autoCompleteTextViewCurrency.setAdapter(currencyAdapter)
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
 }
