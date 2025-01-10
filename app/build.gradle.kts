@@ -12,11 +12,16 @@ android {
         applicationId = "com.mobcoin.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.0"
 
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildFeatures {
+            viewBinding = true
+            buildConfig = true
+        }
     }
 
     buildTypes {
@@ -28,6 +33,15 @@ android {
             )
         }
     }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        create("develop") {
+            dimension = "environment"
+            versionNameSuffix = "-dev"
+//            buildConfigField("String", "API_KEY", "CG-soMb1tvkPUXUcqmJXvd3He5g")
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -35,9 +49,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        viewBinding = true
-    }
+
 }
 
 dependencies {
