@@ -1,5 +1,7 @@
 package com.mobcoin.app.ui.login
 
+import android.Manifest
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
@@ -9,8 +11,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import android.Manifest
-import android.content.Intent
 import com.mobcoin.app.MainActivity
 import com.mobcoin.app.databinding.ActivityRegisterBinding
 import com.mobcoin.app.services.ImageService

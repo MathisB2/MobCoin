@@ -1,6 +1,5 @@
 package com.mobcoin.app.ui.me.settings
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -9,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.textfield.TextInputLayout
 import com.mobcoin.app.MainActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivitySettingsBinding

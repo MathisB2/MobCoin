@@ -14,7 +14,6 @@ import com.mobcoin.app.model.GlobalMarketData
 import com.mobcoin.app.services.CurrencyService
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import timber.log.Timber
 
 class HomeViewModel : ViewModel() {

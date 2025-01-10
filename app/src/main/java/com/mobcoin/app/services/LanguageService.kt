@@ -2,7 +2,7 @@ package com.mobcoin.app.services
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import java.util.*
+import java.util.Locale
 
 object LanguageService {
 
