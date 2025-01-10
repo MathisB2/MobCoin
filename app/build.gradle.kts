@@ -39,7 +39,17 @@ android {
         create("develop") {
             dimension = "environment"
             versionNameSuffix = "-dev"
-//            buildConfigField("String", "API_KEY", "CG-soMb1tvkPUXUcqmJXvd3He5g")
+            buildConfigField("String", "API_KEY", "\"CG-soMb1tvkPUXUcqmJXvd3He5g\"")
+        }
+        create("preproduction") {
+            dimension = "environment"
+            versionNameSuffix = "-preprod"
+            buildConfigField("String", "API_KEY", "\"CG-soMb1tvkPUXUcqmJXvd3He5g\"")
+        }
+        create("production") {
+            dimension = "environment"
+            versionNameSuffix = "-prod"
+            buildConfigField("String", "API_KEY", "\"CG-soMb1tvkPUXUcqmJXvd3He5g\"")
         }
     }
     compileOptions {
