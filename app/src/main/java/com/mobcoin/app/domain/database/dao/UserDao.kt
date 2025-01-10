@@ -2,7 +2,6 @@ package com.mobcoin.app.domain.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.mobcoin.app.domain.database.model.CoinData
 import com.mobcoin.app.domain.database.model.User
 
 @Dao

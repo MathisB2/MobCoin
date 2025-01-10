@@ -2,7 +2,6 @@ package com.mobcoin.app.domain.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 @Entity(tableName = "t_user_x_coin", primaryKeys = ["id_user", "id_coin"])
 data class UserCoin (

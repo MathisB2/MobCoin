@@ -9,16 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
-import com.mobcoin.app.model.Currency
-import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.model.Ticker
 import com.mobcoin.app.services.CoinService
-import com.mobcoin.app.services.CurrencyService
-import com.mobcoin.app.ui.CoinInfoViewModel
 import com.squareup.picasso.Picasso
 
 class ExchangeItemAdapter(

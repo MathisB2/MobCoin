@@ -11,13 +11,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.mobcoin.app.R
-import com.mobcoin.app.model.Coin
 import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.ui.chart.ChartFragment
 import com.squareup.picasso.Picasso
-import kotlin.math.log
 
 class FavoriteCoinItemAdapter(
     private var dataset: List<DetailedCoin>,
