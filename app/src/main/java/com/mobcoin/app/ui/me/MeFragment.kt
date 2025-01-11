@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mobcoin.app.databinding.FragmentMeBinding
-import com.mobcoin.app.domain.UserRepository
 import com.mobcoin.app.ui.others.LoadingFragment
 import com.mobcoin.app.ui.others.LoggedOutFragment
 

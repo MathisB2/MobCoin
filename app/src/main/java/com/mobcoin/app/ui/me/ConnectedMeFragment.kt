@@ -2,7 +2,6 @@ package com.mobcoin.app.ui.me
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.ImageButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,15 +21,14 @@ import com.mobcoin.app.adapter.AssetItemAdapter
 import com.mobcoin.app.adapter.ChartItemAdapter
 import com.mobcoin.app.databinding.FragmentConnectedMeBinding
 import com.mobcoin.app.model.Currency
-import com.mobcoin.app.ui.me.addCoin.AddCoinActivity
 import com.mobcoin.app.model.DisplayedAsset
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.ui.CoinInfoActivity
+import com.mobcoin.app.ui.me.addCoin.AddCoinActivity
 import com.mobcoin.app.ui.me.addCoin.EditCoinValueActivity
 import com.mobcoin.app.ui.me.settings.SettingsActivity
-import java.util.Arrays
 
 
 class ConnectedMeFragment : Fragment() {

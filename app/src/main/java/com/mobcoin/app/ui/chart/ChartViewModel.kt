@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
 import com.mobcoin.app.domain.GeckoRepository
 import com.mobcoin.app.model.CoinPrice
-import com.mobcoin.app.model.DetailedCoin
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 

@@ -1,6 +1,5 @@
 package com.mobcoin.app.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,14 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
-import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.databinding.FragmentHomeBinding
 import com.mobcoin.app.model.Currency
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.CurrencyService
-import com.mobcoin.app.services.LanguageService
+import com.mobcoin.app.ui.CoinInfoActivity
 
 class HomeFragment : Fragment() {
 

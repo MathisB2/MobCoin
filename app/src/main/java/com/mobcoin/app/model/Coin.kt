@@ -1,7 +1,6 @@
 package com.mobcoin.app.model
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class Coin (
     @SerializedName("id")val id: String,

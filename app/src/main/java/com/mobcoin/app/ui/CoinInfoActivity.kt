@@ -1,7 +1,5 @@
 package com.mobcoin.app.ui
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,13 +7,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
-import com.mobcoin.app.R
 import com.mobcoin.app.adapter.ExchangeItemAdapter
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.Currency
@@ -25,8 +20,6 @@ import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.services.LanguageService
 import com.mobcoin.app.ui.chart.ChartFragment
-import com.mobcoin.app.ui.me.addCoin.EditCoinValueActivity
-
 import com.squareup.picasso.Picasso
 
 class CoinInfoActivity : AppCompatActivity() {

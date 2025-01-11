@@ -2,11 +2,11 @@ package com.mobcoin.app.ui.others
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.FragmentLoggedOutBinding
 import com.mobcoin.app.ui.login.LoginActivity
