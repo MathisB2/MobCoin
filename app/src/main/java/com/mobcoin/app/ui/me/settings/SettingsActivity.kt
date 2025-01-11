@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.mobcoin.app.BuildConfig
 import com.mobcoin.app.MainActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivitySettingsBinding
@@ -47,6 +48,8 @@ class SettingsActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+
+        binding.appVersion.text = "Version: ${BuildConfig.VERSION_NAME}"
 
         binding.buttonApply.setOnClickListener {
 
