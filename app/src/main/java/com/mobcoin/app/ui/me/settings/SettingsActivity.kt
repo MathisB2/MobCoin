@@ -49,7 +49,7 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
 
-        binding.appVersion.text = "Version: ${BuildConfig.VERSION_NAME}"
+        binding.appVersion.text = "Version: ${BuildConfig.BUILD_TYPE} ${BuildConfig.VERSION_NAME}"
 
         binding.buttonApply.setOnClickListener {
 
