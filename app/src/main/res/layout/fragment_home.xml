@@ -301,9 +301,10 @@
                         android:id="@+id/textView_currency_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:text="@string/currency"
                         android:textAppearance="@style/TitleSmallTextStyle"
-                        android:textColor="@color/md_theme_onBackground"
+                        android:textColor="@color/md_theme_secondary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -315,7 +316,7 @@
                         android:layout_marginEnd="72dp"
                         android:text="@string/price"
                         android:textAppearance="@style/TitleSmallTextStyle"
-                        android:textColor="@color/md_theme_onBackground"
+                        android:textColor="@color/md_theme_secondary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/textView_currency_change"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -327,7 +328,7 @@
                         android:text="@string/_24h"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TitleSmallTextStyle"
-                        android:textColor="@color/md_theme_onBackground"
+                        android:textColor="@color/md_theme_secondary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
