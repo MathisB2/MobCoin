@@ -62,5 +62,9 @@
     <string name="settings">设置</string>
     <string name="price">价格</string>
     <string name="_24h">24h %</string>
+    <string name="retry">再试一次</string>
+    <string name="offlineError">发生错误！\n请检查您的互联网连接。</string>
+
+
 </resources>
 

@@ -62,5 +62,7 @@
     </string-array>
     <string name="price">Price</string>
     <string name="_24h">24h %</string>
+    <string name="retry">Retry</string>
+    <string name="offlineError">An error has occurred!\nPlease check your internet connection.</string>
 
 </resources>
