@@ -139,8 +139,8 @@ class CoinInfoActivity : AppCompatActivity() {
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange30d,binding.evolution30d)
         CoinService.setPercentageText(coin.marketData?.percentagePriceChange1y,binding.evolution1y)
         binding.marketCapRankValue.text = "#"+coin.marketCapRank.toString()
-        binding.totalSupplyValue.text = coin.marketData?.totalSupply.toString()
-        binding.marketCapValue.text = coin.marketData?.marketCap?.get(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
+        binding.totalSupplyValue.text = CoinService.formatNumber(coin.marketData?.totalSupply)
+        binding.marketCapValue.text = CoinService.formatNumber(coin.marketData?.marketCap?.get(CurrencyService.getCurrency(this))) + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
         binding.athValue.text = coin.marketData?.getAthByCurrency(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
         binding.atlValue.text = coin.marketData?.getAtlByCurrency(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
 
