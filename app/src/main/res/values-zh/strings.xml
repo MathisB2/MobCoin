@@ -60,5 +60,7 @@
     </string-array>
     <string name="available_exchanges">可用的交易所</string>
     <string name="settings">设置</string>
+    <string name="price">价格</string>
+    <string name="_24h">24h %</string>
 </resources>
 

@@ -60,5 +60,7 @@
         <item>eur</item>
         <item>jpy</item>
     </string-array>
+    <string name="price">Price</string>
+    <string name="_24h">24h %</string>
 
 </resources>

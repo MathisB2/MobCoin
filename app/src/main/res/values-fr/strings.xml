@@ -60,4 +60,6 @@
     </string-array>
     <string name="available_exchanges">Plateformes d\'échange</string>
     <string name="settings">Paramètres</string>
+    <string name="price">Prix</string>
+    <string name="_24h">24h %</string>
 </resources>

@@ -55,6 +55,11 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
         homeViewModel.fetchCoins(requireContext())
 
+        //title
+        val currencyNameTitle = binding.textViewCurrencyName
+        val currencyCourseTitle = binding.textViewCurrencyCourse
+        val currencyChangeTitle = binding.textViewCurrencyChange
+
 
 
         // FNG donut

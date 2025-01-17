@@ -26,6 +26,7 @@ class CoinItemAdapter(
         val coinPrice: TextView = view.findViewById(R.id.coinPrice)
         val coinChanges: TextView = view.findViewById(R.id.coinChanges)
         val coinIcon: ImageView = view.findViewById(R.id.coinIcon)
+        val coinName: TextView = view.findViewById(R.id.coinName)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -39,6 +40,7 @@ class CoinItemAdapter(
     override fun onBindViewHolder(holder: ItemViewHolder, coinId: Int) {
         val item = dataset[coinId]
         holder.coinSymbole.text = item.symbol.uppercase()
+        holder.coinName.text = item.name
         holder.coinPrice.text = item.currentPrice.toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(context))
         CoinService.setPercentageText(item.percentagePriceChange24h,holder.coinChanges)
 

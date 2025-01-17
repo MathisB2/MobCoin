@@ -284,12 +284,54 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins"
+                    android:paddingBottom="4dp"
                     android:text="@string/home_view_popularCoinsTitle"
                     android:textAppearance="@style/TitleMediumTextStyle"
                     android:textColor="@color/md_theme_onBackground"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/homeDashboardLayout" />
 
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="4dp">
+
+                    <TextView
+                        android:id="@+id/textView_currency_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/currency"
+                        android:textAppearance="@style/TitleSmallTextStyle"
+                        android:textColor="@color/md_theme_onBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_currency_course"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="72dp"
+                        android:text="@string/price"
+                        android:textAppearance="@style/TitleSmallTextStyle"
+                        android:textColor="@color/md_theme_onBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView_currency_change"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_currency_change"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_24h"
+                        android:textAlignment="textEnd"
+                        android:textAppearance="@style/TitleSmallTextStyle"
+                        android:textColor="@color/md_theme_onBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_coin_list"
