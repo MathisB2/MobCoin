@@ -1,12 +1,16 @@
 package com.mobcoin.app.ui.me
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.button.MaterialButton
 import com.mobcoin.app.databinding.FragmentMeBinding
+import com.mobcoin.app.ui.me.settings.SettingsActivity
 import com.mobcoin.app.ui.others.LoadingFragment
 import com.mobcoin.app.ui.others.LoggedOutFragment
 
@@ -25,6 +29,14 @@ class MeFragment : Fragment(){
 
         val root: View = binding.root
         val meViewModel = ViewModelProvider(this).get(MeViewModel::class.java)
+
+
+        val settingsButton: ImageButton = binding.imageButton
+        settingsButton.setOnClickListener {
+            val intent = Intent(requireContext(), SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
 
         childFragmentManager.beginTransaction().replace(binding.meFragmentContainer.id, LoadingFragment()).commit()
 

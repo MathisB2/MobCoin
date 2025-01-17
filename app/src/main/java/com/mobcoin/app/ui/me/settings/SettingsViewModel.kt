@@ -17,13 +17,18 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
-    fun getUser(context: Context): LiveData<User> {
-        val username = MutableLiveData<User>()
-        viewModelScope.launch {
-            UserRepository.getCurrentUser(context).collect {
-                username.postValue(it)
+    fun getUser(context: Context): LiveData<User?> {
+        val username = MutableLiveData<User?>()
+        try {
+            viewModelScope.launch {
+                UserRepository.getCurrentUser(context).collect {
+                    username.postValue(it)
+                }
             }
+        }catch (e: Exception) {
+            username.postValue(null)
         }
+
         return username
     }
 }

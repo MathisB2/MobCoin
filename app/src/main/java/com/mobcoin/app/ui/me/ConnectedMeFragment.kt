@@ -54,12 +54,6 @@ class ConnectedMeFragment : Fragment() {
             meViewModel.fetchDisplayedAssets(requireContext())
         }
 
-        val settingsButton: MaterialButton = binding.meConnectedSettingsButton
-        settingsButton.setOnClickListener {
-            val intent = Intent(requireContext(), SettingsActivity::class.java)
-            startActivity(intent)
-        }
-
         val plusButton: ImageButton = binding.buttonConnectedMe
         plusButton.setOnClickListener {
             val intent = Intent(requireContext(), AddCoinActivity::class.java)

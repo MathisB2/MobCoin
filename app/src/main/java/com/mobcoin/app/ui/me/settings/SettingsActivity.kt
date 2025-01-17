@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
@@ -63,19 +64,27 @@ class SettingsActivity : AppCompatActivity() {
             restartApp()
         }
 
-
-
         settingsViewModel.getUser(this).observe(this) {
-            binding.settingsUsername.text = it.surname
-            binding.settingsEmail.text = it.email
+            if(it != null){
+                binding.settingsUsername.text = it.surname
+                binding.settingsEmail.text = it.email
 
-            if(it.profileImage != null){
-                val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
-                binding.settingsProfilePicture.setImageBitmap(userBitmap)
+                if(it.profileImage != null){
+                    val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
+                    binding.settingsProfilePicture.setImageBitmap(userBitmap)
+                }
+                binding.settingsUsername.visibility = View.VISIBLE
+                binding.settingsEmail.visibility = View.VISIBLE
+                binding.settingsProfilePicture.visibility = View.VISIBLE
+                binding.SettingsButtonLogout.visibility = View.VISIBLE
+            }else{
+                binding.settingsUsername.visibility = View.GONE
+                binding.settingsEmail.visibility = View.GONE
+                binding.settingsProfilePicture.visibility = View.GONE
+                binding.SettingsButtonLogout.visibility = View.GONE
             }
 
         }
-
 
     }
 
