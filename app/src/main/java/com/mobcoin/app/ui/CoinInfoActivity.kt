@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
+import com.mobcoin.app.R
 import com.mobcoin.app.adapter.ExchangeItemAdapter
 import com.mobcoin.app.databinding.ActivityCoinInfoBinding
 import com.mobcoin.app.model.Currency
@@ -143,6 +144,21 @@ class CoinInfoActivity : AppCompatActivity() {
         binding.marketCapValue.text = CoinService.formatNumber(coin.marketData?.marketCap?.get(CurrencyService.getCurrency(this))) + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
         binding.athValue.text = coin.marketData?.getAthByCurrency(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
         binding.atlValue.text = coin.marketData?.getAtlByCurrency(CurrencyService.getCurrency(this)).toString() + Currency.getCurrencySymbole(CurrencyService.getCurrency(this))
+
+//        binding.volume24hValue.text = coin.communityData.twitterFollowers.toString();
+
+        try {
+            if(coin.communityData.twitterFollowers < 10_000)
+                binding.trustBar.setImageResource(R.drawable.trust1)
+            else if(coin.communityData.twitterFollowers < 50_000)
+                binding.trustBar.setImageResource(R.drawable.trust2)
+            else if(coin.communityData.twitterFollowers < 100_000)
+                binding.trustBar.setImageResource(R.drawable.trust3)
+            else
+                binding.trustBar.setImageResource(R.drawable.trust4)
+        }catch (e: Exception){
+            binding.trustBar.setImageResource(R.drawable.trust1)
+        }
 
 
 
