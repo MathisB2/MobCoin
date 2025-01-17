@@ -1,7 +1,6 @@
 package com.mobcoin.app.ui.favorites
 
 import android.content.Context
-import android.media.Image
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobcoin.app.domain.FavoriteRepository
 import com.mobcoin.app.domain.GeckoRepository
-import com.mobcoin.app.model.DetailedCoin
 import com.mobcoin.app.model.FavoriteCoin
 import com.mobcoin.app.services.ImageService
 import kotlinx.coroutines.flow.catch
