@@ -48,7 +48,6 @@
     <string name="market_cap_rank">Market Cap Rank: </string>
     <string name="total_supply">Total supply:</string>
     <string name="market_cap_info">Market Cap:</string>
-    <string name="_24h_volume_info">24h Volume:</string>
     <string name="trendings">Trendings:</string>
     <string name="main_language">English</string>
     <string name="appliquer">Apply</string>
@@ -64,5 +63,6 @@
     <string name="_24h">24h %</string>
     <string name="retry">Retry</string>
     <string name="offlineError">An error has occurred!\nPlease check your internet connection.</string>
+    <string name="trust_score">Trust score:</string>
 
 </resources>

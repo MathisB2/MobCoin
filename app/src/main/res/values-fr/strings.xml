@@ -48,7 +48,6 @@
     <string name="market_cap_rank">Classement de la capitalisation boursière : </string>
     <string name="total_supply">Offre totale :</string>
     <string name="market_cap_info">Capitalisation boursière :</string>
-    <string name="_24h_volume_info">Volume sur 24h :</string>
     <string name="trendings">Tendances :</string>
     <string name="main_language">Français</string>
     <string name="appliquer">Appliquer</string>
@@ -64,5 +63,6 @@
     <string name="_24h">24h %</string>
     <string name="retry">Réésayer</string>
     <string name="offlineError">Une erreur est survenue !\nVeuillez vérifier votre connexion internet.</string>
+    <string name="trust_score">Score de confiance :</string>
 
 </resources>
