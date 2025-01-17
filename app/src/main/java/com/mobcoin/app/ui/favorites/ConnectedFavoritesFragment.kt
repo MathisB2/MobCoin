@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mobcoin.app.adapter.FavoriteCoinItemAdapter
 import com.mobcoin.app.databinding.FragmentConnectedFavoritesBinding
 import com.mobcoin.app.model.DetailedCoin
+import com.mobcoin.app.model.FavoriteCoin
 import com.mobcoin.app.ui.CoinInfoActivity
 
 class ConnectedFavoritesFragment : Fragment() {
@@ -43,7 +44,7 @@ class ConnectedFavoritesFragment : Fragment() {
         return root
     }
 
-    private fun onFavoriteItemClick(): (DetailedCoin) -> Unit = { coin ->
+    private fun onFavoriteItemClick(): (FavoriteCoin) -> Unit = { coin ->
         val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
             putExtra("COIN_ID", coin.id)
         }
