@@ -49,6 +49,13 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textView_portfolio"
+                style="@style/HeadlineSmallTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/portfolio" />
+
             <LinearLayout
                 android:id="@+id/price_section"
                 android:layout_width="match_parent"

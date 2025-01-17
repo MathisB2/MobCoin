@@ -64,6 +64,7 @@
     <string name="_24h">24h %</string>
     <string name="retry">再试一次</string>
     <string name="offlineError">发生错误！\n请检查您的互联网连接。</string>
+    <string name="portfolio">钱包</string>
 
 
 </resources>

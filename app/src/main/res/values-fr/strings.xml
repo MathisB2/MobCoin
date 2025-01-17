@@ -64,5 +64,7 @@
     <string name="_24h">24h %</string>
     <string name="retry">Réésayer</string>
     <string name="offlineError">Une erreur est survenue !\nVeuillez vérifier votre connexion internet.</string>
+    <string name="portfolio">Portefeuille
+</string>
 
 </resources>

@@ -63,5 +63,6 @@
     </string-array>
     <string name="retry">Retry</string>
     <string name="offlineError">An error has occurred!\nPlease check your internet connection.</string>
+    <string name="portfolio">Portfolio</string>
 
 </resources>
