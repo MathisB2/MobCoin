@@ -16,7 +16,6 @@ import com.mobcoin.app.model.Currency
 import com.mobcoin.app.services.CoinService
 import com.mobcoin.app.services.ConnectivityService
 import com.mobcoin.app.services.CurrencyService
-import com.mobcoin.app.ui.IsOnlineHomeFragment
 import com.mobcoin.app.ui.internet.OfflineFragment
 import com.mobcoin.app.ui.others.LoadingFragment
 
