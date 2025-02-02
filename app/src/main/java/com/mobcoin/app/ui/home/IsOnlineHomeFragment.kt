@@ -1,4 +1,4 @@
-package com.mobcoin.app.ui
+package com.mobcoin.app.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.mobcoin.app.R
 import com.mobcoin.app.adapter.CoinItemAdapter
-import com.mobcoin.app.databinding.FragmentHomeBinding
 import com.mobcoin.app.databinding.FragmentIsOnlineHomeBinding
-import com.mobcoin.app.ui.home.HomeViewModel
+import com.mobcoin.app.ui.CoinInfoActivity
 
 
 class IsOnlineHomeFragment : Fragment() {

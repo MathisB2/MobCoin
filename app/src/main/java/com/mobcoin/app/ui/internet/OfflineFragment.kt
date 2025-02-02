@@ -8,10 +8,12 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.mobcoin.app.databinding.FragmentOfflineBinding
 
-class OfflineFragment(private val onButtonClicked: () -> Unit) : Fragment() {
+class OfflineFragment : Fragment() {
 
     private var _binding: FragmentOfflineBinding? = null
     private val binding get() = _binding!!
+
+    private var onButtonClicked: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,17 +24,16 @@ class OfflineFragment(private val onButtonClicked: () -> Unit) : Fragment() {
         val root: View = binding.root
 
         val retryButton: Button = binding.offlineFragmentRetryButton
-        retryButton.setOnClickListener{
-            onButtonClicked()
+        retryButton.setOnClickListener {
+            onButtonClicked?.invoke() // Exécute la callback si elle est définie
         }
 
         return root
     }
 
     companion object {
-        fun newInstance(callback: () -> Unit): OfflineFragment {
-            return OfflineFragment(callback)
+        fun newInstance(callback: () -> Unit) = OfflineFragment().apply {
+            this.onButtonClicked = callback
         }
-
     }
 }
