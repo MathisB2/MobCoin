@@ -65,5 +65,8 @@
     <string name="offlineError">发生错误！\n请检查您的互联网连接。</string>
     <string name="portfolio">钱包</string>
     <string name="trust_score">信任评分:</string>
+    <string name="you_dont_have_any_assets_yet">您还没有任何资产</string>
+    <string name="add_your_first_asset">添加您的第一个资产</string>
+
 </resources>
 
