@@ -64,5 +64,7 @@
     <string name="retry">Retry</string>
     <string name="offlineError">An error has occurred!\nPlease check your internet connection.</string>
     <string name="portfolio">Portfolio</string>
+    <string name="you_dont_have_any_assets_yet">You dont have any assets yet</string>
+    <string name="add_your_first_asset">Add your first asset</string>
 
 </resources>
