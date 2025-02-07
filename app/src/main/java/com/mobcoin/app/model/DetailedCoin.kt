@@ -10,7 +10,9 @@ data class DetailedCoin (
     @SerializedName("image") val image: Map<String, String>? = null,
     @SerializedName("market_data") val marketData: CoinMarketData? = null,
     @SerializedName("market_cap_rank")val marketCapRank: Long,
-    @SerializedName("tickers")val tickers: List<Ticker>?
+    @SerializedName("tickers")val tickers: List<Ticker>?,
+    @SerializedName("community_data") val communityData: CommunityData
+
 ) : Serializable {
 
     fun getImageUrlLarge(): String? = image?.get("large")
@@ -44,3 +46,8 @@ data class CoinMarketData(
         return atl?.get(currency)
     }
 }
+
+
+data class CommunityData(
+    @SerializedName("twitter_followers")val twitterFollowers: Int
+)

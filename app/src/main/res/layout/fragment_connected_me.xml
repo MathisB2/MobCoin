@@ -45,15 +45,16 @@
                         android:textAppearance="@style/HeadlineSmallTextStyle"
                         android:textColor="@color/md_theme_onBackground" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/meConnectedSettingsButton"
-                        style="@style/Widget.Material3.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings" />
                 </LinearLayout>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_portfolio"
+                style="@style/HeadlineSmallTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/portfolio" />
 
             <LinearLayout
                 android:id="@+id/price_section"
@@ -195,6 +196,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
+
+                <LinearLayout
+                    android:id="@+id/emptyAssetLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="128dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/you_dont_have_any_assets_yet"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addFirstAsset_button"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/add_your_first_asset"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

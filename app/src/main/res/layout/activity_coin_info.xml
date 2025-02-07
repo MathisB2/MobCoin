@@ -513,17 +513,16 @@
                             android:id="@+id/volume_24h_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/_24h_volume_info"
+                            android:text="@string/trust_score"
                             android:textAppearance="@style/LabelLargeTextStyle"
                             android:textColor="@color/md_theme_onBackground" />
 
-                        <TextView
-                            android:id="@+id/volume_24h_value"
+                        <ImageView
+                            android:id="@+id/trustBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="$0"
-                            android:textAppearance="@style/TitleMediumTextStyle"
-                            android:textColor="@color/md_theme_primary" />
+                            android:layout_marginTop="8dp"
+                            app:srcCompat="@drawable/trust1" />
                     </LinearLayout>
 
                     <LinearLayout

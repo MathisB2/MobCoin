@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.mobcoin.app.MainActivity
 import com.mobcoin.app.R
 import com.mobcoin.app.databinding.ActivitySettingsBinding
 import com.mobcoin.app.model.Language
+import com.mobcoin.app.services.ConnectivityService
 import com.mobcoin.app.services.CurrencyService
 import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.services.LanguageService
@@ -63,20 +65,31 @@ class SettingsActivity : AppCompatActivity() {
             restartApp()
         }
 
+        if(ConnectivityService.isOnline(this)){
+            settingsViewModel.getUser(this).observe(this) {
+                if(it != null){
+                    binding.settingsUsername.text = it.surname
+                    binding.settingsEmail.text = it.email
 
-
-        settingsViewModel.getUser(this).observe(this) {
-            binding.settingsUsername.text = it.surname
-            binding.settingsEmail.text = it.email
-
-            if(it.profileImage != null){
-                val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
-                binding.settingsProfilePicture.setImageBitmap(userBitmap)
+                    if(it.profileImage != null){
+                        val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
+                        binding.settingsProfilePicture.setImageBitmap(userBitmap)
+                    }
+                    setSettingUserDataVisibility(View.VISIBLE)
+                }else{
+                    setSettingUserDataVisibility(View.GONE)
+                }
             }
-
+        }else{
+            setSettingUserDataVisibility(View.GONE)
         }
+    }
 
-
+    fun setSettingUserDataVisibility(visibility: Int){
+        binding.settingsUsername.visibility = visibility
+        binding.settingsEmail.visibility = visibility
+        binding.settingsProfilePicture.visibility = visibility
+        binding.SettingsButtonLogout.visibility = visibility
     }
 
     fun restartApp(){

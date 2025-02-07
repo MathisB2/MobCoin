@@ -48,7 +48,6 @@
     <string name="market_cap_rank">Market Cap Rank: </string>
     <string name="total_supply">Total supply:</string>
     <string name="market_cap_info">Market Cap:</string>
-    <string name="_24h_volume_info">24h Volume:</string>
     <string name="trendings">Trendings:</string>
     <string name="main_language">English</string>
     <string name="appliquer">Apply</string>
@@ -60,5 +59,12 @@
         <item>eur</item>
         <item>jpy</item>
     </string-array>
-
+    <string name="price">Price</string>
+    <string name="_24h">24h %</string>
+    <string name="retry">Retry</string>
+    <string name="offlineError">An error has occurred!\nPlease check your internet connection.</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="trust_score">Trust score:</string>
+    <string name="you_dont_have_any_assets_yet">You dont have any assets yet</string>
+    <string name="add_your_first_asset">Add your first asset</string>
 </resources>

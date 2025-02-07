@@ -1,6 +1,5 @@
 package com.mobcoin.app.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,23 +8,21 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.mobcoin.app.R
-import com.mobcoin.app.adapter.CoinItemAdapter
 import com.mobcoin.app.databinding.FragmentHomeBinding
 import com.mobcoin.app.model.Currency
 import com.mobcoin.app.services.CoinService
+import com.mobcoin.app.services.ConnectivityService
 import com.mobcoin.app.services.CurrencyService
-import com.mobcoin.app.ui.CoinInfoActivity
+import com.mobcoin.app.ui.internet.OfflineFragment
+import com.mobcoin.app.ui.others.LoadingFragment
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -33,29 +30,43 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // coins list
-        val recyclerView: RecyclerView = binding.recyclerViewCoinList
-        val adapter = CoinItemAdapter(homeViewModel.coins.value ?: emptyList(), requireContext()) { coin ->
-            val intent = Intent(requireContext(), CoinInfoActivity::class.java).apply {
-                putExtra("COIN_ID", coin.id)
-            }
-            startActivity(intent)
+
+        val containerId = binding.homeFragmentContainer.id
+        childFragmentManager.beginTransaction().replace(containerId, LoadingFragment()).commit()
+
+        if(ConnectivityService.isOnline(requireContext())){
+            loadData()
+            //coin list fragment
+            childFragmentManager.beginTransaction().replace(containerId, IsOnlineHomeFragment()).commit()
+        }else{
+            //offline fragment
+            childFragmentManager.beginTransaction().replace(containerId, OfflineFragment.newInstance { retryConnexion() }).commit()
         }
 
-        homeViewModel.coins.observe(viewLifecycleOwner){
-            adapter.setDataset(it ?: emptyList())
+        return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    fun retryConnexion(){
+        if(ConnectivityService.isOnline(requireContext())){
+            loadData()
+            //coin list fragment
+            val containerId = binding.homeFragmentContainer.id
+            childFragmentManager.beginTransaction().replace(containerId, IsOnlineHomeFragment()).commit()
         }
+    }
 
-        recyclerView.adapter = adapter
-        homeViewModel.fetchCoins(requireContext())
-
-
+    fun loadData(){
+        val homeViewModel =
+            ViewModelProvider(this)[HomeViewModel::class.java]
 
         // FNG donut
         val fngDonut: DonutProgressView = binding.fngDonut
@@ -80,7 +91,7 @@ class HomeFragment : Fragment() {
         val dominanceCoinText: TextView = binding.textViewDominanceCoin
         homeViewModel.getGlobalMarketData().observe(viewLifecycleOwner){
             mcValueText.text = Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext())) +
-               CoinService.formatNumber(it?.totalMarketCap?.get(CurrencyService.getCurrency(requireContext())))
+                    CoinService.formatNumber(it?.totalMarketCap?.get(CurrencyService.getCurrency(requireContext())))
             CoinService.setPercentageText(it?.marketCapChangePercentage24hUsd,mcChangeText)
             volumeValueText.text = CoinService.formatNumber(it?.totalVolume?.get(CurrencyService.getCurrency(requireContext()))) + Currency.getCurrencySymbole(CurrencyService.getCurrency(requireContext()))
 
@@ -90,12 +101,6 @@ class HomeFragment : Fragment() {
             dominanceCoinText.text = dominanceMap?.key?.uppercase() ?: "-"
 
         }
-
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

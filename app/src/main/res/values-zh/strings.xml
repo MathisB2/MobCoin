@@ -48,7 +48,6 @@
     <string name="market_cap_rank">市值排名: </string>
     <string name="total_supply">总供应量:</string>
     <string name="market_cap_info">市值:</string>
-    <string name="_24h_volume_info">24小时交易量:</string>
     <string name="trendings">趋势:</string>
     <string name="main_language">英语</string>
     <string name="appliquer">应用</string>
@@ -60,5 +59,14 @@
     </string-array>
     <string name="available_exchanges">可用的交易所</string>
     <string name="settings">设置</string>
+    <string name="price">价格</string>
+    <string name="_24h">24h %</string>
+    <string name="retry">再试一次</string>
+    <string name="offlineError">发生错误！\n请检查您的互联网连接。</string>
+    <string name="portfolio">钱包</string>
+    <string name="trust_score">信任评分:</string>
+    <string name="you_dont_have_any_assets_yet">您还没有任何资产</string>
+    <string name="add_your_first_asset">添加您的第一个资产</string>
+
 </resources>
 

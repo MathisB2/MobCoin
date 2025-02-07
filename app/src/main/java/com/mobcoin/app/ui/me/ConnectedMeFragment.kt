@@ -28,8 +28,6 @@ import com.mobcoin.app.services.ImageService
 import com.mobcoin.app.ui.CoinInfoActivity
 import com.mobcoin.app.ui.me.addCoin.AddCoinActivity
 import com.mobcoin.app.ui.me.addCoin.EditCoinValueActivity
-import com.mobcoin.app.ui.me.settings.SettingsActivity
-
 
 class ConnectedMeFragment : Fragment() {
 
@@ -38,7 +36,6 @@ class ConnectedMeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var addCoinValueActivityLauncher: ActivityResultLauncher<Intent>
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,18 +51,16 @@ class ConnectedMeFragment : Fragment() {
             meViewModel.fetchDisplayedAssets(requireContext())
         }
 
-        val settingsButton: MaterialButton = binding.meConnectedSettingsButton
-        settingsButton.setOnClickListener {
-            val intent = Intent(requireContext(), SettingsActivity::class.java)
-            startActivity(intent)
-        }
-
         val plusButton: ImageButton = binding.buttonConnectedMe
+        val firstAssetsButton: MaterialButton = binding.addFirstAssetButton
         plusButton.setOnClickListener {
             val intent = Intent(requireContext(), AddCoinActivity::class.java)
             addCoinValueActivityLauncher.launch(intent)
         }
-
+        firstAssetsButton.setOnClickListener {
+            val intent = Intent(requireContext(), AddCoinActivity::class.java)
+            addCoinValueActivityLauncher.launch(intent)
+        }
 
         meViewModel.getUser(requireContext()).observe(viewLifecycleOwner) {
             binding.meConnectedUsername.text = it.surname
@@ -73,8 +68,7 @@ class ConnectedMeFragment : Fragment() {
             if(it.profileImage != null){
                 val userBitmap = ImageService.byteArrayToBitmap(it.profileImage)
                 binding.meConnectedProfilePicture.setImageBitmap(userBitmap)
-            }   
-
+            }
         }
 
         // Asset List
@@ -91,6 +85,11 @@ class ConnectedMeFragment : Fragment() {
             requireContext())
 
         meViewModel.displayedAssets.observe(viewLifecycleOwner){
+            if(it == null || it.isEmpty()){
+                binding.emptyAssetLayout.visibility = View.VISIBLE
+            }else{
+                binding.emptyAssetLayout.visibility = View.GONE
+            }
             adapter.setDataset(it ?: emptyList())
             setDonut(it ?: emptyList())
             setPortfolioChange(it ?: emptyList())
@@ -108,10 +107,14 @@ class ConnectedMeFragment : Fragment() {
     }
 
     private fun setDonut(assets : List<DisplayedAsset>){
-        if(assets.isEmpty()){
-            return
-        }
         val donut: DonutProgressView = binding.accountDonut
+
+        if (assets.isEmpty()) {
+            binding.chartSection.visibility = View.GONE
+            return
+        }else{
+            binding.chartSection.visibility = View.VISIBLE
+        }
 
         val colorList= listOf(R.color.donut_1,R.color.donut_2,R.color.donut_3,R.color.donut_4)
 
@@ -128,7 +131,6 @@ class ConnectedMeFragment : Fragment() {
         }
         donut.cap = 1f
         donut.submitData(priceList)
-
 
         setChartTitles(priceList)
     }
