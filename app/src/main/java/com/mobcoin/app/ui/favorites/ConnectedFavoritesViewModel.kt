@@ -14,9 +14,11 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class ConnectedFavoritesViewModel : ViewModel() {
+    private var _favorites : MutableLiveData<List<FavoriteCoin>?> = MutableLiveData()
+    val favorites : LiveData<List<FavoriteCoin>?> = _favorites
 
-    fun getFavoriteCoins(context: Context): LiveData<List<FavoriteCoin>> {
-        val liveData = MutableLiveData<List<FavoriteCoin>>()
+
+    fun fetchFavoriteCoins(context: Context) {
 
         viewModelScope.launch {
             FavoriteRepository.getFavorites(context).collect {
@@ -52,10 +54,10 @@ class ConnectedFavoritesViewModel : ViewModel() {
 
                     listCoins.add(favoriteCoin)
                 }
-                liveData.postValue(listCoins)
+
+                if(favorites.value != listCoins)
+                    _favorites.postValue(listCoins)
             }
         }
-
-        return liveData
     }
 }
